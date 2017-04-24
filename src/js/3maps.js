@@ -47,8 +47,8 @@ d3.select('#rightlowerpanel select')
 function menuchange(side) {
 				
 	var values = d3.select("#" + side + "panel select").property('value');
-	csvpath = './Tables/'.concat(values, '.csv');
-	questionpath = './Questions/'.concat(values, '.txt');
+	csvpath = './Data/Tables/'.concat(values, '.csv');
+	questionpath = './Data/Questions/'.concat(values, '.txt');
 				
 	// Remove previous question and checkboxes
 	d3.select("#" + side + "panel .question").selectAll("*").remove();
