@@ -1,24 +1,27 @@
 <html>
 <head>
-    <title>Coventry Data Explorer</title>
+    <title>Coventry Data Explorer: correlation</title>
     
     <style>
         
         .layout {
             width: 1200px;
             margin: auto;
+            margin-top : 0px;
         }
         
         .header {
 			width: 1200px;
-            height: 130px;
+            background-color: navy;
+            padding-bottom: 20px;
 		}
         
         h1 {
             text-align: center;
-			font-size: 50px;
+			font-size: 60px;
             font-family: "Helvetica", Georgia, Serif;
-            margin-top: 20px;
+            color: white;
+            margin-top: 0px;
             margin-bottom: 10px;
         }
         
@@ -26,18 +29,23 @@
             text-align: center;
 			font-size: 20px;
             font-family: "Helvetica", Georgia, Serif;
+            color: white;
             margin-top: 10px;
             margin-bottom: 10px;
         }
         
         .description {
-			width: 1160px;
+			width: 1100px;
 			font-size: 16px;
             font-family: "Helvetica", Georgia, Serif;
-            border-style: solid;
-            border-width: 5px;
+            background-color: aliceblue;
+            border-radius: 20px;
             padding-left: 15px;
             padding-right: 15px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            margin: auto;
+            text-align: justify;
 		}
         
         .mainrow {
@@ -76,7 +84,6 @@
         
         div.bottompan {
             width: 1200px;
-            height: 600px;
             display: flex;
             flex-flow: row wrap;
             justify-content: space-between;
@@ -127,9 +134,11 @@
         }
         
         div.tooltip {
+            font-size: 14px;
+            font-family: "Helvetica", Georgia, Serif;
             color: #222;
-            background-color: #fff;
-            padding: .5em;
+            background-color: white;
+            padding: 10px;
             text-shadow: #f5f5f5 0 1px 0;
             border-radius: 2px;
             opacity: 0.9;
@@ -182,6 +191,17 @@
             stroke-width:5px;
         }
         
+        .credcls {
+			width: 1200px;
+            height: 50px;
+            background-color: navy;
+            font-size: 14px;
+            font-family: "Helvetica", Georgia, Serif;
+            text-align: center;
+            padding: 2px;
+            color: white;
+		}
+        
 
     </style>
 </head>
@@ -198,10 +218,11 @@
         <div class='header'>
             <h1>Coventry Data Explorer</h1>
             <h2>Correlations in wards</h2>
-        </div>
+            
+            <div class='description'>
+                <p>This is a tool for exploring the correlation between two different variables selected from 3 different data categories: ONS Census, Households Survey and Cultural Participation. First, select the items in the menu and tick the boxes to create and display the desired variables you want to analyse. Note that you can tick multiple boxes adding the values up. A scatter plot in the center will show a two-dimensional point for each ward and the correlation between the selected variables. A correlation analysis can be performed underneath by pressing run.</p>
+            </div>
         
-        <div class='description'>
-            <p>This is a tool for exploring the correlation between two different variables selected from 3 different data categories: ONS Census, Households Survey and Cultural Participation. First, select the items in the menu and tick the boxes to create and display the desired variables you want to analyse. Note that you can tick multiple boxes adding the values up. A scatter plot in the center will show a two-dimensional point for each ward and the correlation between the selected variables. A correlation analysis can be performed underneath by pressing run.</p>
         </div>
         
         <div id='row-main' class="mainrow">
@@ -260,8 +281,8 @@
                         <option value="Q43">Health problem description</option>
                         <option value="Q48">Money worry</option>
                         <option disabled>===== Cultural Participation =====</option>
-                        <option value="Q12b">Cultural events attendance</option>
-                        <option value="Q13b">Cultural events attendance (children)</option>
+                        <option value="Q12a">Cultural events attendance</option>
+                        <option value="Q13a">Cultural events attendance (children)</option>
                         <option value="Q14">Coventry City of Culture bid support</option>
                         <option value="Q15">Coventry City rating</option>
                         <option value="IndigoAudience">Audience engagement in Coventry</option>
@@ -350,8 +371,8 @@
             </div>
         </div>
         
-        <div id='credits'>
-            Visualization by <a href="http://twitter.com/mgutierrezroig">@mgutierrezroig</a> from <a href="http://datasciencelab.co.uk/">WBS Data Science Lab</a> Version 1 (updated April 2017) <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer">Code on github</a>
+        <div id='credits' class='credcls'>
+            <p> Visualization by <a href="http://twitter.com/mgutierrezroig">@mgutierrezroig</a> from <a href="http://datasciencelab.co.uk/">WBS Data Science Lab</a>. Code available on <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer">github</a> Version 1 (updated September 2017) </p>
         </div>
     
     </div>
@@ -391,8 +412,8 @@
         function menuchange(side) {
                         
             var values = d3.select("#" + side + "select").property('value');
-            csvpath = './Data/Tables/'.concat(values, '.csv');
-            questionpath = './Data/Questions/'.concat(values, '.txt');
+            csvpath = './Data/Census/Tables/'.concat(values, '.csv');
+            questionpath = './Data/Census/Questions/'.concat(values, '.txt');
                         
             // Remove previous question and checkboxes
             d3.select("#" + side + "question").selectAll("*").remove();
@@ -810,6 +831,24 @@
 
                     generate_analysisbox(xscale, yscale, leftvalues, rightvalues);
                     
+                    /* Interactive Icon */
+            
+                    svg.append("image")
+                        .attr("width", "24px")
+                        .attr("height", "36px")
+                        .attr("transform", "translate(-60,-20)")
+                        //.attr("x", 0)
+                        //.attr("y", 0)
+                        .attr("xlink:href","./Images/Interactive_icon.png")
+                        .on('mousemove', function(d){
+                            tooltip.classed('hidden', false)
+                                .attr('style', 'left:' + (d3.event.pageX + 5) +  'px; top:' + (d3.event.pageY - 0) + 'px')
+                                .style("width", "220")
+                                .html("This is an interactive plot. Hover on the points to display the corresponding ward.");                    
+                        })
+                        .on('mouseout', function(d){
+                            tooltip.classed('hidden', true);
+                        });
                 }
             }
         }

@@ -1,24 +1,28 @@
 <html>
 <head>
-    <title>Coventry Data Explorer</title>
+    <title>Coventry Data Explorer: Geographical Distribution</title>
     
     <style>
         
         .layout {
             width: 1200px;
             margin: auto;
+            margin-top : 0px;
         }
         
         .header {
 			width: 1200px;
-            height: 130px;
+            background-color: navy;
+            padding-bottom: 20px;
+            margin-top : 0px;
 		}
         
         h1 {
             text-align: center;
-			font-size: 50px;
+			font-size: 60px;
             font-family: "Helvetica", Georgia, Serif;
-            margin-top: 20px;
+            color: white;
+            margin-top: 0px;
             margin-bottom: 10px;
         }
         
@@ -26,23 +30,28 @@
             text-align: center;
 			font-size: 20px;
             font-family: "Helvetica", Georgia, Serif;
-            margin-top: 10px;
+            color: white;
+            margin-top: 0px;
             margin-bottom: 10px;
         }
         
         .description {
-			width: 1160px;
+			width: 1100px;
 			font-size: 16px;
             font-family: "Helvetica", Georgia, Serif;
-            border-style: solid;
-            border-width: 5px;
+            background-color: aliceblue;
+            border-radius: 20px;
             padding-left: 15px;
             padding-right: 15px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            margin: auto;
+            text-align: justify;
 		}
         
         .mainrow {
 			width: 1200px;
-            height: 800px;
+            height: 550px;
             display: flex;
             flex-flow: row wrap;
             justify-content: space-between;
@@ -50,24 +59,16 @@
 		}
         
         .leftpan {
-            width: 400px;
-            height: 330px;
-            vertical-align: top;
-            font-size: 14px;
-            font-family: "Helvetica", Georgia, Serif;
-        }
-        
-        .centerpan {
-            width: 400px;
-            height: 330px;
+            width: 500px;
+            height: 550px;
             vertical-align: top;
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
         }
         
         .rightpan {
-            width: 400px;
-            height: 330px;
+            width: 700px;
+            height: 550px;
             vertical-align: top;
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
@@ -100,13 +101,13 @@
             line-height: 16px;
             margin-bottom: 20px;
             margin-right: 40px;
-            height: 150px;
+            height: 400px;
             overflow-y: auto;
         }
         
         .map {
-            width: 400px;
-            height: 400px;
+            width: 800px;
+            height: 550px;
             vertical-align: top;
         }
         
@@ -156,6 +157,17 @@
             font-family: "Helvetica", Georgia, Serif;
         }
         
+        .credcls {
+			width: 1200px;
+            height: 50px;
+            background-color: navy;
+            font-size: 14px;
+            font-family: "Helvetica", Georgia, Serif;
+            text-align: center;
+            padding-top: 2px;
+            color: white;
+		}
+        
 
     </style>
 </head>
@@ -171,11 +183,12 @@
 
         <div class='header'>
             <h1>Coventry Data Explorer</h1>
-            <h2>Differences in wards</h2>
-        </div>
+            <h2>Geographical Distribution</h2>
+            
+            <div class='description'>
+                <p>You can explore the geographical distribution across Coventry wards of different demographic and socio-economic indicators compiled in the UK ONS census, Household Surveys and Indigo Audience Data. You can select on the left menu the multiple topics and questions. Corresponding possible answers will appear beneath and by ticking them the map on the right will show its geographical distribution. You can also multiple tick answer boxes so the values will be aggregated.</p>
+            </div>
         
-        <div class='description'>
-            <p>You can explore the geographical distribution of different demographic, attitudes and levels of cultural participation and support across the city. The first map draws on the ONS Census to give data on age, ethnicity, religion, economic activity. The second draws on the Coventry Household Survey 2016 and gives insight into attitudes, health and neighborhood values. The third draws on cultural participation data. By picking variables is each map you can see connections between, for instance, ethnic group, quality of life and cultural participation. You can multiple click the values in each section as well.</p>
         </div>
         
         <div id='row-main' class="mainrow">
@@ -185,53 +198,42 @@
                     
                     <select id="leftselect" class="select">
                       <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
-                      <!-- <option value="KS103EW">Civil Partnership Status</option> -->
-                      <!-- <option value="KS104EW">Living Arrangements</option> -->
+                      <option style="background-color: #cccccc;" disabled>===== ONS Census =====</option>
+                      <option value="KS103EW">Civil Partnership Status</option>
+                      <option value="KS104EW">Living Arrangements</option>
                       <option value="KS105EW">Household Composition</option>
-                      <!-- <option value="KS106EW">Employment and dependent children</option> -->
-                      <!-- <option value="KS107EW">Lone parent with dependent children</option> -->
-                      <!-- <option value="QS117EW">One adult household</option> -->
-                      <!-- <option value="QS118EW">Families with dependent children</option> -->
+                      <option value="KS106EW">Employment and dependent children</option>
+                      <option value="KS107EW">Lone parent with dependent children</option>
+                      <option value="QS117EW">One adult household</option>
+                      <option value="QS118EW">Families with dependent children</option>
                       <option value="QS119EW">Households deprivation</option>
                       <option value="KS201EW">Ethnic Group</option>
-                      <!-- <option value="KS202EW">National Identity</option> -->
-                      <!-- <option value="KS205EW">Passports Held</option> -->
-                      <!-- <option value="QS205EW">Proficiency in English</option> -->
+                      <option value="KS202EW">National Identity</option>
+                      <option value="KS205EW">Passports Held</option>
+                      <option value="QS205EW">Proficiency in English</option>
                       <option value="KS206EW">Household Language</option>
                       <option value="KS209EW">Religion</option>
-                      <!-- <option value="QS210EW">Religion (Detailed)</option> -->
+                      <option value="QS210EW">Religion (Detailed)</option>
                       <option value="KS301EW">Health</option>
-                      <!-- <option value="KS401EW">Accomodiation type</option> -->
-                      <!-- <option value="KS402EW">Tenure</option> -->
-                      <!-- <option value="KS403EW">Rooms and heating</option> -->
+                      <option value="KS401EW">Accomodiation type</option>
+                      <option value="KS402EW">Tenure</option>
+                      <option value="KS403EW">Rooms and heating</option>
                       <option value="KS404EW">Car availability</option>
-                      <!-- <option value="QS404EW">Tenure over 65</option> -->
-                      <!-- <option value="KS405EW">Communal establishment residents</option> -->
-                      <!-- <option value="QS406EW">Household size</option> -->
+                      <option value="QS404EW">Tenure over 65</option>
+                      <option value="KS405EW">Communal establishment residents</option>
+                      <option value="QS406EW">Household size</option>
                       <option value="KS501EW">Qualifications</option>
                       <option value="KS601EW">Economic Activity</option>
-                      <!-- <option value="KS602EW">Economic Activity (males)</option> -->
-                      <!-- <option value="KS603EW">Economic Activity (females)</option> -->
-                      <!-- <option value="KS604EW">Hours worked</option> -->
-                      <!-- <option value="KS605EW">Industry</option> -->
+                      <option value="KS602EW">Economic Activity (males)</option>
+                      <option value="KS603EW">Economic Activity (females)</option>
+                      <option value="KS604EW">Hours worked</option>
+                      <option value="KS605EW">Industry</option>
                       <option value="KS608EW">Occupation</option>
-                      <!-- <option value="KS609EW">Occupation (males)</option> -->
-                      <!-- <option value="KS610EW">Occupation (females)</option> -->
-                      <!-- <option value="QS612EW">Year last worked</option> -->
-                      <!-- <option value="QS701EW">Method of travel to work</option> -->
-                    </select>
-                
-                </div>
-                <div id='leftquestion' class='question'> </div>
-                <div id='leftanswers' class='answers'> </div>
-                
-            </div>
-            <div id='centerpanel' class='centerpan'>
-                <div id='centermenu' class='menu'> 
-                    <p> Select item in Household Survey</p>
-                        
-                    <select id="centerselect" class="select">
-                      <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
+                      <option value="KS609EW">Occupation (males)</option>
+                      <option value="KS610EW">Occupation (females)</option>
+                      <option value="QS612EW">Year last worked</option>
+                      <option value="QS701EW">Method of travel to work</option>
+                      <option style="background-color: #cccccc;" disabled>===== Household Survey =====</option>
                       <option value="Q1">How long living in neighbourhood</option>
                       <option value="Q3">Satisfaction with neighbourhood</option>
                       <option value="Q6">Quality of life perception</option>
@@ -239,51 +241,35 @@
                       <option value="Q9">Getting involved</option>
                       <option value="Q10">Getting involved in the future</option>
                       <option value="Q11">People from different backgrounds</option>
-                      <!-- <option value="Q12">Cultural events attendance</option>
+                      <option value="Q12">Cultural events attendance</option>
                       <option value="Q12a">Cultural events attendance</option>
                       <option value="Q12b">Cultural events attendance</option>
                       <option value="Q13">Cultural events attendance (children)</option>
                       <option value="Q13a">Cultural events attendance (children)</option>
                       <option value="Q13b">Cultural events attendance (children)</option>
-                      <option value="Q14">Coventry City of Culture bid support</option> -->
+                      <option value="Q14">Coventry City of Culture bid support</option>
+                      <option value="Q15">Coventry City rating</option>
                       <option value="Q27">Health</option>
                       <option value="Q37">Physical activity</option>
                       <option value="Q42">Health limitations</option>
                       <option value="Q43">Health problem description</option>
                       <option value="Q48">Money worry</option>
-                      
+                      <option style="background-color: #cccccc;" disabled>===== Indigo Audience =====</option>
+                      <option value="IndigoAudience">Audience engagement in Coventry</option>
                     </select>
-                </div>
-                <div id='centerquestion' class='question'> </div>
-                <div id='centeranswers' class='answers'> </div>
                 
+                </div>
+                <div id='question' class='question'> </div>
+                <div id='answers' class='answers'> </div>
             </div>
+            
             <div id='rightpanel' class='rightpan'>
-                <div id='rightmenu' class='menu'> 
-                    <p> Select item in Cultural Participation</p>
-
-                    <select id="rightselect" class="select">
-                        <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
-                        <option value="Q12a">Cultural events attendance</option>
-                        <option value="Q13a">Cultural events attendance (children)</option>
-                        <option value="Q14">Coventry City of Culture bid support</option>
-                        <option value="Q15">Coventry City rating</option>
-                        <option value="IndigoAudience">Audience engagement in Coventry</option>
-                    </select>
-                </div>
-                <div id='rightquestion' class='question'> </div>
-                <div id='rightanswers' class='answers'> </div>
-                
-            </div>
-            <div id='bottompanel' class='bottompan'>
-                <div id='leftmap' class='map'> </div>
-                <div id='centermap' class='map'> </div>
-                <div id='rightmap' class='map'> </div>
+                <div id='map' class='map'> </div>
             </div>
         </div>
         
-        <div id='credits'>
-            Visualization by <a href="http://twitter.com/mgutierrezroig">@mgutierrezroig</a> from <a href="http://datasciencelab.co.uk/">WBS Data Science Lab</a> Version 1 (updated April 2017) <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer">Code on github</a>
+        <div id='credits' class='credcls'>
+            <p> Visualization by <a href="http://twitter.com/mgutierrezroig">@mgutierrezroig</a> from <a href="http://datasciencelab.co.uk/">WBS Data Science Lab</a>. Code available on <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer">github</a> Version 1 (updated September 2017) </p>
         </div>
     
     </div>
@@ -298,42 +284,39 @@
             height = 500;
          
         var projection = d3.geoAlbers()
-            .scale(160000)
+            .scale(260000)
             .rotate([0,0])
-            .center([-1.49, 52.39])
-            .translate([width/2,height/2.3]);
+            .center([-1.55, 52.42])
+            .translate([width/2,height/2.2]);
          
         var geoPath = d3.geoPath()
             .projection(projection);
   
-        var tooltip = d3.select('#bottompanel')
+        var tooltip = d3.select('#rightpanel')
             .append('div')
             .attr('class', 'hidden tooltip');
         
         var leftselect = d3.select('#leftselect')
             .on('change', function(d){
-                menuchange("left");
+                menuchange();
             });
         
-        var centerselect = d3.select('#centerselect')
-            .on('change', function(d){
-                menuchange("center");
-            });
-        
-        var rightselect = d3.select('#rightselect')
-            .on('change', function(d){
-                menuchange("right");
+        d3.queue()
+            .defer(d3.json, './Map/cov.topojson')
+            .await(function(error, wards){
+                if (error) throw error;
+                plotmapnull(wards);
             });
 
-        function menuchange(side) {
+        function menuchange() {
                         
-            var values = d3.select("#" + side + "select").property('value');
-            csvpath = './Data/Tables/'.concat(values, '.csv');
-            questionpath = './Data/Questions/'.concat(values, '.txt');
+            var values = d3.select("#leftselect").property('value');
+            csvpath = './Data/Census/Tables/'.concat(values, '.csv');
+            questionpath = './Data/Census/Questions/'.concat(values, '.txt');
                         
             // Remove previous question and checkboxes
-            d3.select("#" + side + "question").selectAll("*").remove();
-            d3.select("#" + side + "answers").selectAll("*").remove();
+            d3.select("#question").selectAll("*").remove();
+            d3.select("#answers").selectAll("*").remove();
             
             // Loading data in this way prevents from ploting anything before loading finishes
             d3.queue()
@@ -345,18 +328,18 @@
             
                     // Assigning values to general variables, otherwise updating doesn't work
                     WARDS = wards;
-                    CSVTAB[side] = csvtab;
-                    QUESTION[side] = questiontext;
+                    CSVTAB = csvtab;
+                    QUESTION = questiontext;
                     
                     /* Appends Questions */
-                    d3.select("#" + side + "question")
+                    d3.select("#question")
                         .append("div")
                         //.attr("class", "questpan")
-                        .text(QUESTION[side]);
+                        .text(QUESTION);
                     
                     /* Adds the answers */
 
-                    var answers = d3.keys(CSVTAB[side][0]); // Get the column names of csv
+                    var answers = d3.keys(CSVTAB[0]); // Get the column names of csv
                     answers.remove('name', true); // Remove the element "name"
                     answers.remove('code', true); // Remove the element "code"
                     
@@ -364,25 +347,25 @@
                     
                     answers.forEach(function(d,i) {
                         // Append the checkboxes
-                        d3.select("#" + side + "answers")
+                        d3.select("#answers")
                             .append("div")
                             .append("label")
-                            .attr("id", side + "answer" + i)
+                            .attr("id", "answer" + i)
                             .append("input")
                             .attr("type", "checkbox")
                             .attr("class", "mapCheckbox")
                             .attr("value", d)
                             .on("change", function(d){ 
-                                CheckboxUpdate(WARDS, CSVTAB[side], side);
+                                CheckboxUpdate(WARDS, CSVTAB);
                             });
                             
                         // Append the text
-                        d3.select("#" + side + "answer" + i)
+                        d3.select("#answer" + i)
                             .append("text")
                             .text(d);
                     });
 
-                    plotmapnull(WARDS, side); // Plots the initial null map in the left
+                    plotmapnull(WARDS); // Plots the initial null map in the left
             
                 });
 
@@ -408,11 +391,11 @@
         }
 
         // Plots the map
-        function plotmap(patches, values, legendtext, side) {
+        function plotmap(patches, values, legendtext) {
             
-            d3.select("#" + side + "map").selectAll("*").remove();  // Remove previous objects
+            d3.select("#map").selectAll("*").remove();  // Remove previous objects
             
-            var svgelement = d3.select("#" + side + "map")
+            var svgelement = d3.select("#map")
                 .append('svg')
                 .attr('class', 'map');
             
@@ -424,7 +407,7 @@
             
             var xScale = d3.scaleLinear()
                 .domain([minval, maxval])
-                .rangeRound([600, 900]);
+                .rangeRound([0, 500]);
                 
             var delta = (maxval - minval) / 5.0; // toFixed() for rounding it to int
             
@@ -455,24 +438,22 @@
 				})
 				.on('mouseover', function(d){
                     d3.select(this).moveToFront().attr("class","hover");
-                    d3.select("#scatterplot").select("#" + d.properties.code).attr("class","hover");
                 })
                 .on('mousemove', function(d){
                     tooltip.classed('hidden', false)
 						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
-						.html(d.properties.name + ': ' + Number(values[d.properties.code].toFixed(1)));                    
+						.html(d.properties.name + ': ' + Number(values[d.properties.code].toFixed(1)));
                 })
                 .on('mouseout', function(d){
                     tooltip.classed('hidden', true);
                     d3.select(this).attr("class","incident");
-                    d3.select("#scatterplot").select("#" + d.properties.code).attr("class","incident");
                 });
                 
                 /* Legend */
                 
                 svgelement.append("g")
                     .attr("class", "key")
-                    .attr("transform", "translate(-550,310)")
+                    .attr("transform", "translate(80,510)")
                     .selectAll("rect")
                     .data(color.range().map(function(d) {
                         d = color.invertExtent(d);
@@ -489,7 +470,7 @@
                     
                 svgelement.append("g")
                     .attr("class", "key")
-                    .attr("transform", "translate(-550,310)")
+                    .attr("transform", "translate(80,510)")
                     .append("text")
                     .attr("class", "caption")
                     .attr("x", xScale.range()[0])
@@ -502,7 +483,7 @@
 
                 svgelement.append("g")
                     .attr("class", "key")
-                    .attr("transform", "translate(-550,310)")
+                    .attr("transform", "translate(80,510)")
                     .call(d3.axisBottom(xScale)
                     .tickSize(13)
                     .tickFormat(function(xScale, i) { return i ? xScale : xScale; })
@@ -512,11 +493,11 @@
         }
         
         // Plots the map if there is no choice selected
-        function plotmapnull(patches, side) {
+        function plotmapnull(patches) {
             
-            d3.select("#" + side + "map").selectAll("*").remove();  // Remove previous objects
+            d3.select("#map").selectAll("*").remove();  // Remove previous objects
             
-            var svgelement = d3.select("#" + side + "map")
+            var svgelement = d3.select("#map")
                 .append('svg')
                 .attr('class', 'map');
             
@@ -538,7 +519,7 @@
                 .on('mousemove', function(d){
                     tooltip.classed('hidden', false)
 						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
-						.html(d.properties.name);                    
+						.html(d.properties.name);
                 })
                 .on('mouseout', function(d){
                     d3.select(this)
@@ -550,25 +531,25 @@
         }
         
         // Updates the map according to checked boxes
-        function CheckboxUpdate(wards, data, side){
+        function CheckboxUpdate(wards, data){
 
-            var paneltoplot = "#" + side + "map";
-            var valuestoplot = computevalues(data,side);
+            var paneltoplot = "#map";
+            var valuestoplot = computevalues(data);
             
             if (Object.keys(valuestoplot).length == 0)
             {
-                plotmapnull(wards, side); // Plots the map again
+                plotmapnull(wards); // Plots the map again
             }
             else
             {                
-                plotmap(wards, valuestoplot, "Percentage", side); // Plots the map again
+                plotmap(wards, valuestoplot, "Percentage"); // Plots the map again
             }
         }
         
         // Looks which checkboxes are selected and returns the corresponding data
-        function computevalues(data, side){
+        function computevalues(data){
             
-            var paneltolook = "#" + side + "panel";
+            var paneltolook = "#leftpanel";
             
             var choices = [];
             
