@@ -25,13 +25,18 @@
             margin-bottom: 10px;
         }
         
-        h2 {
-            text-align: center;
+        .navmenu {
+			width: 1100px;
 			font-size: 20px;
             font-family: "Helvetica", Georgia, Serif;
             color: white;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 2px;
+            padding-bottom: 2px;
             margin-top: 10px;
             margin-bottom: 10px;
+            text-align: center;
         }
         
         .description {
@@ -189,7 +194,10 @@
 
         <div class='header'>
             <h1>Coventry Data Explorer</h1>
-            <h2>Differences in wards</h2>
+            
+            <div class='navmenu'>
+				<a href="./geographical_distribution.html" style="text-decoration: none; color: LightSteelBlue"> Geographical Distribution</a> | <b>Differences in Wards</b> | <a href="./correlation.html" style="text-decoration: none; color: LightSteelBlue">Correlations in Wards</a> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a>
+			</div>
             
             <div class='description'>
                 <p>You can explore the geographical distribution of different demographic, attitudes and levels of cultural participation and support across the city. The first map draws on the ONS Census to give data on age, ethnicity, religion, economic activity. The second draws on the Coventry Household Survey 2016 and gives insight into attitudes, health and neighborhood values. The third draws on cultural participation data. By picking variables is each map you can see connections between, for instance, ethnic group, quality of life and cultural participation. You can multiple click the values in each section as well.</p>
@@ -302,7 +310,7 @@
         </div>
         
         <div id='credits' class='credcls'>
-            <p> Visualization by <a href="http://twitter.com/mgutierrezroig">@mgutierrezroig</a> from <a href="http://datasciencelab.co.uk/">WBS Data Science Lab</a>. Code available on <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer">github</a> Version 1 (updated September 2017) </p>
+            <p> Visualization by <a href="http://twitter.com/mgutierrezroig" style="text-decoration: none; color: SkyBlue">@mgutierrezroig</a> from <a href="http://datasciencelab.co.uk/" style="text-decoration: none; color: SkyBlue">WBS Data Science Lab</a>. Code available on <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer" style="text-decoration: none; color: SkyBlue">github</a> Version 1 (updated October 2017) </p>
         </div>
     
     </div>

@@ -25,13 +25,18 @@
             margin-bottom: 10px;
         }
         
-        h2 {
-            text-align: center;
+        .navmenu {
+			width: 1100px;
 			font-size: 20px;
             font-family: "Helvetica", Georgia, Serif;
             color: white;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 2px;
+            padding-bottom: 2px;
             margin-top: 10px;
             margin-bottom: 10px;
+            text-align: center;
         }
         
         .description {
@@ -217,7 +222,10 @@
 
         <div class='header'>
             <h1>Coventry Data Explorer</h1>
-            <h2>Correlations in wards</h2>
+            
+            <div class='navmenu'>
+				<a href="./geographical_distribution.html" style="text-decoration: none; color: LightSteelBlue"> Geographical Distribution</a> | <a href="./differences_wards.html" style="text-decoration: none; color: LightSteelBlue">Differences in Wards</a> | <b>Correlations in Wards</b> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a>
+			</div>
             
             <div class='description'>
                 <p>This is a tool for exploring the correlation between two different variables selected from 3 different data categories: ONS Census, Households Survey and Cultural Participation. First, select the items in the menu and tick the boxes to create and display the desired variables you want to analyse. Note that you can tick multiple boxes adding the values up. A scatter plot in the center will show a two-dimensional point for each ward and the correlation between the selected variables. A correlation analysis can be performed underneath by pressing run.</p>
@@ -372,7 +380,7 @@
         </div>
         
         <div id='credits' class='credcls'>
-            <p> Visualization by <a href="http://twitter.com/mgutierrezroig">@mgutierrezroig</a> from <a href="http://datasciencelab.co.uk/">WBS Data Science Lab</a>. Code available on <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer">github</a> Version 1 (updated September 2017) </p>
+            <p> Visualization by <a href="http://twitter.com/mgutierrezroig" style="text-decoration: none; color: SkyBlue">@mgutierrezroig</a> from <a href="http://datasciencelab.co.uk/" style="text-decoration: none; color: SkyBlue">WBS Data Science Lab</a>. Code available on <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer" style="text-decoration: none; color: SkyBlue">github</a> Version 1 (updated October 2017) </p>
         </div>
     
     </div>
