@@ -1,0 +1,390 @@
+<html>
+<head>
+    <title>Coventry Data Explorer: Parallel Coordinates</title>
+    
+    <style>
+        
+        .layout {
+            width: 1200px;
+            margin: auto;
+            margin-top : 0px;
+        }
+        
+        .header {
+			width: 1200px;
+            background-color: navy;
+            padding-bottom: 20px;
+		}
+        
+        h1 {
+            text-align: center;
+			font-size: 60px;
+            font-family: "Helvetica", Georgia, Serif;
+            color: white;
+            margin-top: 0px;
+            margin-bottom: 10px;
+        }
+        
+        .navmenu {
+			width: 1100px;
+			font-size: 20px;
+            font-family: "Helvetica", Georgia, Serif;
+            color: white;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .description {
+			width: 1100px;
+			font-size: 16px;
+            font-family: "Helvetica", Georgia, Serif;
+            background-color: aliceblue;
+            border-radius: 20px;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            margin: auto;
+            text-align: justify;
+		}
+        
+        .mainrow {
+			width: 1200px;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+		}
+        
+        div.bottompan {
+            width: 1200px;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .question {
+            font-size: 14px;
+            font-family: "Helvetica", Georgia, Serif;
+            line-height: 16px;
+            margin-bottom: 14px;
+            margin-right: 40px;
+        }
+        
+        .answers {
+            font-size: 14px;
+            font-family: "Helvetica", Georgia, Serif;
+            line-height: 16px;
+            margin-bottom: 20px;
+            margin-right: 40px;
+            height: 150px;
+            overflow-y: auto;
+        }
+        
+        .radiobutton {
+            width: 1200px;
+            height: 50px;
+            padding: 10px;
+        }
+        
+        .map {
+            width: 400px;
+            height: 400px;
+            vertical-align: top;
+        }
+        
+        .parallel {
+            width: 800px;
+            height: 400px;
+            vertical-align: top;
+        }
+        
+        div.tooltip {
+            color: #222;
+            background-color: #fff;
+            padding: .5em;
+            text-shadow: #f5f5f5 0 1px 0;
+            border-radius: 2px;
+            opacity: 0.9;
+            position: absolute;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .incident {
+            width: 200px;
+            height: 200px;
+            opacity: 0.75;
+            stroke: #fff;
+            stroke-width:1px;
+        }
+        
+        .credcls {
+			width: 1200px;
+            height: 50px;
+            background-color: navy;
+            font-size: 14px;
+            font-family: "Helvetica", Georgia, Serif;
+            text-align: center;
+            padding: 2px;
+            color: white;
+		}
+        
+
+    </style>
+</head>
+<body>
+    
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://d3js.org/d3-array.v1.min.js"></script>
+	<script src="https://d3js.org/d3-geo.v1.min.js"></script>
+	<script src="https://d3js.org/d3-queue.v3.min.js"></script>
+	<script src="https://d3js.org/topojson.v1.min.js"></script>
+    
+    <div class='layout'>
+
+        <div class='header'>
+            <h1>Coventry Data Explorer</h1>
+            
+            <div class='navmenu'>
+				<a href="./geographical_distribution.html" style="text-decoration: none; color: LightSteelBlue"> Geographical Distribution</a> | <b>Differences in Wards</b> | <a href="./correlation.html" style="text-decoration: none; color: LightSteelBlue">Correlations in Wards</a> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a> | <a href="./scenicness.html" style="text-decoration: none; color: LightSteelBlue">Scenicness</a>
+			</div>
+            
+            <div class='description'>
+                <p>You can explore the geographical distribution of different demographic, attitudes and levels of cultural participation and support across the city. The first map draws on the ONS Census to give data on age, ethnicity, religion, economic activity. The second draws on the Coventry Household Survey 2016 and gives insight into attitudes, health and neighborhood values. The third draws on cultural participation data. By picking variables is each map you can see connections between, for instance, ethnic group, quality of life and cultural participation. You can multiple click the values in each section as well.</p>
+            </div>
+        
+        </div>
+        
+        <div id='row-main' class="mainrow">
+            <div id='radiobutton' class='radiobutton'>
+                Select the number of dimensions:
+                <input type="radio" name="numdim" value=3 checked> 3
+                <input type="radio" name="numdim" value=4> 4
+                <input type="radio" name="numdim" value=5> 5
+            
+            </div>
+            
+            <div id='covmap' class='map'> </div>
+            <div id='parallel' class='parallel'> </div>
+                
+        </div>
+        
+        <div id='credits' class='credcls'>
+            <p> Visualization by <a href="http://twitter.com/mgutierrezroig" style="text-decoration: none; color: SkyBlue">@mgutierrezroig</a> from <a href="http://datasciencelab.co.uk/" style="text-decoration: none; color: SkyBlue">WBS Data Science Lab</a>. Code available on <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer" style="text-decoration: none; color: SkyBlue">github</a> Version 1 (updated October 2017) </p>
+        </div>
+    
+    </div>
+    
+    <script>
+        
+        WARDS = {}   // General variable for ward objects
+        CSVTAB = {}  // General variable for csvtab object
+        QUESTION = {}  // General variable for question object
+        
+        VALUES = {"KS103EW":"Civil Partnership Status",
+                    "KS104EW":"Living Arrangements",
+                    "KS105EW":"Household Composition",
+                    "KS106EW":"Employment and dependent children",
+                    "KS107EW":"Lone parent with dependent children",
+                    "QS117EW":"One adult household",
+                    "QS118EW":"Families with dependent children",
+                    "QS119EW":"Households deprivation",
+                    "KS201EW":"Ethnic Group",
+                    "KS202EW":"National Identity",
+                    "KS205EW":"Passports Held",
+                    "QS205EW":"Proficiency in English",
+                    "KS206EW":"Household Language",
+                    "KS209EW":"Religion",
+                    "QS210EW":"Religion (Detailed)",
+                    "KS301EW":"Health",
+                    "KS401EW":"Accomodiation type",
+                    "KS402EW":"Tenure",
+                    "KS403EW":"Rooms and heating",
+                    "KS404EW":"Car availability",
+                    "QS404EW":"Tenure over 65",
+                    "KS405EW":"Communal establishment residents",
+                    "QS406EW":"Household size",
+                    "KS501EW":"Qualifications",
+                    "KS601EW":"Economic Activity",
+                    "KS602EW":"Economic Activity (males)",
+                    "KS603EW":"Economic Activity (females)",
+                    "KS604EW":"Hours worked",
+                    "KS605EW":"Industry",
+                    "KS608EW":"Occupation",
+                    "KS609EW":"Occupation (males)",
+                    "KS610EW":"Occupation (females)",
+                    "QS612EW":"Year last worked",
+                    "QS701EW":"Method of travel to work",
+                    "Q1":"How long living in neighbourhood",
+                    "Q3":"Satisfaction with neighbourhood",
+                    "Q6":"Quality of life perception",
+                    "Q8":"Influence in local area",
+                    "Q9":"Getting involved",
+                    "Q10":"Getting involved in the future",
+                    "Q11":"People from different backgrounds",
+                    "Q12":"Cultural events attendance",
+                    "Q12a":"Cultural events attendance",
+                    "Q12b":"Cultural events attendance",
+                    "Q13":"Cultural events attendance (children)",
+                    "Q13a":"Cultural events attendance (children)",
+                    "Q13b":"Cultural events attendance (children)",
+                    "Q14":"Coventry City of Culture bid support",
+                    "Q15":"Coventry City rating",
+                    "Q27":"Health",
+                    "Q37":"Physical activity",
+                    "Q42":"Health limitations",
+                    "Q43":"Health problem description",
+                    "Q48":"Money worry",
+                    "IndigoAudience":"Audience engagement in Coventry"}
+  
+        var tooltip = d3.select('#row-main')
+            .append('div')
+            .attr('class', 'hidden tooltip');
+        
+        start();
+
+        function start() {
+            
+            // Loading data in this way prevents from ploting anything before loading finishes
+            d3.queue()
+                .defer(d3.json, './Map/cov.topojson')
+                .await(function(error, wards){
+                    if (error) throw error;
+
+                    plotmap(wards); // Plots the initial null map in the left
+            
+                });
+
+        };
+        
+        // Function that move object to front in order to avoid plotting border issues
+        d3.selection.prototype.moveToFront = function() {
+          return this.each(function(){
+            this.parentNode.appendChild(this);
+          });
+        };
+        
+        // Function for removing specific string from array of strings
+        Array.prototype.remove= function(){
+            var what, a= arguments, L= a.length, ax;
+            while(L && this.length){
+                what= a[--L];
+                while((ax= this.indexOf(what))!= -1){
+                    this.splice(ax, 1);
+                }
+            }
+            return this;
+        }
+        
+        // Plots the map if there is no choice selected
+        function plotmap(patches) {
+            
+            var width = d3.selectAll("#covmap").style("width").slice(0,-2);
+            var height = d3.selectAll("#covmap").style("height").slice(0,-2);
+            
+            console.log(height);
+            var projection = d3.geoAlbers()
+                .scale(120000)
+                .rotate([0,0])
+                .center([-1.49, 52.39])
+                .translate([width/2,height/2.3]);
+             
+            var geoPath = d3.geoPath()
+                .projection(projection);
+            
+            d3.select("#covmap").selectAll("*").remove();  // Remove previous objects
+            
+            var svgelement = d3.select("#covmap")
+                .append('svg')
+                .attr('class', 'map');
+            
+            /* Map */
+            
+			svgelement.append("g")
+                .selectAll("path")
+                .data(topojson.feature(patches, patches.objects.covwards).features)
+                .enter()
+                .append("path")
+                .attr("d", geoPath)
+                .attr("class","incident")
+                .style("fill", "#e5e5e5")
+				.on('mouseover', function(d){
+                    d3.select(this)
+                        .moveToFront()
+                        .style("fill","steelblue");
+                })
+                .on('mousemove', function(d){
+                    tooltip.classed('hidden', false)
+						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
+						.html(d.properties.name);
+                })
+                .on('mouseout', function(d){
+                    d3.select(this)
+                        .attr("class","incident")
+                        .style("fill", "#e5e5e5");
+                    
+                    tooltip.classed('hidden', true);
+                });
+        }
+        
+        // Updates the map according to checked boxes
+        function CheckboxUpdate(wards, data, side){
+
+            var paneltoplot = "#" + side + "map";
+            var valuestoplot = computevalues(data,side);
+            
+            if (Object.keys(valuestoplot).length == 0)
+            {
+                plotmapnull(wards, side); // Plots the map again
+            }
+            else
+            {                
+                plotmap(wards, valuestoplot, "Percentage", side); // Plots the map again
+            }
+        }
+        
+        // Looks which checkboxes are selected and returns the corresponding data
+        function computevalues(data, side){
+            
+            var paneltolook = "#" + side + "panel";
+            
+            var choices = [];
+            
+            d3.select(paneltolook)
+                .selectAll(".mapCheckbox")
+                .each(function(d){
+                    cb = d3.select(this);
+                    if(cb.property("checked")){
+                        choices.push(cb.property("value"));
+                }
+            });
+            
+            var valuestoplot = {};  
+                
+            data.forEach(function(d) {
+                choices.forEach(function(c) {
+                    var k = d.code;
+                    if (k in valuestoplot) {
+                        valuestoplot[k] += Number(d[c]);
+                    } else {
+                        valuestoplot[k] = Number(d[c]);
+                    }
+                });
+            });
+            
+            return(valuestoplot);
+        }
+
+    </script>
+
+</body>
+</html>

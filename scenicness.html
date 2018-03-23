@@ -1,0 +1,240 @@
+<html>
+<head>
+    <title>Coventry Data Explorer: Scenicness</title>
+    
+    <style>
+        
+        .layout {
+            width: 1200px;
+            margin: auto;
+            margin-top : 0px;
+        }
+        
+        .header {
+			width: 1200px;
+            background-color: navy;
+            padding-bottom: 20px;
+		}
+        
+        h1 {
+            text-align: center;
+			font-size: 60px;
+            font-family: "Helvetica", Georgia, Serif;
+            color: white;
+            margin-top: 0px;
+            margin-bottom: 10px;
+        }
+        
+        .navmenu {
+			width: 1100px;
+			font-size: 20px;
+            font-family: "Helvetica", Georgia, Serif;
+            color: white;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .description {
+			width: 1100px;
+			font-size: 16px;
+            font-family: "Helvetica", Georgia, Serif;
+            background-color: aliceblue;
+            border-radius: 20px;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            margin: auto;
+            text-align: justify;
+		}
+        
+        .mainrow {
+			width: 1200px;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+		}
+        
+        .osmap {
+            width: 1200px;
+            height: 800px;
+        }
+        
+        .legend {
+            line-height: 18px;
+            color: #555;
+            background-color: white;
+            opacity: 0.9;
+            padding: 7px;
+        }
+        .legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+        }
+
+        .credcls {
+			width: 1200px;
+            height: 50px;
+            background-color: navy;
+            font-size: 14px;
+            font-family: "Helvetica", Georgia, Serif;
+            text-align: center;
+            padding: 2px;
+            color: white;
+		}
+        
+
+    </style>
+</head>
+<body>
+    
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://d3js.org/d3-array.v1.min.js"></script>
+	<script src="https://d3js.org/d3-geo.v1.min.js"></script>
+	<script src="https://d3js.org/d3-queue.v3.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+    
+    <div class='layout'>
+
+        <div class='header'>
+            <h1>Coventry Data Explorer</h1>
+            
+            <div class='navmenu'>
+				<a href="./geographical_distribution.html" style="text-decoration: none; color: LightSteelBlue"> Geographical Distribution</a> | <a href="./differences_wards.html" style="text-decoration: none; color: LightSteelBlue">Differences in Wards</a> | <a href="./correlation.html" style="text-decoration: none; color: LightSteelBlue">Correlation in Wards</a> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a> | <b>Scenicness</b>
+			</div>
+            
+            <div class='description'>
+                <p>Here you can explore the visual landscape of Coventry, generated with the same methodology used in <a href="https://datasciencelab.co.uk/publications/"> this article</a>. The map is generated from extracting visual features using a Machine Learning algorithm, called <a href="http://places.csail.mit.edu/">Places</a> and developed by MIT. The images were downloaded from <a href="https://www.google.com/streetview/#"> Google Street View</a> pictures across the different wards of Coventry. All plots are interactive, so feel free to hover and click in order to discover Coventry wards' visual DNA. </p>
+            </div>
+        
+        </div>
+        
+        <div id='row-main' class="mainrow">
+            <div id='map' class='osmap'> </div>
+        </div>
+        
+        <div id='credits' class='credcls'>
+            <p> Visualization by <a href="http://twitter.com/mgutierrezroig" style="text-decoration: none; color: SkyBlue">@mgutierrezroig</a> from <a href="http://datasciencelab.co.uk/" style="text-decoration: none; color: SkyBlue">WBS Data Science Lab</a>. Code available on <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer" style="text-decoration: none; color: SkyBlue">github</a> (updated October 2017) </p>
+        </div>
+    
+    </div>
+    
+    <script>
+        
+        
+        var OSM;
+		
+        function start() {
+                        
+            csvpath = './Data/Scenicness/Coventry_geograph_data.csv';
+            var DATA = []   // General variable for ward objects
+            
+            // Loading data in this way prevents from ploting anything before loading finishes
+            d3.queue()
+                .defer(d3.csv, csvpath)
+                .await(function(error, data){
+                    if (error) throw error;
+
+                    createOpenStreetMap(data);
+                });
+        };
+        
+        start();
+        
+        function createOpenStreetMap(data) {
+            
+            var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                'Imagery © <a href="http://mapbox.com">Mapbox</a>';
+            var mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+            
+            var gpsdata = L.layerGroup();
+            
+            var grayscale = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr});
+            var streets = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr});
+            
+            var baseMaps = {
+                "Grayscale": grayscale,
+                "Streets": streets
+            };
+            
+            var markers = [];
+            
+            var n = data.length;
+            for (var i = 0; i < n; i++) {
+                var id = data[i]["picid"];
+                var lat = data[i]["lat"];
+                var lon = data[i]["lon"];
+                var date = new Date(data[i]["date"]);
+                var thumb = data[i]["thumbnail"];
+                var title = data[i]["title"];
+                var author = data[i]["author"];
+                var scenicness = data[i]["scenicness"];
+                
+                var markerIcon = L.icon({
+                    iconUrl: "./Images/map-marker-scenicness-" + Number(scenicness-0.5).toFixed(0).toString() + ".png",
+                    //iconSize:     [14, 23], // size of the icon
+                    popupAnchor:  [7, -5] // point from which the popup should open relative to the iconAnchor
+                });
+                
+                var picurl = "https://www.geograph.org.uk/photo/" + id
+                
+                markers.push(new L.marker([lat,lon], {icon: markerIcon})
+                .bindPopup("<b>Title: </b>" + title +
+                           "<br> <b>Author: </b>" + author +
+                           "<br> <b>Date: </b>" + date.toUTCString().slice(0,16) +
+                           "<br> <a target='_blank' href=" + picurl + "> <center><img src=" + thumb + "> </center></a> " +
+                           "<br> <b>Scenicness Score: </b>" + scenicness, {maxWidth : 150}));
+            }
+            
+            var overlayMaps = {
+                "GPS Data" : L.layerGroup(markers)
+            };
+            
+            OSM = L.map('map', {
+                center: [52.407848, -1.511065],
+                zoom: 16,
+                minZoom: 16,
+                layers: [streets,overlayMaps["GPS Data"]]
+            });
+            
+            L.control.layers(baseMaps,null,{position: 'topleft'}).addTo(OSM);
+            
+            var legend = L.control({position: 'topright'});
+            var colors = ["#edf8fb", "#bfd3e6", "#9ebcda", "#8c96c6", "#8856a7", "#810f7c"]
+            legend.onAdd = function (map) {
+
+                var div = L.DomUtil.create('div', 'legend'),
+                    grades = [0, 1, 2, 3, 4, 5, 6],
+                    labels = [];
+                
+                div.innerHTML += "<center><b>Scenicness <br> Score</b></center>"
+                
+                // loop through our density intervals and generate a label with a colored square for each interval
+                for (var i = 0; i < grades.length-1; i++) {
+                    div.innerHTML +=
+                        '<i style="background:' + colors[i] + '"></i> ' +
+                        grades[i] + ' &ndash; ' + grades[i + 1] + '<br>';
+                }
+
+                return div;
+            };
+
+            legend.addTo(OSM);
+        
+        };
+
+
+    </script>
+
+</body>
+</html>

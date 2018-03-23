@@ -190,7 +190,7 @@
             <h1>Coventry Data Explorer</h1>
             
             <div class='navmenu'>
-				<b> Geographical Distribution</b> | <a href="./differences_wards.html" style="text-decoration: none; color: LightSteelBlue">Differences in Wards</a> | <a href="./correlation.html" style="text-decoration: none; color: LightSteelBlue">Correlations in Wards</a> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a>
+				<b> Geographical Distribution</b> | <a href="./differences_wards.html" style="text-decoration: none; color: LightSteelBlue">Differences in Wards</a> | <a href="./correlation.html" style="text-decoration: none; color: LightSteelBlue">Correlations in Wards</a> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a> | <a href="./scenicness.html" style="text-decoration: none; color: LightSteelBlue">Scenicness</a>
 			</div>
             
             <div class='description'>
@@ -319,6 +319,7 @@
         function menuchange() {
                         
             var values = d3.select("#leftselect").property('value');
+
             csvpath = './Data/Census/Tables/'.concat(values, '.csv');
             questionpath = './Data/Census/Questions/'.concat(values, '.txt');
                         
