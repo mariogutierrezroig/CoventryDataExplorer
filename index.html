@@ -273,7 +273,7 @@
             
             // Loading data in this way prevents from ploting anything before loading finishes
             d3.queue()
-                .defer(d3.json, './Map/cov.json')
+                .defer(d3.json, './Map/coventry_wards.json')
                 .defer(d3.csv, csvpath)
                 .await(function(error, wards, csvtab){
                     if (error) throw error;

@@ -16,7 +16,7 @@
             padding-bottom: 20px;
             margin-top : 0px;
 		}
-        
+
         h1 {
             text-align: center;
 			font-size: 60px;
@@ -202,68 +202,13 @@
         <div id='row-main' class="mainrow">
             <div id='leftpanel' class='leftpan'> 
                 <div id='leftmenu' class='menu'>
-                    <p> Select item in ONS Census </p>
+                    <p> Select a database </p>
                     
-                    <select id="leftselect" class="select">
+                    <select id="datasetselect" class="select">
                       <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
-                      <option style="background-color: #cccccc;" disabled>===== ONS Census =====</option>
-                      <option value="KS103EW">Civil Partnership Status</option>
-                      <option value="KS104EW">Living Arrangements</option>
-                      <option value="KS105EW">Household Composition</option>
-                      <option value="KS106EW">Employment and dependent children</option>
-                      <option value="KS107EW">Lone parent with dependent children</option>
-                      <option value="QS117EW">One adult household</option>
-                      <option value="QS118EW">Families with dependent children</option>
-                      <option value="QS119EW">Households deprivation</option>
-                      <option value="KS201EW">Ethnic Group</option>
-                      <option value="KS202EW">National Identity</option>
-                      <option value="KS205EW">Passports Held</option>
-                      <option value="QS205EW">Proficiency in English</option>
-                      <option value="KS206EW">Household Language</option>
-                      <option value="KS209EW">Religion</option>
-                      <option value="QS210EW">Religion (Detailed)</option>
-                      <option value="KS301EW">Health</option>
-                      <option value="KS401EW">Accomodiation type</option>
-                      <option value="KS402EW">Tenure</option>
-                      <option value="KS403EW">Rooms and heating</option>
-                      <option value="KS404EW">Car availability</option>
-                      <option value="QS404EW">Tenure over 65</option>
-                      <option value="KS405EW">Communal establishment residents</option>
-                      <option value="QS406EW">Household size</option>
-                      <option value="KS501EW">Qualifications</option>
-                      <option value="KS601EW">Economic Activity</option>
-                      <option value="KS602EW">Economic Activity (males)</option>
-                      <option value="KS603EW">Economic Activity (females)</option>
-                      <option value="KS604EW">Hours worked</option>
-                      <option value="KS605EW">Industry</option>
-                      <option value="KS608EW">Occupation</option>
-                      <option value="KS609EW">Occupation (males)</option>
-                      <option value="KS610EW">Occupation (females)</option>
-                      <option value="QS612EW">Year last worked</option>
-                      <option value="QS701EW">Method of travel to work</option>
-                      <option style="background-color: #cccccc;" disabled>===== Household Survey =====</option>
-                      <option value="Q1">How long living in neighbourhood</option>
-                      <option value="Q3">Satisfaction with neighbourhood</option>
-                      <option value="Q6">Quality of life perception</option>
-                      <option value="Q8">Influence in local area</option>
-                      <option value="Q9">Getting involved</option>
-                      <option value="Q10">Getting involved in the future</option>
-                      <option value="Q11">People from different backgrounds</option>
-                      <option value="Q12">Cultural events attendance</option>
-                      <option value="Q12a">Cultural events attendance</option>
-                      <option value="Q12b">Cultural events attendance</option>
-                      <option value="Q13">Cultural events attendance (children)</option>
-                      <option value="Q13a">Cultural events attendance (children)</option>
-                      <option value="Q13b">Cultural events attendance (children)</option>
-                      <option value="Q14">Coventry City of Culture bid support</option>
-                      <option value="Q15">Coventry City rating</option>
-                      <option value="Q27">Health</option>
-                      <option value="Q37">Physical activity</option>
-                      <option value="Q42">Health limitations</option>
-                      <option value="Q43">Health problem description</option>
-                      <option value="Q48">Money worry</option>
-                      <option style="background-color: #cccccc;" disabled>===== Indigo Audience =====</option>
-                      <option value="IndigoAudience">Audience engagement in Coventry</option>
+                      <option value="Household_Survey_2018_MSOA.json">ONS Census 2011</option>
+                      <option value="Household_Survey_2018_MSOA.json">Household Survey 2016</option>
+                      <option value="Household_Survey_2018_MSOA.json">Household Survey 2018</option>
                     </select>
                 
                 </div>
@@ -283,9 +228,8 @@
     
     <script>
         
-        WARDS = {}   // General variable for ward objects
-        CSVTAB = {}  // General variable for csvtab object
-        QUESTION = {}  // General variable for question object
+        MAP = {}   // General variable for map objects
+        DATA = {}  // General variable for csvtab object
         
         var width = 500,
             height = 500;
@@ -303,80 +247,102 @@
             .append('div')
             .attr('class', 'hidden tooltip');
         
-        var leftselect = d3.select('#leftselect')
+        var dataset = d3.select('#datasetselect')
             .on('change', function(d){
-                menuchange();
+                change_dataset();
             });
         
         d3.queue()
-            .defer(d3.json, './Map/cov.topojson')
+            .defer(d3.json, './Map/coventry_msoa.geojson')
+            //.defer(d3.json, './Map/coventry_wards.geojson')
+            //.defer(d3.json, './Map/coventry_wards.topojson')
             .await(function(error, wards){
                 if (error) throw error;
                 plotmapnull(wards);
             });
+        
+        function change_dataset() {
+            var values = d3.select("#datasetselect").property('value');
 
-        function menuchange() {
-                        
-            var values = d3.select("#leftselect").property('value');
-
-            csvpath = './Data/Census/Tables/'.concat(values, '.csv');
-            questionpath = './Data/Census/Questions/'.concat(values, '.txt');
+            datapath = './Data/'.concat(values);
                         
             // Remove previous question and checkboxes
+            d3.select("#questionselect").selectAll("*").remove();
             d3.select("#question").selectAll("*").remove();
             d3.select("#answers").selectAll("*").remove();
             
             // Loading data in this way prevents from ploting anything before loading finishes
             d3.queue()
-                .defer(d3.json, './Map/cov.topojson')
-                .defer(d3.csv, csvpath)
-                .defer(d3.text, questionpath)
-                .await(function(error, wards, csvtab, questiontext){
+                .defer(d3.json, './Map/coventry_msoa.geojson')
+                .defer(d3.json, datapath)
+                .await(function(error, map, data){
                     if (error) throw error;
             
                     // Assigning values to general variables, otherwise updating doesn't work
-                    WARDS = wards;
-                    CSVTAB = csvtab;
-                    QUESTION = questiontext;
+                    MAP = map;
+                    DATA = data;
+                                        
+                    //change_question();
                     
-                    /* Appends Questions */
-                    d3.select("#question")
-                        .append("div")
-                        //.attr("class", "questpan")
-                        .text(QUESTION);
-                    
-                    /* Adds the answers */
+                    /* Adds Features Menu */
 
-                    var answers = d3.keys(CSVTAB[0]); // Get the column names of csv
-                    answers.remove('name', true); // Remove the element "name"
-                    answers.remove('code', true); // Remove the element "code"
-                    
-                    /* Adds Checkboxes */
-                    
-                    answers.forEach(function(d,i) {
-                        // Append the checkboxes
-                        d3.select("#answers")
-                            .append("div")
-                            .append("label")
-                            .attr("id", "answer" + i)
-                            .append("input")
-                            .attr("type", "checkbox")
-                            .attr("class", "mapCheckbox")
-                            .attr("value", d)
-                            .on("change", function(d){ 
-                                CheckboxUpdate(WARDS, CSVTAB);
-                            });
-                            
-                        // Append the text
-                        d3.select("#answer" + i)
-                            .append("text")
-                            .text(d);
-                    });
-
-                    plotmapnull(WARDS); // Plots the initial null map in the left
+					var options = d3.select('#leftmenu')
+						.append('select')
+                        .attr('id','questionselect')
+						.attr('class','select')
+						.on('change',function (d) { change_question(); return d; })
+						.selectAll('option')
+						.data(Object.keys(DATA))
+						.enter()
+						.append('option')
+						.text(function (d) { return DATA[d]["Topic"]; })
+                        .attr('value',function (d) { return d; });
             
                 });
+        }
 
+        function change_question() {
+            
+            var qvalue = d3.select('#questionselect').property('value');
+                                    
+            // Remove previous question and checkboxes
+            d3.select("#question").selectAll("*").remove();
+            d3.select("#answers").selectAll("*").remove();
+                    
+            /* Appends Questions */
+            d3.select("#question")
+                .append("div")
+                //.attr("class", "questpan")
+                .text(DATA[qvalue]["Question"]);
+            
+            /* Adds the answers */
+
+            var answers = Object.keys(DATA[qvalue]["Answers"]); // Get the column names of csv
+            
+            /* Adds Checkboxes */
+            
+            answers.forEach(function(d,i) {
+                // Append the checkboxes
+                d3.select("#answers")
+                    .append("div")
+                    .append("label")
+                    .attr("id", "answer" + i)
+                    .append("input")
+                    .attr("type", "checkbox")
+                    .attr("class", "mapCheckbox")
+                    .attr("value", d)
+                    .on("change", function(d){ 
+                        CheckboxUpdate();
+                    });
+                    
+                // Append the text
+                d3.select("#answer" + i)
+                    .append("text")
+                    .text(d);
+            });
+
+            plotmapnull(MAP); // Plots the initial null map in the left
+            
         };
         
         // Function that move object to front in order to avoid plotting border issues
@@ -434,7 +400,7 @@
             
 			svgelement.append("g")
                 .selectAll("path")
-                .data(topojson.feature(patches, patches.objects.covwards).features)
+                .data(patches.features)
                 .enter()
                 .append("path")
                 .attr( "d", geoPath )
@@ -513,7 +479,7 @@
             
 			svgelement.append("g")
                 .selectAll("path")
-                .data(topojson.feature(patches, patches.objects.covwards).features)
+                .data(patches.features)
                 .enter()
                 .append("path")
                 .attr("d", geoPath)
@@ -539,23 +505,23 @@
         }
         
         // Updates the map according to checked boxes
-        function CheckboxUpdate(wards, data){
+        function CheckboxUpdate(){
 
             var paneltoplot = "#map";
-            var valuestoplot = computevalues(data);
+            var valuestoplot = computevalues();
             
             if (Object.keys(valuestoplot).length == 0)
             {
-                plotmapnull(wards); // Plots the map again
+                plotmapnull(MAP); // Plots the map again
             }
             else
             {                
-                plotmap(wards, valuestoplot, "Percentage"); // Plots the map again
+                plotmap(MAP, valuestoplot, "Percentage"); // Plots the map again
             }
         }
         
         // Looks which checkboxes are selected and returns the corresponding data
-        function computevalues(data){
+        function computevalues(){
             
             var paneltolook = "#leftpanel";
             
@@ -570,15 +536,17 @@
                 }
             });
             
-            var valuestoplot = {};  
-                
-            data.forEach(function(d) {
-                choices.forEach(function(c) {
-                    var k = d.code;
+            var qvalue = d3.select('#questionselect').property('value');
+            
+            var valuestoplot = {};
+
+            choices.forEach(function(c) {
+                var keys = Object.keys(DATA[qvalue]["Answers"][c]);
+                keys.forEach(function(k) {
                     if (k in valuestoplot) {
-                        valuestoplot[k] += Number(d[c]);
+                        valuestoplot[k] += Number(DATA[qvalue]["Answers"][c][k]);
                     } else {
-                        valuestoplot[k] = Number(d[c]);
+                        valuestoplot[k] = Number(DATA[qvalue]["Answers"][c][k]);
                     }
                 });
             });
