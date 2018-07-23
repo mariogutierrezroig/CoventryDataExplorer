@@ -206,7 +206,7 @@
                     
                     <select id="datasetselect" class="select">
                       <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
-                      <option value="Household_Survey_2018_MSOA.json">ONS Census 2011</option>
+                      <option value="Coventry_Census_2011_MSOA.json">ONS Census 2011</option>
                       <option value="Household_Survey_2018_MSOA.json">Household Survey 2016</option>
                       <option value="Household_Survey_2018_MSOA.json">Household Survey 2018</option>
                     </select>
@@ -262,14 +262,16 @@
             });
         
         function change_dataset() {
+
+            // Remove previous question and checkboxes
+            d3.select("#questionselect").remove();
+            d3.select("#question_p").remove();
+            d3.select("#question").selectAll("*").remove();
+            d3.select("#answers").selectAll("*").remove();
+            
             var values = d3.select("#datasetselect").property('value');
 
             datapath = './Data/'.concat(values);
-                        
-            // Remove previous question and checkboxes
-            d3.select("#questionselect").selectAll("*").remove();
-            d3.select("#question").selectAll("*").remove();
-            d3.select("#answers").selectAll("*").remove();
             
             // Loading data in this way prevents from ploting anything before loading finishes
             d3.queue()
@@ -282,7 +284,10 @@
                     MAP = map;
                     DATA = data;
                                         
-                    //change_question();
+                    d3.select('#leftmenu')
+						.append('p')
+                        .attr('id','question_p')
+                        .text('Select a question')
                     
                     /* Adds Features Menu */
 

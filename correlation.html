@@ -236,64 +236,14 @@
         <div id='row-main' class="mainrow">
             <div id='leftpanel' class='leftpan'> 
                 <div id='leftmenu' class='menu'>
-                    <p> Select item for the variable X </p>
                     
-                    <select id="leftselect" class="select">
-                        <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
-                        <option disabled>===== ONS Census =====</option>
-                        <!-- <option value="KS103EW">Civil Partnership Status</option> -->
-                        <!-- <option value="KS104EW">Living Arrangements</option> -->
-                        <option value="KS105EW">Household Composition</option>
-                        <!-- <option value="KS106EW">Employment and dependent children</option> -->
-                        <!-- <option value="KS107EW">Lone parent with dependent children</option> -->
-                        <!-- <option value="QS117EW">One adult household</option> -->
-                        <!-- <option value="QS118EW">Families with dependent children</option> -->
-                        <option value="QS119EW">Households deprivation</option>
-                        <option value="KS201EW">Ethnic Group</option>
-                        <!-- <option value="KS202EW">National Identity</option> -->
-                        <!-- <option value="KS205EW">Passports Held</option> -->
-                        <!-- <option value="QS205EW">Proficiency in English</option> -->
-                        <option value="KS206EW">Household Language</option>
-                        <option value="KS209EW">Religion</option>
-                        <!-- <option value="QS210EW">Religion (Detailed)</option> -->
-                        <option value="KS301EW">Health</option>
-                        <!-- <option value="KS401EW">Accomodiation type</option> -->
-                        <!-- <option value="KS402EW">Tenure</option> -->
-                        <!-- <option value="KS403EW">Rooms and heating</option> -->
-                        <option value="KS404EW">Car availability</option>
-                        <!-- <option value="QS404EW">Tenure over 65</option> -->
-                        <!-- <option value="KS405EW">Communal establishment residents</option> -->
-                        <!-- <option value="QS406EW">Household size</option> -->
-                        <option value="KS501EW">Qualifications</option>
-                        <option value="KS601EW">Economic Activity</option>
-                        <!-- <option value="KS602EW">Economic Activity (males)</option> -->
-                        <!-- <option value="KS603EW">Economic Activity (females)</option> -->
-                        <!-- <option value="KS604EW">Hours worked</option> -->
-                        <!-- <option value="KS605EW">Industry</option> -->
-                        <option value="KS608EW">Occupation</option>
-                        <!-- <option value="KS609EW">Occupation (males)</option> -->
-                        <!-- <option value="KS610EW">Occupation (females)</option> -->
-                        <!-- <option value="QS612EW">Year last worked</option> -->
-                        <!-- <option value="QS701EW">Method of travel to work</option> -->
-                        <option disabled>===== Household Survey =====</option>
-                        <option value="Q1">How long living in neighbourhood</option>
-                        <option value="Q3">Satisfaction with neighbourhood</option>
-                        <option value="Q6">Quality of life perception</option>
-                        <option value="Q8">Influence in local area</option>
-                        <option value="Q9">Getting involved</option>
-                        <option value="Q10">Getting involved in the future</option>
-                        <option value="Q11">People from different backgrounds</option>
-                        <option value="Q27">Health</option>
-                        <option value="Q37">Physical activity</option>
-                        <option value="Q42">Health limitations</option>
-                        <option value="Q43">Health problem description</option>
-                        <option value="Q48">Money worry</option>
-                        <option disabled>===== Cultural Participation =====</option>
-                        <option value="Q12a">Cultural events attendance</option>
-                        <option value="Q13a">Cultural events attendance (children)</option>
-                        <option value="Q14">Coventry City of Culture bid support</option>
-                        <option value="Q15">Coventry City rating</option>
-                        <option value="IndigoAudience">Audience engagement in Coventry</option>
+                    <p> Select a database </p>
+                    
+                    <select id="leftdatasetselect" class="select">
+                      <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
+                      <option value="Coventry_Census_2011_MSOA.json">ONS Census 2011</option>
+                      <option value="Household_Survey_2018_MSOA.json">Household Survey 2016</option>
+                      <option value="Household_Survey_2018_MSOA.json">Household Survey 2018</option>
                     </select>
                 
                 </div>
@@ -305,65 +255,14 @@
                 <div id='scatterplot' class='plot'> </div>
             </div>
             <div id='rightpanel' class='rightpan'>
-                <div id='rightmenu' class='menu'> 
-                    <p> Select item for the variable Y </p>
-
-                    <select id="rightselect" class="select">
-                        <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
-                        <option disabled>===== ONS Census =====</option>
-                        <!-- <option value="KS103EW">Civil Partnership Status</option> -->
-                        <!-- <option value="KS104EW">Living Arrangements</option> -->
-                        <option value="KS105EW">Household Composition</option>
-                        <!-- <option value="KS106EW">Employment and dependent children</option> -->
-                        <!-- <option value="KS107EW">Lone parent with dependent children</option> -->
-                        <!-- <option value="QS117EW">One adult household</option> -->
-                        <!-- <option value="QS118EW">Families with dependent children</option> -->
-                        <!-- <option value="QS119EW">Households deprivation</option> -->
-                        <option value="KS201EW">Ethnic Group</option>
-                        <!-- <option value="KS202EW">National Identity</option> -->
-                        <!-- <option value="KS205EW">Passports Held</option> -->
-                        <!-- <option value="QS205EW">Proficiency in English</option> -->
-                        <option value="KS206EW">Household Language</option>
-                        <option value="KS209EW">Religion</option>
-                        <!-- <option value="QS210EW">Religion (Detailed)</option> -->
-                        <option value="KS301EW">Health</option>
-                        <!-- <option value="KS401EW">Accomodiation type</option> -->
-                        <!-- <option value="KS402EW">Tenure</option> -->
-                        <!-- <option value="KS403EW">Rooms and heating</option> -->
-                        <option value="KS404EW">Car availability</option>
-                        <!-- <option value="QS404EW">Tenure over 65</option> -->
-                        <!-- <option value="KS405EW">Communal establishment residents</option> -->
-                        <!-- <option value="QS406EW">Household size</option> -->
-                        <option value="KS501EW">Qualifications</option>
-                        <option value="KS601EW">Economic Activity</option>
-                        <!-- <option value="KS602EW">Economic Activity (males)</option> -->
-                        <!-- <option value="KS603EW">Economic Activity (females)</option> -->
-                        <!-- <option value="KS604EW">Hours worked</option> -->
-                        <!-- <option value="KS605EW">Industry</option> -->
-                        <option value="KS608EW">Occupation</option>
-                        <!-- <option value="KS609EW">Occupation (males)</option> -->
-                        <!-- <option value="KS610EW">Occupation (females)</option> -->
-                        <!-- <option value="QS612EW">Year last worked</option> -->
-                        <!-- <option value="QS701EW">Method of travel to work</option> -->
-                        <option disabled>===== Household Survey =====</option>
-                        <option value="Q1">How long living in neighbourhood</option>
-                        <option value="Q3">Satisfaction with neighbourhood</option>
-                        <option value="Q6">Quality of life perception</option>
-                        <option value="Q8">Influence in local area</option>
-                        <option value="Q9">Getting involved</option>
-                        <option value="Q10">Getting involved in the future</option>
-                        <option value="Q11">People from different backgrounds</option>
-                        <option value="Q27">Health</option>
-                        <option value="Q37">Physical activity</option>
-                        <option value="Q42">Health limitations</option>
-                        <option value="Q43">Health problem description</option>
-                        <option value="Q48">Money worry</option>
-                        <option disabled>===== Cultural Participation =====</option>
-                        <option value="Q12a">Cultural events attendance</option>
-                        <option value="Q13a">Cultural events attendance (children)</option>
-                        <option value="Q14">Coventry City of Culture bid support</option>
-                        <option value="Q15">Coventry City rating</option>
-                        <option value="IndigoAudience">Audience engagement in Coventry</option>
+                <div id='rightmenu' class='menu'>
+                    <p> Select a database </p>
+                    
+                    <select id="rightdatasetselect" class="select">
+                      <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
+                      <option value="Coventry_Census_2011_MSOA.json">ONS Census 2011</option>
+                      <option value="Household_Survey_2018_MSOA.json">Household Survey 2016</option>
+                      <option value="Household_Survey_2018_MSOA.json">Household Survey 2018</option>
                     </select>
                 </div>
                 <div id='rightquestion' class='question'> </div>
@@ -387,9 +286,8 @@
     
     <script>
         
-        WARDS = {}   // General variable for ward objects
-        CSVTAB = {}  // General variable for csvtab object
-        QUESTION = {}  // General variable for question object
+        MAP = {}   // General variable for ward objects
+        DATA = {}  // General variable for csvtab object
         
         var width = 500,
             height = 500;
@@ -407,15 +305,107 @@
             .append('div')
             .attr('class', 'hidden tooltip');
         
-        var leftselect = d3.select('#leftselect')
+        var leftselect = d3.select('#leftdatasetselect')
             .on('change', function(d){
-                menuchange("left");
+                change_dataset("left");
             });
         
-        var rightselect = d3.select('#rightselect')
+        var rightselect = d3.select('#rightdatasetselect')
             .on('change', function(d){
-                menuchange("right");
+                change_dataset("right");
             });
+
+        function change_dataset(side) {
+
+            // Remove previous question and checkboxes
+            d3.select("#" + side + "questionselect").remove();
+            d3.select("#" + side + "question_p").remove();
+            d3.select("#" + side + "question").selectAll("*").remove();
+            d3.select("#" + side + "answers").selectAll("*").remove();
+            
+            var values = d3.select("#" + side + "datasetselect").property('value');
+
+            datapath = './Data/'.concat(values);
+            
+            // Loading data in this way prevents from ploting anything before loading finishes
+            d3.queue()
+                .defer(d3.json, './Map/coventry_msoa.geojson')
+                .defer(d3.json, datapath)
+                .await(function(error, map, data){
+                    if (error) throw error;
+            
+                    // Assigning values to general variables, otherwise updating doesn't work
+                    MAP = map;
+                    DATA[side] = data;
+                                        
+                    d3.select("#" + side + "menu")
+						.append('p')
+                        .attr('id', side + "question_p")
+                        .text('Select a question')
+                    
+                    /* Adds Features Menu */
+
+					var options = d3.select("#" + side + "menu")
+						.append('select')
+                        .attr('id', side + "questionselect")
+						.attr('class','select')
+						.on('change',function (d) { change_question(side); return d; })
+						.selectAll('option')
+						.data(Object.keys(DATA[side]))
+						.enter()
+						.append('option')
+						.text(function (d) { return DATA[side][d]["Topic"]; })
+                        .attr('value',function (d) { return d; });
+            
+                });
+        }
+        
+        function change_question(side) {
+                        
+            var qvalue = d3.select("#" + side + "questionselect").property('value');
+                                    
+            // Remove previous question and checkboxes
+            d3.select("#" + side + "question").selectAll("*").remove();
+            d3.select("#" + side + "answers").selectAll("*").remove();
+                    
+            /* Appends Questions */
+            d3.select("#" + side + "question")
+                .append("div")
+                //.attr("class", "questpan")
+                .text(DATA[side][qvalue]["Question"]);
+            
+            /* Adds the answers */
+
+            var answers = Object.keys(DATA[side][qvalue]["Answers"]); // Get the column names of csv
+            
+            /* Adds Checkboxes */
+            
+            answers.forEach(function(d,i) {
+                // Append the checkboxes
+                d3.select("#" + side + "answers")
+                    .append("div")
+                    .append("label")
+                    .attr("id", side + "answer" + i)
+                    .append("input")
+                    .attr("type", "checkbox")
+                    .attr("class", "mapCheckbox")
+                    .attr("value", d)
+                    .on("change", function(d){ 
+                        CheckboxUpdate(side);
+                        plotscatterplot();
+                    });
+                    
+                // Append the text
+                d3.select("#" + side + "answer" + i)
+                    .append("text")
+                    .text(d);
+            });
+
+            d3.select("#scatterplot").selectAll("*").remove();  // Remove previous objects
+            d3.select("#analysisbox").selectAll("*").remove();  // Remove previous objects
+            plotmapnull(MAP, side); // Plots the initial null map in the left
+            
+        };
 
         function menuchange(side) {
                         
@@ -537,7 +527,7 @@
             
 			svgelement.append("g")
                 .selectAll("path")
-                .data(topojson.feature(patches, patches.objects.covwards).features)
+                .data(patches.features)
                 .enter()
                 .append("path")
                 .attr( "d", geoPath )
@@ -642,7 +632,7 @@
             
 			svgelement.append("g")
                 .selectAll("path")
-                .data(topojson.feature(patches, patches.objects.covwards).features)
+                .data(patches.features)
                 .enter()
                 .append("path")
                 .attr("d", geoPath)
@@ -666,25 +656,25 @@
                     tooltip.classed('hidden', true);
                 });
         }
-        
+
         // Updates the map according to checked boxes
-        function CheckboxUpdate(wards, data, side){
+        function CheckboxUpdate(side){
 
             var paneltoplot = "#" + side + "map";
-            var valuestoplot = computevalues(data,side);
+            var valuestoplot = computevalues(side);
             
             if (Object.keys(valuestoplot).length == 0)
             {
-                plotmapnull(wards, side); // Plots the map again
+                plotmapnull(MAP,side); // Plots the map again
             }
             else
             {                
-                plotmap(wards, valuestoplot, "Percentage", side); // Plots the map again
+                plotmap(MAP, valuestoplot, "Percentage",side); // Plots the map again
             }
         }
         
         // Looks which checkboxes are selected and returns the corresponding data
-        function computevalues(data, side){
+        function computevalues(side){
             
             var paneltolook = "#" + side + "panel";
             
@@ -699,15 +689,17 @@
                 }
             });
             
-            var valuestoplot = {};  
-                
-            data.forEach(function(d) {
-                choices.forEach(function(c) {
-                    var k = d.code;
+            var qvalue = d3.select("#" + side + "questionselect").property('value');
+            
+            var valuestoplot = {};
+
+            choices.forEach(function(c) {
+                var keys = Object.keys(DATA[side][qvalue]["Answers"][c]);
+                keys.forEach(function(k) {
                     if (k in valuestoplot) {
-                        valuestoplot[k] += Number(d[c]);
+                        valuestoplot[k] += Number(DATA[side][qvalue]["Answers"][c][k]);
                     } else {
-                        valuestoplot[k] = Number(d[c]);
+                        valuestoplot[k] = Number(DATA[side][qvalue]["Answers"][c][k]);
                     }
                 });
             });
@@ -717,13 +709,12 @@
         
         // Plots the scatter plot
         function plotscatterplot(){
-            
+                        
             d3.select("#scatterplot").selectAll("*").remove();  // Remove previous objects
             d3.select("#analysisbox").selectAll("*").remove();
             
-            if(Object.keys(CSVTAB).length == 2)
-            {
-                
+            if(Object.keys(DATA).length == 2)
+            {                
                 var margin = {top: 20, right: 20, bottom: 50, left: 60},
                     width = 400 - margin.left - margin.right,
                     height = 300 - margin.top - margin.bottom;
@@ -738,8 +729,8 @@
                     .attr("width", width)
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-                var leftvalues = computevalues(CSVTAB["left"],"left");
-                var rightvalues = computevalues(CSVTAB["right"],"right");
+                var leftvalues = computevalues("left");
+                var rightvalues = computevalues("right");
                             
                 if(Object.keys(leftvalues).length > 0 && Object.keys(rightvalues).length > 0){
                 
@@ -748,8 +739,8 @@
                     
                     var names = {}
                     
-                    CSVTAB["left"].forEach(function(d){ names[d.code] = d.name });
-                    
+                    MAP["features"].forEach(function(d){ names[d["properties"]["code"]] = d["properties"]["name"] });
+                                        
                     var keys = Object.keys(leftvalues);
                     keys.forEach(function(key){
                         x.push(leftvalues[key])
