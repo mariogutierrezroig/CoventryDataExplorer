@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Coventry Data Explorer: Geographical Distribution</title>
+    <title>Coventry Data Explorer: Exploration</title>
     
     <style>
         
@@ -70,13 +70,34 @@
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
         }
-        
+
         .rightpan {
             width: 700px;
             height: 550px;
             vertical-align: top;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: flex-start;
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
+        }
+        
+        .displaymodebar {
+            width: 800px;
+            height: 50px;
+            
+        }
+        
+        .radio-inline {
+            width: auto;
+            vertical-align: center;
+        }
+        
+        .bigplot {
+            width: 500px;
+            height: 500px;
+            horizontal-align: center;
         }
         
         div.bottompan {
@@ -217,7 +238,33 @@
             </div>
             
             <div id='rightpanel' class='rightpan'>
-                <div id='map' class='map'> </div>
+                <div id='displaymodebar' class='displaymodebar'>
+                    
+                    <div>Display mode:</div>
+                    <form id='displaygroup'>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="MSOA" onchange="radioChange()" checked>by area
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Gender" onchange="radioChange()">by gender
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Age" onchange="radioChange()">by age
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Income" onchange="radioChange()">by economic status
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Ethnicity" onchange="radioChange()">by ethnicity
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Education" onchange="radioChange()">by education
+                        </label>
+                    </form>
+                </div>
+                
+                <div id='bigplot' class='bigplot'> </div>
+                
             </div>
         </div>
         
@@ -343,12 +390,17 @@
                 // Append the text
                 d3.select("#answer" + i)
                     .append("text")
-                    .text(d);
+                    .text(DATA[qvalue]["Answers"][d]["Text"]);
             });
 
             plotmapnull(MAP); // Plots the initial null map in the left
             
         };
+        
+        // Function triggered when radio changes
+        function radioChange() {
+            CheckboxUpdate()
+        }
         
         // Function that move object to front in order to avoid plotting border issues
         d3.selection.prototype.moveToFront = function() {
@@ -372,9 +424,9 @@
         // Plots the map
         function plotmap(patches, values, legendtext) {
             
-            d3.select("#map").selectAll("*").remove();  // Remove previous objects
+            d3.select("#bigplot").selectAll("*").remove();  // Remove previous objects
             
-            var svgelement = d3.select("#map")
+            var svgelement = d3.select("#bigplot")
                 .append('svg')
                 .attr('class', 'map');
             
@@ -474,9 +526,9 @@
         // Plots the map if there is no choice selected
         function plotmapnull(patches) {
             
-            d3.select("#map").selectAll("*").remove();  // Remove previous objects
+            d3.select("#bigplot").selectAll("*").remove();  // Remove previous objects
             
-            var svgelement = d3.select("#map")
+            var svgelement = d3.select("#bigplot")
                 .append('svg')
                 .attr('class', 'map');
             
@@ -508,25 +560,132 @@
                     tooltip.classed('hidden', true);
                 });
         }
+ 
+         // Updates the map according to checked boxes
+        function barchart(values, legendtext){
+
+            d3.select("#bigplot").selectAll("*").remove();  // Remove previous objects
+            
+            /* Domain and Colors */
+
+            // set the dimensions and margins of the graph
+            var margin = {top: 20, right: 20, bottom: 30, left: 40},
+                width = 500 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+            
+            var arr = Object.keys(values).map(function (key) { return values[key]; });
+            var minval = Math.min.apply(null, arr);
+            var maxval = Math.max.apply(null, arr);
+            
+            //var xScale = d3.scaleLinear()
+                //.domain([minval, maxval])
+                //.rangeRound([0, 500]);
+                
+            var delta = (maxval - minval) / 5.0; // toFixed() for rounding it to int
+
+
+            // set the ranges
+            var y = d3.scaleBand()
+                      .range([height, 0])
+                      .padding(0.1);
+
+            var x = d3.scaleLinear()
+                      .range([0, width]);
+            
+            var domainArray = new Array();
+            for (i = minval + delta; i <= maxval; i+=delta){
+                domainArray.push(Number(i.toFixed(1)));
+            }
+
+            var x = d3.scaleLinear()
+                .range([0, width])
+                .domain([minval, maxval]);
+
+            var y = d3.scaleOrdinal()
+                .rangeRound([height, 0])
+                .domain(data.map(function (d) {
+                    return d.name;
+                }));
+
+            var svg = d3.select("#bigplot")
+                .append('svg')
+                .attr('class', 'plot')
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                      
+            // append the svg object to the body of the page
+            // append a 'group' element to 'svg'
+            // moves the 'group' element to the top left margin
+            var svg = d3.select("body").append("svg")
+                .attr("width", width + margin.left + margin.right)
+
+
+              // format the data
+              data.forEach(function(d) {
+                d.sales = +d.sales;
+              });
+
+              // Scale the range of the data in the domains
+              x.domain([0, d3.max(data, function(d){ return d.sales; })])
+              y.domain(data.map(function(d) { return d.salesperson; }));
+              //y.domain([0, d3.max(data, function(d) { return d.sales; })]);
+
+              // append the rectangles for the bar chart
+              svg.selectAll(".bar")
+                  .data(data)
+                .enter().append("rect")
+                  .attr("class", "bar")
+                  //.attr("x", function(d) { return x(d.sales); })
+                  .attr("width", function(d) {return x(d.sales); } )
+                  .attr("y", function(d) { return y(d.salesperson); })
+                  .attr("height", y.bandwidth());
+
+              // add the x Axis
+              svg.append("g")
+                  .attr("transform", "translate(0," + height + ")")
+                  .call(d3.axisBottom(x));
+
+              // add the y Axis
+              svg.append("g")
+                  .call(d3.axisLeft(y));
+            
+        }       
+        
         
         // Updates the map according to checked boxes
         function CheckboxUpdate(){
+            
+            var group = d3.select('input[name="optradio"]:checked').node().value;
 
-            var paneltoplot = "#map";
-            var valuestoplot = computevalues();
+            var valuestoplot = computevalues(group);
             
             if (Object.keys(valuestoplot).length == 0)
             {
-                plotmapnull(MAP); // Plots the map again
+                if (group == "MSOA")
+                {
+                    plotmapnull(MAP); // Plots the map again
+                }
+                else
+                {
+                    d3.select("#bigplot").selectAll("*").remove();
+                }
             }
             else
-            {                
-                plotmap(MAP, valuestoplot, "Percentage"); // Plots the map again
+            {
+                if (group == "MSOA")
+                {
+                    plotmap(MAP, valuestoplot, "Percentage"); // Plots the map again
+                }
+                else
+                {
+                    barchart(valuestoplot, "Percentage");
+                }
             }
         }
         
         // Looks which checkboxes are selected and returns the corresponding data
-        function computevalues(){
+        function computevalues(group){
             
             var paneltolook = "#leftpanel";
             
@@ -541,17 +700,19 @@
                 }
             });
             
+            var group = d3.select('input[name="optradio"]:checked').node().value;
+            
             var qvalue = d3.select('#questionselect').property('value');
             
             var valuestoplot = {};
 
             choices.forEach(function(c) {
-                var keys = Object.keys(DATA[qvalue]["Answers"][c]);
+                var keys = Object.keys(DATA[qvalue]["Answers"][c][group]);
                 keys.forEach(function(k) {
                     if (k in valuestoplot) {
-                        valuestoplot[k] += Number(DATA[qvalue]["Answers"][c][k]);
+                        valuestoplot[k] += Number(DATA[qvalue]["Answers"][c][group][k]);
                     } else {
-                        valuestoplot[k] = Number(DATA[qvalue]["Answers"][c][k]);
+                        valuestoplot[k] = Number(DATA[qvalue]["Answers"][c][group][k]);
                     }
                 });
             });

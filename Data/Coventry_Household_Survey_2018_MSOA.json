@@ -361,7 +361,7 @@
                 "E02001999": 38.3838,
                 "E02006805": 71.2329
             },
-            "Neither satisfied nor dissatisfied ": {
+            "Neither satisfied nor dissatisfied": {
                 "E02001958": 8.5714,
                 "E02001959": 1.6949,
                 "E02001961": 0.0,
@@ -499,7 +499,7 @@
         "Topic": "Local area satisfaction changed",
         "Question": "Do you think that over the past two years your area has ...?",
         "Answers": {
-            "Got better to live in ": {
+            "Got better to live in": {
                 "E02001958": 4.2857,
                 "E02001959": 16.9492,
                 "E02001961": 13.2353,
@@ -543,7 +543,7 @@
                 "E02001999": 15.1515,
                 "E02006805": 4.1096
             },
-            "Got worse to live in ": {
+            "Got worse to live in": {
                 "E02001958": 20.0,
                 "E02001959": 11.8644,
                 "E02001961": 19.1176,
@@ -631,7 +631,7 @@
                 "E02001999": 41.4141,
                 "E02006805": 57.5342
             },
-            "Have not lived here long enough to say ": {
+            "Have not lived here long enough to say": {
                 "E02001958": 11.4286,
                 "E02001959": 8.4746,
                 "E02001961": 13.2353,
@@ -813,7 +813,7 @@
                 "E02001999": 45.0549,
                 "E02006805": 61.9718
             },
-            "Definitely disagree ": {
+            "Definitely disagree": {
                 "E02001958": 21.7391,
                 "E02001959": 20.6897,
                 "E02001961": 39.7059,
@@ -995,7 +995,7 @@
                 "E02001999": 36.6667,
                 "E02006805": 47.0588
             },
-            "Definitely disagree ": {
+            "Definitely disagree": {
                 "E02001958": 5.2632,
                 "E02001959": 12.2807,
                 "E02001961": 36.7647,
@@ -1045,7 +1045,7 @@
         "Topic": "Reasons for not getting involved",
         "Question": "Which, if any, of the following might make it easier for you to influence decisions in your local area?",
         "Answers": {
-            "If I had more time ": {
+            "If I had more time": {
                 "E02001958": 35.7143,
                 "E02001959": 37.2881,
                 "E02001961": 19.1176,
@@ -1089,7 +1089,7 @@
                 "E02001999": 22.2222,
                 "E02006805": 28.7671
             },
-            "If the local council got in touch with me and asked me ": {
+            "If the local council got in touch with me and asked me": {
                 "E02001958": 30.0,
                 "E02001959": 6.7797,
                 "E02001961": 0.0,
@@ -1133,7 +1133,7 @@
                 "E02001999": 15.1515,
                 "E02006805": 23.2877
             },
-            "If I could give my opinion online /by email ": {
+            "If I could give my opinion online /by email": {
                 "E02001958": 10.0,
                 "E02001959": 8.4746,
                 "E02001961": 0.0,
@@ -1177,7 +1177,7 @@
                 "E02001999": 27.2727,
                 "E02006805": 6.8493
             },
-            "If I knew what issues were being considered ": {
+            "If I knew what issues were being considered": {
                 "E02001958": 22.8571,
                 "E02001959": 30.5085,
                 "E02001961": 19.1176,
@@ -1221,7 +1221,7 @@
                 "E02001999": 13.1313,
                 "E02006805": 9.589
             },
-            "If it was easy to contact my local councillor ": {
+            "If it was easy to contact my local councillor": {
                 "E02001958": 8.5714,
                 "E02001959": 6.7797,
                 "E02001961": 2.9412,
@@ -1265,7 +1265,7 @@
                 "E02001999": 11.1111,
                 "E02006805": 15.0685
             },
-            "If I knew who my local councillor was ": {
+            "If I knew who my local councillor was": {
                 "E02001958": 0.0,
                 "E02001959": 10.1695,
                 "E02001961": 0.0,
@@ -1309,7 +1309,7 @@
                 "E02001999": 8.0808,
                 "E02006805": 2.7397
             },
-            "If I could get involved in a group (not online) making decisions about issues affecting my local area/neighbourhood ": {
+            "If I could get involved in a group (not online) making decisions about issues affecting my local area/neighbourhood": {
                 "E02001958": 0.0,
                 "E02001959": 5.0847,
                 "E02001961": 0.0,
@@ -1353,7 +1353,7 @@
                 "E02001999": 9.0909,
                 "E02006805": 0.0
             },
-            "If I could get involved in a dedicated online platform in decisions about issues affecting my local area/neighbourhood ": {
+            "If I could get involved in a dedicated online platform in decisions about issues affecting my local area/neighbourhood": {
                 "E02001958": 1.4286,
                 "E02001959": 1.6949,
                 "E02001961": 0.0,
@@ -1397,7 +1397,7 @@
                 "E02001999": 8.0808,
                 "E02006805": 0.0
             },
-            "Something else (specify in the box below) ": {
+            "Something else (specify in the box below)": {
                 "E02001958": 1.4286,
                 "E02001959": 3.3898,
                 "E02001961": 1.4706,
@@ -1673,7 +1673,7 @@
         "Topic": "Interacting with neighbours",
         "Question": "How often do you chat to your neighbours, more than to just say hello?",
         "Answers": {
-            "On most days ": {
+            "On most days": {
                 "E02001958": 37.1429,
                 "E02001959": 27.1186,
                 "E02001961": 36.7647,
@@ -1943,7 +1943,7 @@
         "Topic": "Reasons why not interacting with neighbours",
         "Question": "Why don't you chat to your neighbours more often?",
         "Answers": {
-            "Prefer to keep myself to myself    ": {
+            "Prefer to keep myself to myself": {
                 "E02001958": 31.8182,
                 "E02001959": 20.9302,
                 "E02001961": 25.5814,
@@ -1987,7 +1987,7 @@
                 "E02001999": 6.7568,
                 "E02006805": 17.6471
             },
-            "Don't have time    ": {
+            "Don't have time": {
                 "E02001958": 25.0,
                 "E02001959": 65.1163,
                 "E02001961": 60.4651,
@@ -2031,7 +2031,7 @@
                 "E02001999": 17.5676,
                 "E02006805": 23.5294
             },
-            "Prefer to choose my friends/ have enough friends already    ": {
+            "Prefer to choose my friends/ have enough friends already": {
                 "E02001958": 4.5455,
                 "E02001959": 2.3256,
                 "E02001961": 0.0,
@@ -2075,7 +2075,7 @@
                 "E02001999": 2.7027,
                 "E02006805": 3.9216
             },
-            "Neighbours speak different language/have different culture    ": {
+            "Neighbours speak different language/have different culture": {
                 "E02001958": 0.0,
                 "E02001959": 4.6512,
                 "E02001961": 11.6279,
@@ -2119,7 +2119,7 @@
                 "E02001999": 1.3514,
                 "E02006805": 0.0
             },
-            "Don't trust/get on with my neighbours    ": {
+            "Don't trust/get on with my neighbours": {
                 "E02001958": 0.0,
                 "E02001959": 2.3256,
                 "E02001961": 2.3256,
@@ -2163,7 +2163,7 @@
                 "E02001999": 2.7027,
                 "E02006805": 1.9608
             },
-            "Have no need to speak to neighbours    ": {
+            "Have no need to speak to neighbours": {
                 "E02001958": 2.2727,
                 "E02001959": 13.9535,
                 "E02001961": 0.0,
@@ -2207,7 +2207,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Don\u2019t feel I know my neighbours well enough    ": {
+            "Don\u2019t feel I know my neighbours well enough": {
                 "E02001958": 4.5455,
                 "E02001959": 6.9767,
                 "E02001961": 0.0,
@@ -2251,7 +2251,7 @@
                 "E02001999": 2.7027,
                 "E02006805": 9.8039
             },
-            "Nothing in common with my neighbours    ": {
+            "Nothing in common with my neighbours": {
                 "E02001958": 2.2727,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -2295,7 +2295,7 @@
                 "E02001999": 5.4054,
                 "E02006805": 1.9608
             },
-            "I'm new to the area    ": {
+            "I'm new to the area": {
                 "E02001958": 11.3636,
                 "E02001959": 0.0,
                 "E02001961": 2.3256,
@@ -2339,7 +2339,7 @@
                 "E02001999": 12.1622,
                 "E02006805": 13.7255
             },
-            "Don't see neighbours very often    ": {
+            "Don't see neighbours very often": {
                 "E02001958": 27.2727,
                 "E02001959": 53.4884,
                 "E02001961": 74.4186,
@@ -2383,7 +2383,7 @@
                 "E02001999": 48.6486,
                 "E02006805": 54.902
             },
-            "Have an illness/disability that prevents me from going out much    ": {
+            "Have an illness/disability that prevents me from going out much": {
                 "E02001958": 0.0,
                 "E02001959": 2.3256,
                 "E02001961": 2.3256,
@@ -2427,7 +2427,7 @@
                 "E02001999": 2.7027,
                 "E02006805": 0.0
             },
-            "People just don't speak to each other round here    ": {
+            "People just don't speak to each other round here": {
                 "E02001958": 4.5455,
                 "E02001959": 2.3256,
                 "E02001961": 0.0,
@@ -2471,7 +2471,7 @@
                 "E02001999": 4.0541,
                 "E02006805": 0.0
             },
-            "Other (specify below) ": {
+            "Other (specify below)": {
                 "E02001958": 0.0,
                 "E02001959": 4.6512,
                 "E02001961": 0.0,
@@ -2653,7 +2653,7 @@
                 "E02001999": 19.1919,
                 "E02006805": 27.3973
             },
-            "Definitely disagree ": {
+            "Definitely disagree": {
                 "E02001958": 28.5714,
                 "E02001959": 49.1525,
                 "E02001961": 41.1765,
@@ -2703,7 +2703,7 @@
         "Topic": "Belonging to a group",
         "Question": "In the last 12 months, have you been a member of any of the following decision making groups in your local area?",
         "Answers": {
-            "A group making decisions on local health services   ": {
+            "A group making decisions on local health services": {
                 "E02001958": 0.0,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -2791,7 +2791,7 @@
                 "E02001999": 1.0101,
                 "E02006805": 0.0
             },
-            "A decision making group set up to improve culture activities   ": {
+            "A decision making group set up to improve culture activities": {
                 "E02001958": 0.0,
                 "E02001959": 3.3898,
                 "E02001961": 0.0,
@@ -2835,7 +2835,7 @@
                 "E02001999": 1.0101,
                 "E02006805": 0.0
             },
-            "A decision making group set up to tackle local crime problems   ": {
+            "A decision making group set up to tackle local crime problems": {
                 "E02001958": 0.0,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -2879,7 +2879,7 @@
                 "E02001999": 1.0101,
                 "E02006805": 0.0
             },
-            "A tenants' group decision making committee   ": {
+            "A tenants' group decision making committee": {
                 "E02001958": 0.0,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -2923,7 +2923,7 @@
                 "E02001999": 3.0303,
                 "E02006805": 0.0
             },
-            "A group making decisions on local education services   ": {
+            "A group making decisions on local education services": {
                 "E02001958": 0.0,
                 "E02001959": 1.6949,
                 "E02001961": 0.0,
@@ -2967,7 +2967,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "A group making decisions on local services for young people   ": {
+            "A group making decisions on local services for young people": {
                 "E02001958": 0.0,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -4053,7 +4053,7 @@
                 "E02001999": 5.2632,
                 "E02006805": 12.6761
             },
-            "Definitely disagree ": {
+            "Definitely disagree": {
                 "E02001958": 4.6875,
                 "E02001959": 3.3898,
                 "E02001961": 1.4706,
@@ -4235,7 +4235,7 @@
                 "E02001999": 31.3131,
                 "E02006805": 32.8767
             },
-            "Neither ": {
+            "Neither": {
                 "E02001958": 25.7143,
                 "E02001959": 27.1186,
                 "E02001961": 17.6471,
@@ -4323,7 +4323,7 @@
                 "E02001999": 39.3939,
                 "E02006805": 27.3973
             },
-            "Not well informed at all ": {
+            "Not well informed at all": {
                 "E02001958": 7.1429,
                 "E02001959": 5.0847,
                 "E02001961": 4.4118,
@@ -4681,7 +4681,7 @@
                 "E02001999": 22.2222,
                 "E02006805": 16.4384
             },
-            "Email newsletters ": {
+            "Email newsletters": {
                 "E02001958": 0.0,
                 "E02001959": 0.0,
                 "E02001961": 1.4706,
@@ -5485,7 +5485,7 @@
         "Topic": "Attending cultural events",
         "Question": "Have you attended any of the following cultural events IN COVENTRY, AT LEAST THREE TIMES, in the past 12 months?",
         "Answers": {
-            "Museums and galleries   ": {
+            "Museums and galleries": {
                 "E02001958": 21.4286,
                 "E02001959": 35.5932,
                 "E02001961": 27.9412,
@@ -5529,7 +5529,7 @@
                 "E02001999": 29.2929,
                 "E02006805": 28.7671
             },
-            "Pubs, clubs, and bars   ": {
+            "Pubs, clubs, and bars": {
                 "E02001958": 44.2857,
                 "E02001959": 64.4068,
                 "E02001961": 61.7647,
@@ -5573,7 +5573,7 @@
                 "E02001999": 52.5253,
                 "E02006805": 32.8767
             },
-            "Live events   ": {
+            "Live events": {
                 "E02001958": 22.8571,
                 "E02001959": 13.5593,
                 "E02001961": 22.0588,
@@ -5617,7 +5617,7 @@
                 "E02001999": 17.1717,
                 "E02006805": 9.589
             },
-            "Live music   ": {
+            "Live music": {
                 "E02001958": 12.8571,
                 "E02001959": 13.5593,
                 "E02001961": 14.7059,
@@ -5661,7 +5661,7 @@
                 "E02001999": 14.1414,
                 "E02006805": 2.7397
             },
-            "Theatre   ": {
+            "Theatre": {
                 "E02001958": 14.2857,
                 "E02001959": 25.4237,
                 "E02001961": 11.7647,
@@ -5705,7 +5705,7 @@
                 "E02001999": 31.3131,
                 "E02006805": 4.1096
             },
-            "Cinema   ": {
+            "Cinema": {
                 "E02001958": 47.1429,
                 "E02001959": 49.1525,
                 "E02001961": 39.7059,
@@ -5749,7 +5749,7 @@
                 "E02001999": 47.4747,
                 "E02006805": 49.3151
             },
-            "Activities organised by arts-based community groups (e.g. dance, music, arts, etc.)   ": {
+            "Activities organised by arts-based community groups (e.g. dance, music, arts, etc.)": {
                 "E02001958": 14.2857,
                 "E02001959": 1.6949,
                 "E02001961": 0.0,
@@ -5793,7 +5793,7 @@
                 "E02001999": 4.0404,
                 "E02006805": 5.4795
             },
-            "Faith-based cultural activities   ": {
+            "Faith-based cultural activities": {
                 "E02001958": 5.7143,
                 "E02001959": 10.1695,
                 "E02001961": 1.4706,
@@ -5837,7 +5837,7 @@
                 "E02001999": 5.0505,
                 "E02006805": 4.1096
             },
-            "I have not attended cultural events at least three times in the last 12 months.  ": {
+            "I have not attended cultural events at least three times in the last 12 months.": {
                 "E02001958": 28.5714,
                 "E02001959": 13.5593,
                 "E02001961": 20.5882,
@@ -7319,7 +7319,7 @@
                 "E02001999": 15.1515,
                 "E02006805": 2.7397
             },
-            "Outside, such as on the street, in parks or grounds ": {
+            "Outside, such as on the street, in parks or grounds": {
                 "E02001958": 14.2857,
                 "E02001959": 10.1695,
                 "E02001961": 2.9412,
@@ -7897,7 +7897,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Shop Front Theatre ": {
+            "Shop Front Theatre": {
                 "E02001958": 31.7073,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -8293,7 +8293,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "University of Warwick- Arts trail ": {
+            "University of Warwick- Arts trail": {
                 "E02001958": 53.6585,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -8431,7 +8431,7 @@
         "Topic": "Awareness of Coventry attractions (b)",
         "Question": "Are you aware of the following Coventry attractions?",
         "Answers": {
-            "Belgrade theatre   ": {
+            "Belgrade theatre": {
                 "E02001958": 93.1034,
                 "E02001959": 83.0508,
                 "E02001961": 92.6471,
@@ -8475,7 +8475,7 @@
                 "E02001999": 83.8384,
                 "E02006805": 86.3014
             },
-            "Herbert Art Gallery and Museum   ": {
+            "Herbert Art Gallery and Museum": {
                 "E02001958": 82.7586,
                 "E02001959": 86.4407,
                 "E02001961": 95.5882,
@@ -8519,7 +8519,7 @@
                 "E02001999": 77.7778,
                 "E02006805": 83.5616
             },
-            "Coventry transport museum \u00a0   ": {
+            "Coventry transport museum \u00a0": {
                 "E02001958": 100.0,
                 "E02001959": 89.8305,
                 "E02001961": 97.0588,
@@ -8563,7 +8563,7 @@
                 "E02001999": 91.9192,
                 "E02006805": 91.7808
             },
-            "Warwick Arts centre   ": {
+            "Warwick Arts centre": {
                 "E02001958": 55.1724,
                 "E02001959": 61.0169,
                 "E02001961": 60.2941,
@@ -8607,7 +8607,7 @@
                 "E02001999": 97.9798,
                 "E02006805": 50.6849
             },
-            "The Albany\u00a0 Theatre   ": {
+            "The Albany\u00a0 Theatre": {
                 "E02001958": 44.8276,
                 "E02001959": 52.5424,
                 "E02001961": 39.7059,
@@ -8651,7 +8651,7 @@
                 "E02001999": 58.5859,
                 "E02006805": 38.3562
             },
-            "Charterhouse   ": {
+            "Charterhouse": {
                 "E02001958": 31.0345,
                 "E02001959": 32.2034,
                 "E02001961": 22.0588,
@@ -8695,7 +8695,7 @@
                 "E02001999": 35.3535,
                 "E02006805": 23.2877
             },
-            "Tin Music and Arts   ": {
+            "Tin Music and Arts": {
                 "E02001958": 20.6897,
                 "E02001959": 32.2034,
                 "E02001961": 17.6471,
@@ -8739,7 +8739,7 @@
                 "E02001999": 14.1414,
                 "E02006805": 9.589
             },
-            "Fargo Village   ": {
+            "Fargo Village": {
                 "E02001958": 62.068999999999996,
                 "E02001959": 35.5932,
                 "E02001961": 47.0588,
@@ -8783,7 +8783,7 @@
                 "E02001999": 46.4646,
                 "E02006805": 35.6164
             },
-            "Cathedral   ": {
+            "Cathedral": {
                 "E02001958": 93.1034,
                 "E02001959": 94.9153,
                 "E02001961": 95.5882,
@@ -8827,7 +8827,7 @@
                 "E02001999": 89.899,
                 "E02006805": 91.7808
             },
-            "Other (specify below) ": {
+            "Other (specify below)": {
                 "E02001958": 0.0,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -9317,7 +9317,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Shop Front Theatre ": {
+            "Shop Front Theatre": {
                 "E02001958": 0.0,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -9713,7 +9713,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "University of Warwick- Arts trail ": {
+            "University of Warwick- Arts trail": {
                 "E02001958": 10.2564,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -9807,7 +9807,7 @@
         "Topic": "Visited any of Coventry attractions (b)",
         "Question": "And, have you visited any of these Coventry attractions? ...",
         "Answers": {
-            "Belgrade theatre   ": {
+            "Belgrade theatre": {
                 "E02001958": 64.2857,
                 "E02001959": 56.8182,
                 "E02001961": 75.0,
@@ -9851,7 +9851,7 @@
                 "E02001999": 69.8925,
                 "E02006805": 58.5714
             },
-            "Herbert Art Gallery and Museum   ": {
+            "Herbert Art Gallery and Museum": {
                 "E02001958": 42.8571,
                 "E02001959": 77.2727,
                 "E02001961": 96.875,
@@ -9895,7 +9895,7 @@
                 "E02001999": 67.7419,
                 "E02006805": 64.2857
             },
-            "Coventry transport museum \u00a0   ": {
+            "Coventry transport museum \u00a0": {
                 "E02001958": 92.8571,
                 "E02001959": 81.8182,
                 "E02001961": 98.4375,
@@ -9939,7 +9939,7 @@
                 "E02001999": 77.4194,
                 "E02006805": 82.8571
             },
-            "Warwick Arts centre   ": {
+            "Warwick Arts centre": {
                 "E02001958": 32.1429,
                 "E02001959": 27.2727,
                 "E02001961": 31.25,
@@ -9983,7 +9983,7 @@
                 "E02001999": 89.2473,
                 "E02006805": 25.7143
             },
-            "The Albany\u00a0 Theatre   ": {
+            "The Albany\u00a0 Theatre": {
                 "E02001958": 21.4286,
                 "E02001959": 20.4545,
                 "E02001961": 10.9375,
@@ -10027,7 +10027,7 @@
                 "E02001999": 29.0323,
                 "E02006805": 10.0
             },
-            "Charterhouse   ": {
+            "Charterhouse": {
                 "E02001958": 17.8571,
                 "E02001959": 6.8182,
                 "E02001961": 6.25,
@@ -10071,7 +10071,7 @@
                 "E02001999": 16.129,
                 "E02006805": 11.4286
             },
-            "Tin Music and Arts   ": {
+            "Tin Music and Arts": {
                 "E02001958": 7.1429,
                 "E02001959": 11.3636,
                 "E02001961": 3.125,
@@ -10115,7 +10115,7 @@
                 "E02001999": 3.2258,
                 "E02006805": 2.8571
             },
-            "Fargo Village   ": {
+            "Fargo Village": {
                 "E02001958": 35.7143,
                 "E02001959": 15.9091,
                 "E02001961": 18.75,
@@ -10159,7 +10159,7 @@
                 "E02001999": 31.1828,
                 "E02006805": 17.1429
             },
-            "Cathedral   ": {
+            "Cathedral": {
                 "E02001958": 75.0,
                 "E02001959": 75.0,
                 "E02001961": 73.4375,
@@ -10203,7 +10203,7 @@
                 "E02001999": 77.4194,
                 "E02006805": 75.7143
             },
-            "Other (specify below) ": {
+            "Other (specify below)": {
                 "E02001958": 0.0,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -10341,7 +10341,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Bands in parks ": {
+            "Bands in parks": {
                 "E02001958": 39.0244,
                 "E02001959": 50.0,
                 "E02001961": 0.0,
@@ -10429,7 +10429,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Heritage open days ": {
+            "Heritage open days": {
                 "E02001958": 19.5122,
                 "E02001959": 75.0,
                 "E02001961": 0.0,
@@ -10561,7 +10561,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "West Midlands Malaysian Festival 2017 ": {
+            "West Midlands Malaysian Festival 2017": {
                 "E02001958": 7.3171,
                 "E02001959": 16.6667,
                 "E02001961": 0.0,
@@ -10957,7 +10957,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Eid In The Park ": {
+            "Eid In The Park": {
                 "E02001958": 9.7561,
                 "E02001959": 25.0,
                 "E02001961": 0.0,
@@ -11001,7 +11001,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Faith based festivals ": {
+            "Faith based festivals": {
                 "E02001958": 12.1951,
                 "E02001959": 25.0,
                 "E02001961": 0.0,
@@ -11045,7 +11045,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Coombe Abbey Festival of Craft ": {
+            "Coombe Abbey Festival of Craft": {
                 "E02001958": 24.3902,
                 "E02001959": 50.0,
                 "E02001961": 0.0,
@@ -11271,7 +11271,7 @@
                 "E02001999": 85.8586,
                 "E02006805": 82.1918
             },
-            "Heritage open days ": {
+            "Heritage open days": {
                 "E02001958": 24.1379,
                 "E02001959": 63.8298,
                 "E02001961": 64.7059,
@@ -11447,7 +11447,7 @@
                 "E02001999": 36.3636,
                 "E02006805": 34.2466
             },
-            "Faith based festivals ": {
+            "Faith based festivals": {
                 "E02001958": 44.8276,
                 "E02001959": 21.2766,
                 "E02001961": 13.2353,
@@ -11673,7 +11673,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Bands in parks ": {
+            "Bands in parks": {
                 "E02001958": 21.2121,
                 "E02001959": 40.0,
                 "E02001961": 0.0,
@@ -11761,7 +11761,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Heritage open days ": {
+            "Heritage open days": {
                 "E02001958": 9.0909,
                 "E02001959": 60.0,
                 "E02001961": 0.0,
@@ -11893,7 +11893,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "West Midlands Malaysian Festival 2017 ": {
+            "West Midlands Malaysian Festival 2017": {
                 "E02001958": 6.0606,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -12289,7 +12289,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Eid In The Park ": {
+            "Eid In The Park": {
                 "E02001958": 0.0,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -12333,7 +12333,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Faith based festivals ": {
+            "Faith based festivals": {
                 "E02001958": 6.0606,
                 "E02001959": 20.0,
                 "E02001961": 0.0,
@@ -12377,7 +12377,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Coombe Abbey Festival of Craft ": {
+            "Coombe Abbey Festival of Craft": {
                 "E02001958": 9.0909,
                 "E02001959": 30.0,
                 "E02001961": 0.0,
@@ -12559,7 +12559,7 @@
                 "E02001999": 83.3333,
                 "E02006805": 80.7692
             },
-            "Heritage open days ": {
+            "Heritage open days": {
                 "E02001958": 7.4074,
                 "E02001959": 35.2941,
                 "E02001961": 25.5319,
@@ -12735,7 +12735,7 @@
                 "E02001999": 3.0303,
                 "E02006805": 9.6154
             },
-            "Faith based festivals ": {
+            "Faith based festivals": {
                 "E02001958": 29.6296,
                 "E02001959": 20.5882,
                 "E02001961": 8.5106,
@@ -12961,7 +12961,7 @@
                 "E02001999": 9.0909,
                 "E02006805": 1.3699
             },
-            "No ": {
+            "No": {
                 "E02001958": 8.5714,
                 "E02001959": 11.8644,
                 "E02001961": 8.8235,
@@ -13005,7 +13005,7 @@
                 "E02001999": 14.1414,
                 "E02006805": 2.7397
             },
-            "I don't know\u00a0about city of culture ": {
+            "I don't know\u00a0about city of culture": {
                 "E02001958": 20.0,
                 "E02001959": 0.0,
                 "E02001961": 1.4706,
@@ -13416,7 +13416,7 @@
         }
     },
     "Q29": {
-        "Topic": "",
+        "Topic": "E-cigarretes",
         "Question": "Do you use, or have you ever used, e-cigarettes? ",
         "Answers": {
             "Yes, I currently use e-cigarettes": {
@@ -13645,7 +13645,7 @@
                 "E02001999": 41.8367,
                 "E02006805": 36.9863
             },
-            "At least one portion, but less than 3 portions ": {
+            "At least one portion, but less than 3 portions": {
                 "E02001958": 25.7143,
                 "E02001959": 8.4746,
                 "E02001961": 23.5294,
@@ -13783,7 +13783,7 @@
         "Topic": "Eating patterns (1)",
         "Question": "I eat breakfast every day",
         "Answers": {
-            "Definitely agree ": {
+            "Definitely agree": {
                 "E02001958": 35.7143,
                 "E02001959": 81.3559,
                 "E02001961": 66.1765,
@@ -13827,7 +13827,7 @@
                 "E02001999": 45.4545,
                 "E02006805": 32.8767
             },
-            "Tend to agree ": {
+            "Tend to agree": {
                 "E02001958": 37.1429,
                 "E02001959": 6.7797,
                 "E02001961": 14.7059,
@@ -13871,7 +13871,7 @@
                 "E02001999": 42.4242,
                 "E02006805": 35.6164
             },
-            "Tend to disagree ": {
+            "Tend to disagree": {
                 "E02001958": 22.8571,
                 "E02001959": 8.4746,
                 "E02001961": 8.8235,
@@ -13915,7 +13915,7 @@
                 "E02001999": 11.1111,
                 "E02006805": 28.7671
             },
-            "Definitely disagree ": {
+            "Definitely disagree": {
                 "E02001958": 4.2857,
                 "E02001959": 3.3898,
                 "E02001961": 10.2941,
@@ -13965,7 +13965,7 @@
         "Topic": "Eating patterns (2)",
         "Question": "Price is the most important factor to me when I decide what food to buy",
         "Answers": {
-            "Definitely agree ": {
+            "Definitely agree": {
                 "E02001958": 36.2319,
                 "E02001959": 5.0847,
                 "E02001961": 17.6471,
@@ -14009,7 +14009,7 @@
                 "E02001999": 8.0808,
                 "E02006805": 41.0959
             },
-            "Tend to agree ": {
+            "Tend to agree": {
                 "E02001958": 34.7826,
                 "E02001959": 47.4576,
                 "E02001961": 57.3529,
@@ -14053,7 +14053,7 @@
                 "E02001999": 39.3939,
                 "E02006805": 36.9863
             },
-            "Tend to disagree ": {
+            "Tend to disagree": {
                 "E02001958": 26.087,
                 "E02001959": 38.9831,
                 "E02001961": 19.1176,
@@ -14097,7 +14097,7 @@
                 "E02001999": 40.404,
                 "E02006805": 21.9178
             },
-            "Definitely disagree ": {
+            "Definitely disagree": {
                 "E02001958": 2.8986,
                 "E02001959": 8.4746,
                 "E02001961": 5.8824,
@@ -14147,7 +14147,7 @@
         "Topic": "Eating patterns (3)",
         "Question": "It is important to me to eat healthy foods",
         "Answers": {
-            "Definitely agree ": {
+            "Definitely agree": {
                 "E02001958": 22.8571,
                 "E02001959": 59.321999999999996,
                 "E02001961": 64.7059,
@@ -14191,7 +14191,7 @@
                 "E02001999": 40.404,
                 "E02006805": 43.8356
             },
-            "Tend to agree ": {
+            "Tend to agree": {
                 "E02001958": 61.4286,
                 "E02001959": 38.9831,
                 "E02001961": 29.4118,
@@ -14235,7 +14235,7 @@
                 "E02001999": 56.5657,
                 "E02006805": 46.5753
             },
-            "Tend to disagree ": {
+            "Tend to disagree": {
                 "E02001958": 12.8571,
                 "E02001959": 0.0,
                 "E02001961": 2.9412,
@@ -14279,7 +14279,7 @@
                 "E02001999": 3.0303,
                 "E02006805": 9.589
             },
-            "Definitely disagree ": {
+            "Definitely disagree": {
                 "E02001958": 2.8571,
                 "E02001959": 1.6949,
                 "E02001961": 2.9412,
@@ -14329,7 +14329,7 @@
         "Topic": "Eating patterns (4)",
         "Question": "I have enough time to make dinner from scratch every night",
         "Answers": {
-            "Definitely agree ": {
+            "Definitely agree": {
                 "E02001958": 16.6667,
                 "E02001959": 50.8475,
                 "E02001961": 70.5882,
@@ -14373,7 +14373,7 @@
                 "E02001999": 24.2424,
                 "E02006805": 31.5068
             },
-            "Tend to agree ": {
+            "Tend to agree": {
                 "E02001958": 31.8182,
                 "E02001959": 28.8136,
                 "E02001961": 19.1176,
@@ -14417,7 +14417,7 @@
                 "E02001999": 50.5051,
                 "E02006805": 26.0274
             },
-            "Tend to disagree ": {
+            "Tend to disagree": {
                 "E02001958": 40.9091,
                 "E02001959": 18.6441,
                 "E02001961": 8.8235,
@@ -14461,7 +14461,7 @@
                 "E02001999": 22.2222,
                 "E02006805": 36.9863
             },
-            "Definitely disagree ": {
+            "Definitely disagree": {
                 "E02001958": 10.6061,
                 "E02001959": 1.6949,
                 "E02001961": 1.4706,
@@ -14511,7 +14511,7 @@
         "Topic": "Eating patterns (5)",
         "Question": "I always plan my meals before I go food shopping",
         "Answers": {
-            "Definitely agree ": {
+            "Definitely agree": {
                 "E02001958": 11.9403,
                 "E02001959": 23.7288,
                 "E02001961": 20.5882,
@@ -14555,7 +14555,7 @@
                 "E02001999": 12.1212,
                 "E02006805": 13.6986
             },
-            "Tend to agree ": {
+            "Tend to agree": {
                 "E02001958": 35.8209,
                 "E02001959": 38.9831,
                 "E02001961": 42.6471,
@@ -14599,7 +14599,7 @@
                 "E02001999": 44.4444,
                 "E02006805": 47.9452
             },
-            "Tend to disagree ": {
+            "Tend to disagree": {
                 "E02001958": 47.7612,
                 "E02001959": 33.8983,
                 "E02001961": 33.8235,
@@ -14643,7 +14643,7 @@
                 "E02001999": 43.4343,
                 "E02006805": 35.6164
             },
-            "Definitely disagree ": {
+            "Definitely disagree": {
                 "E02001958": 4.4776,
                 "E02001959": 3.3898,
                 "E02001961": 2.9412,
@@ -14693,7 +14693,7 @@
         "Topic": "Eating patterns (6)",
         "Question": "It is important for families to eat together every night",
         "Answers": {
-            "Definitely agree ": {
+            "Definitely agree": {
                 "E02001958": 24.2857,
                 "E02001959": 71.1864,
                 "E02001961": 86.7647,
@@ -14737,7 +14737,7 @@
                 "E02001999": 39.1753,
                 "E02006805": 36.1111
             },
-            "Tend to agree ": {
+            "Tend to agree": {
                 "E02001958": 50.0,
                 "E02001959": 28.8136,
                 "E02001961": 8.8235,
@@ -14781,7 +14781,7 @@
                 "E02001999": 56.701,
                 "E02006805": 59.7222
             },
-            "Tend to disagree ": {
+            "Tend to disagree": {
                 "E02001958": 22.8571,
                 "E02001959": 0.0,
                 "E02001961": 2.9412,
@@ -14825,7 +14825,7 @@
                 "E02001999": 4.1237,
                 "E02006805": 4.1667
             },
-            "Definitely disagree ": {
+            "Definitely disagree": {
                 "E02001958": 2.8571,
                 "E02001959": 0.0,
                 "E02001961": 1.4706,
@@ -14875,7 +14875,7 @@
         "Topic": "Eating patterns (7)",
         "Question": "I have everything I need in my kitchen to cook meals from scratch",
         "Answers": {
-            "Definitely agree ": {
+            "Definitely agree": {
                 "E02001958": 23.1884,
                 "E02001959": 89.8305,
                 "E02001961": 92.6471,
@@ -14919,7 +14919,7 @@
                 "E02001999": 33.6735,
                 "E02006805": 42.4658
             },
-            "Tend to agree ": {
+            "Tend to agree": {
                 "E02001958": 57.971000000000004,
                 "E02001959": 10.1695,
                 "E02001961": 7.3529,
@@ -14963,7 +14963,7 @@
                 "E02001999": 61.2245,
                 "E02006805": 56.1644
             },
-            "Tend to disagree ": {
+            "Tend to disagree": {
                 "E02001958": 14.4928,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -15007,7 +15007,7 @@
                 "E02001999": 5.102,
                 "E02006805": 1.3699
             },
-            "Definitely disagree ": {
+            "Definitely disagree": {
                 "E02001958": 4.3478,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -15057,7 +15057,7 @@
         "Topic": "Eating patterns (8)",
         "Question": "I frequently eat snacks between meals",
         "Answers": {
-            "Definitely agree ": {
+            "Definitely agree": {
                 "E02001958": 14.2857,
                 "E02001959": 47.4576,
                 "E02001961": 48.5294,
@@ -15101,7 +15101,7 @@
                 "E02001999": 4.0404,
                 "E02006805": 4.1096
             },
-            "Tend to agree ": {
+            "Tend to agree": {
                 "E02001958": 41.4286,
                 "E02001959": 28.8136,
                 "E02001961": 32.3529,
@@ -15145,7 +15145,7 @@
                 "E02001999": 53.5354,
                 "E02006805": 50.6849
             },
-            "Tend to disagree ": {
+            "Tend to disagree": {
                 "E02001958": 37.1429,
                 "E02001959": 20.339000000000002,
                 "E02001961": 13.2353,
@@ -15189,7 +15189,7 @@
                 "E02001999": 40.404,
                 "E02006805": 32.8767
             },
-            "Definitely disagree ": {
+            "Definitely disagree": {
                 "E02001958": 7.1429,
                 "E02001959": 3.3898,
                 "E02001961": 5.8824,
@@ -15283,7 +15283,7 @@
                 "E02001999": 4.0404,
                 "E02006805": 1.3699
             },
-            "Once a day ": {
+            "Once a day": {
                 "E02001958": 27.1429,
                 "E02001959": 15.2542,
                 "E02001961": 23.5294,
@@ -15371,7 +15371,7 @@
                 "E02001999": 28.2828,
                 "E02006805": 56.1644
             },
-            "Once or twice a month ": {
+            "Once or twice a month": {
                 "E02001958": 15.7143,
                 "E02001959": 6.7797,
                 "E02001961": 10.2941,
@@ -15459,7 +15459,7 @@
                 "E02001999": 11.1111,
                 "E02006805": 2.7397
             },
-            "Never  ": {
+            "Never": {
                 "E02001958": 1.4286,
                 "E02001959": 27.1186,
                 "E02001961": 10.2941,
@@ -15553,7 +15553,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Once a day ": {
+            "Once a day": {
                 "E02001958": 0.0,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -15641,7 +15641,7 @@
                 "E02001999": 29.2929,
                 "E02006805": 35.6164
             },
-            "Once or twice a month ": {
+            "Once or twice a month": {
                 "E02001958": 35.7143,
                 "E02001959": 38.9831,
                 "E02001961": 42.6471,
@@ -15729,7 +15729,7 @@
                 "E02001999": 29.2929,
                 "E02006805": 15.0685
             },
-            "Never  ": {
+            "Never": {
                 "E02001958": 0.0,
                 "E02001959": 16.9492,
                 "E02001961": 5.8824,
@@ -15961,7 +15961,7 @@
         "Topic": "Alcohol consumption",
         "Question": "How many days in a typical week do you usually drink alcohol?",
         "Answers": {
-            "7 days ": {
+            "7 days": {
                 "E02001958": 1.4286,
                 "E02001959": 1.6949,
                 "E02001961": 2.9412,
@@ -16049,7 +16049,7 @@
                 "E02001999": 4.0404,
                 "E02006805": 0.0
             },
-            "2-4 days ": {
+            "2-4 days": {
                 "E02001958": 17.1429,
                 "E02001959": 42.3729,
                 "E02001961": 19.1176,
@@ -16589,7 +16589,7 @@
         "Topic": "Hours spent on cultural/social activities",
         "Question": "During the last week, how many hours did you spend on cultural activities and social activities? For example, visiting museum; visiting a friend etc. ",
         "Answers": {
-            "None ": {
+            "None": {
                 "E02001958": 22.8571,
                 "E02001959": 16.9492,
                 "E02001961": 19.1176,
@@ -16633,7 +16633,7 @@
                 "E02001999": 76.7677,
                 "E02006805": 13.6986
             },
-            "Some but less than 1 hour ": {
+            "Some but less than 1 hour": {
                 "E02001958": 20.0,
                 "E02001959": 11.8644,
                 "E02001961": 4.4118,
@@ -16771,7 +16771,7 @@
         "Topic": "Hours spent on everyday activity",
         "Question": "During the last week, how many hours did you spend on everyday activity? For example: Active travel (walking or cycling as a form of transport), heavy housework, gardening / DIY, occupational activity ",
         "Answers": {
-            "None ": {
+            "None": {
                 "E02001958": 25.7143,
                 "E02001959": 28.8136,
                 "E02001961": 42.6471,
@@ -16815,7 +16815,7 @@
                 "E02001999": 42.4242,
                 "E02006805": 12.3288
             },
-            "Some but less than 1 hour ": {
+            "Some but less than 1 hour": {
                 "E02001958": 21.4286,
                 "E02001959": 20.339000000000002,
                 "E02001961": 23.5294,
@@ -16953,7 +16953,7 @@
         "Topic": "Hours spent on active recreation",
         "Question": "During the last week, how many hours did you spend on active recreation? For example: Recreational walking / cycling, active play (with children), dance ",
         "Answers": {
-            "None ": {
+            "None": {
                 "E02001958": 50.0,
                 "E02001959": 40.678000000000004,
                 "E02001961": 38.2353,
@@ -16997,7 +16997,7 @@
                 "E02001999": 31.3131,
                 "E02006805": 60.273999999999994
             },
-            "Some but less than 1 hour ": {
+            "Some but less than 1 hour": {
                 "E02001958": 24.2857,
                 "E02001959": 5.0847,
                 "E02001961": 10.2941,
@@ -17135,7 +17135,7 @@
         "Topic": "Hours spent on sport",
         "Question": "During the last week, how many hours did you spend on sport? For example: Swimming, exercise and fitness training, structured competitive activity, individual pursuits or informal sport",
         "Answers": {
-            "None ": {
+            "None": {
                 "E02001958": 57.1429,
                 "E02001959": 72.8814,
                 "E02001961": 85.2941,
@@ -17179,7 +17179,7 @@
                 "E02001999": 58.5859,
                 "E02006805": 68.4932
             },
-            "Some but less than 1 hour ": {
+            "Some but less than 1 hour": {
                 "E02001958": 18.5714,
                 "E02001959": 5.0847,
                 "E02001961": 0.0,
@@ -18699,7 +18699,7 @@
                 "E02001999": 3.125,
                 "E02006805": 2.7778
             },
-            "Rarely ": {
+            "Rarely": {
                 "E02001958": 15.942,
                 "E02001959": 8.4746,
                 "E02001961": 7.3529,
@@ -18787,7 +18787,7 @@
                 "E02001999": 22.9167,
                 "E02006805": 31.9444
             },
-            "Often ": {
+            "Often": {
                 "E02001958": 36.2319,
                 "E02001959": 50.8475,
                 "E02001961": 50.0,
@@ -18831,7 +18831,7 @@
                 "E02001999": 54.1667,
                 "E02006805": 45.8333
             },
-            "All of the time ": {
+            "All of the time": {
                 "E02001958": 14.4928,
                 "E02001959": 20.339000000000002,
                 "E02001961": 8.8235,
@@ -18925,7 +18925,7 @@
                 "E02001999": 0.0,
                 "E02006805": 2.7778
             },
-            "Rarely ": {
+            "Rarely": {
                 "E02001958": 19.1176,
                 "E02001959": 5.0847,
                 "E02001961": 7.3529,
@@ -19013,7 +19013,7 @@
                 "E02001999": 19.7917,
                 "E02006805": 31.9444
             },
-            "Often ": {
+            "Often": {
                 "E02001958": 38.2353,
                 "E02001959": 44.0678,
                 "E02001961": 55.8824,
@@ -19057,7 +19057,7 @@
                 "E02001999": 62.5,
                 "E02006805": 45.8333
             },
-            "All of the time ": {
+            "All of the time": {
                 "E02001958": 14.7059,
                 "E02001959": 35.5932,
                 "E02001961": 14.7059,
@@ -19151,7 +19151,7 @@
                 "E02001999": 3.0928,
                 "E02006805": 0.0
             },
-            "Rarely ": {
+            "Rarely": {
                 "E02001958": 21.7391,
                 "E02001959": 1.6949,
                 "E02001961": 4.4118,
@@ -19239,7 +19239,7 @@
                 "E02001999": 23.7113,
                 "E02006805": 33.3333
             },
-            "Often ": {
+            "Often": {
                 "E02001958": 36.2319,
                 "E02001959": 55.9322,
                 "E02001961": 42.6471,
@@ -19283,7 +19283,7 @@
                 "E02001999": 52.5773,
                 "E02006805": 47.2222
             },
-            "All of the time ": {
+            "All of the time": {
                 "E02001958": 11.5942,
                 "E02001959": 11.8644,
                 "E02001961": 8.8235,
@@ -19377,7 +19377,7 @@
                 "E02001999": 0.0,
                 "E02006805": 1.3889
             },
-            "Rarely ": {
+            "Rarely": {
                 "E02001958": 13.2353,
                 "E02001959": 11.8644,
                 "E02001961": 7.3529,
@@ -19465,7 +19465,7 @@
                 "E02001999": 21.6495,
                 "E02006805": 33.3333
             },
-            "Often ": {
+            "Often": {
                 "E02001958": 44.1176,
                 "E02001959": 40.678000000000004,
                 "E02001961": 47.0588,
@@ -19509,7 +19509,7 @@
                 "E02001999": 54.6392,
                 "E02006805": 55.5556
             },
-            "All of the time ": {
+            "All of the time": {
                 "E02001958": 10.2941,
                 "E02001959": 6.7797,
                 "E02001961": 8.8235,
@@ -19603,7 +19603,7 @@
                 "E02001999": 3.0928,
                 "E02006805": 2.7778
             },
-            "Rarely ": {
+            "Rarely": {
                 "E02001958": 18.8406,
                 "E02001959": 6.7797,
                 "E02001961": 11.7647,
@@ -19691,7 +19691,7 @@
                 "E02001999": 21.6495,
                 "E02006805": 34.7222
             },
-            "Often ": {
+            "Often": {
                 "E02001958": 37.6812,
                 "E02001959": 45.7627,
                 "E02001961": 30.8824,
@@ -19735,7 +19735,7 @@
                 "E02001999": 38.1443,
                 "E02006805": 45.8333
             },
-            "All of the time ": {
+            "All of the time": {
                 "E02001958": 13.0435,
                 "E02001959": 6.7797,
                 "E02001961": 7.3529,
@@ -19829,7 +19829,7 @@
                 "E02001999": 1.0309,
                 "E02006805": 1.4085
             },
-            "Rarely ": {
+            "Rarely": {
                 "E02001958": 13.0435,
                 "E02001959": 0.0,
                 "E02001961": 1.4706,
@@ -19917,7 +19917,7 @@
                 "E02001999": 23.7113,
                 "E02006805": 33.8028
             },
-            "Often ": {
+            "Often": {
                 "E02001958": 43.4783,
                 "E02001959": 42.3729,
                 "E02001961": 50.0,
@@ -19961,7 +19961,7 @@
                 "E02001999": 64.9485,
                 "E02006805": 53.5211
             },
-            "All of the time ": {
+            "All of the time": {
                 "E02001958": 20.2899,
                 "E02001959": 50.8475,
                 "E02001961": 39.7059,
@@ -20007,7 +20007,7 @@
             }
         }
     },
-    "Q65": {
+    "Q39g": {
         "Topic": "Feeling thinking clearly",
         "Question": "How often, if at all, have you been feeling that you have been thinking clearly over the last 2 weeks?",
         "Answers": {
@@ -20055,7 +20055,7 @@
                 "E02001999": 1.0309,
                 "E02006805": 0.0
             },
-            "Rarely ": {
+            "Rarely": {
                 "E02001958": 5.7971,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -20143,7 +20143,7 @@
                 "E02001999": 11.3402,
                 "E02006805": 23.6111
             },
-            "Often ": {
+            "Often": {
                 "E02001958": 50.7246,
                 "E02001959": 25.4237,
                 "E02001961": 27.9412,
@@ -20187,7 +20187,7 @@
                 "E02001999": 75.2577,
                 "E02006805": 65.2778
             },
-            "All of the time ": {
+            "All of the time": {
                 "E02001958": 18.8406,
                 "E02001959": 72.8814,
                 "E02001961": 63.2353,
@@ -20233,7 +20233,7 @@
             }
         }
     },
-    "Q39g": {
+    "Q39h": {
         "Topic": "Feeling good about yourself",
         "Question": "How often, if at all, have you been feeling good about myself over the last 2 weeks?",
         "Answers": {
@@ -20281,7 +20281,7 @@
                 "E02001999": 1.0309,
                 "E02006805": 0.0
             },
-            "Rarely ": {
+            "Rarely": {
                 "E02001958": 17.3913,
                 "E02001959": 0.0,
                 "E02001961": 2.9412,
@@ -20369,7 +20369,7 @@
                 "E02001999": 19.5876,
                 "E02006805": 38.8889
             },
-            "Often ": {
+            "Often": {
                 "E02001958": 46.3768,
                 "E02001959": 32.2034,
                 "E02001961": 32.3529,
@@ -20413,7 +20413,7 @@
                 "E02001999": 67.0103,
                 "E02006805": 50.0
             },
-            "All of the time ": {
+            "All of the time": {
                 "E02001958": 13.0435,
                 "E02001959": 66.1017,
                 "E02001961": 57.3529,
@@ -20459,7 +20459,7 @@
             }
         }
     },
-    "Q39h": {
+    "Q39i": {
         "Topic": "Feeling close to other people",
         "Question": "How often, if at all, have you been feeling close to other people over the last 2 weeks?",
         "Answers": {
@@ -20507,7 +20507,7 @@
                 "E02001999": 1.0417,
                 "E02006805": 0.0
             },
-            "Rarely ": {
+            "Rarely": {
                 "E02001958": 8.8235,
                 "E02001959": 1.6949,
                 "E02001961": 2.9412,
@@ -20595,7 +20595,7 @@
                 "E02001999": 13.5417,
                 "E02006805": 31.9444
             },
-            "Often ": {
+            "Often": {
                 "E02001958": 45.5882,
                 "E02001959": 25.4237,
                 "E02001961": 29.4118,
@@ -20639,7 +20639,7 @@
                 "E02001999": 73.9583,
                 "E02006805": 51.3889
             },
-            "All of the time ": {
+            "All of the time": {
                 "E02001958": 17.6471,
                 "E02001959": 61.0169,
                 "E02001961": 63.2353,
@@ -20685,7 +20685,7 @@
             }
         }
     },
-    "Q39i": {
+    "Q39j": {
         "Topic": "Feeling confident",
         "Question": "How often, if at all, have you been feeling confident over the last 2 weeks?",
         "Answers": {
@@ -20733,7 +20733,7 @@
                 "E02001999": 1.0309,
                 "E02006805": 0.0
             },
-            "Rarely ": {
+            "Rarely": {
                 "E02001958": 11.5942,
                 "E02001959": 0.0,
                 "E02001961": 1.4706,
@@ -20821,7 +20821,7 @@
                 "E02001999": 17.5258,
                 "E02006805": 31.9444
             },
-            "Often ": {
+            "Often": {
                 "E02001958": 47.8261,
                 "E02001959": 30.5085,
                 "E02001961": 27.9412,
@@ -20865,7 +20865,7 @@
                 "E02001999": 69.0722,
                 "E02006805": 52.7778
             },
-            "All of the time ": {
+            "All of the time": {
                 "E02001958": 18.8406,
                 "E02001959": 62.7119,
                 "E02001961": 63.2353,
@@ -20911,7 +20911,7 @@
             }
         }
     },
-    "Q39j": {
+    "Q39k": {
         "Topic": "Feeling able to make up your own mind",
         "Question": "How often, if at all, have you been feeling being able to make up your own mind about things over the last 2 weeks?",
         "Answers": {
@@ -20959,7 +20959,7 @@
                 "E02001999": 1.0309,
                 "E02006805": 0.0
             },
-            "Rarely ": {
+            "Rarely": {
                 "E02001958": 2.8986,
                 "E02001959": 0.0,
                 "E02001961": 1.4706,
@@ -21047,7 +21047,7 @@
                 "E02001999": 4.1237,
                 "E02006805": 36.1111
             },
-            "Often ": {
+            "Often": {
                 "E02001958": 52.1739,
                 "E02001959": 27.1186,
                 "E02001961": 23.5294,
@@ -21091,7 +21091,7 @@
                 "E02001999": 77.3196,
                 "E02006805": 48.6111
             },
-            "All of the time ": {
+            "All of the time": {
                 "E02001958": 15.942,
                 "E02001959": 71.1864,
                 "E02001961": 70.5882,
@@ -21137,7 +21137,7 @@
             }
         }
     },
-    "Q39k": {
+    "Q39l": {
         "Topic": "Feeling loved",
         "Question": "How often, if at all, have you been feeling loved over the last 2 weeks?",
         "Answers": {
@@ -21185,7 +21185,7 @@
                 "E02001999": 1.0309,
                 "E02006805": 0.0
             },
-            "Rarely ": {
+            "Rarely": {
                 "E02001958": 2.8986,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -21273,7 +21273,7 @@
                 "E02001999": 8.2474,
                 "E02006805": 13.8889
             },
-            "Often ": {
+            "Often": {
                 "E02001958": 30.4348,
                 "E02001959": 23.7288,
                 "E02001961": 22.0588,
@@ -21317,7 +21317,7 @@
                 "E02001999": 75.2577,
                 "E02006805": 51.3889
             },
-            "All of the time ": {
+            "All of the time": {
                 "E02001958": 39.1304,
                 "E02001959": 67.7966,
                 "E02001961": 72.0588,
@@ -21363,7 +21363,7 @@
             }
         }
     },
-    "Q39l": {
+    "Q39m": {
         "Topic": "Feeling interested in new things",
         "Question": "How often, if at all, have you been feeling interested in new things over the last 2 weeks?",
         "Answers": {
@@ -21411,7 +21411,7 @@
                 "E02001999": 1.0309,
                 "E02006805": 1.3889
             },
-            "Rarely ": {
+            "Rarely": {
                 "E02001958": 24.6377,
                 "E02001959": 6.7797,
                 "E02001961": 2.9412,
@@ -21499,7 +21499,7 @@
                 "E02001999": 10.3093,
                 "E02006805": 29.1667
             },
-            "Often ": {
+            "Often": {
                 "E02001958": 34.7826,
                 "E02001959": 40.678000000000004,
                 "E02001961": 42.6471,
@@ -21543,7 +21543,7 @@
                 "E02001999": 64.9485,
                 "E02006805": 51.3889
             },
-            "All of the time ": {
+            "All of the time": {
                 "E02001958": 14.4928,
                 "E02001959": 22.0339,
                 "E02001961": 35.2941,
@@ -21589,7 +21589,7 @@
             }
         }
     },
-    "Q39m": {
+    "Q39n": {
         "Topic": "Feeling cheerful",
         "Question": "How often, if at all, have you been feeling cheerful over the last 2 weeks?",
         "Answers": {
@@ -21637,7 +21637,7 @@
                 "E02001999": 1.0309,
                 "E02006805": 0.0
             },
-            "Rarely ": {
+            "Rarely": {
                 "E02001958": 10.1449,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -21725,7 +21725,7 @@
                 "E02001999": 14.433,
                 "E02006805": 23.6111
             },
-            "Often ": {
+            "Often": {
                 "E02001958": 47.8261,
                 "E02001959": 47.4576,
                 "E02001961": 52.9412,
@@ -21769,7 +21769,7 @@
                 "E02001999": 73.1959,
                 "E02006805": 65.2778
             },
-            "All of the time ": {
+            "All of the time": {
                 "E02001958": 17.3913,
                 "E02001959": 38.9831,
                 "E02001961": 30.8824,
@@ -21819,7 +21819,7 @@
         "Topic": "Health problems limitation",
         "Question": "Are your day-to-day activities limited because of a health problem or disability which has lasted, or is expected to last, at least 12 months (includes problems relating to old age and mental health)?",
         "Answers": {
-            "Yes, limited a lot ": {
+            "Yes, limited a lot": {
                 "E02001958": 14.2857,
                 "E02001959": 3.3898,
                 "E02001961": 10.2941,
@@ -21863,7 +21863,7 @@
                 "E02001999": 16.1616,
                 "E02006805": 6.8493
             },
-            "Yes, limited a little ": {
+            "Yes, limited a little": {
                 "E02001958": 5.7143,
                 "E02001959": 6.7797,
                 "E02001961": 13.2353,
@@ -21907,7 +21907,7 @@
                 "E02001999": 7.0707,
                 "E02006805": 1.3699
             },
-            "Not at all ": {
+            "Not at all": {
                 "E02001958": 80.0,
                 "E02001959": 89.8305,
                 "E02001961": 76.4706,
@@ -22089,7 +22089,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Mental ": {
+            "Mental": {
                 "E02001958": 33.3333,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -22227,7 +22227,7 @@
         "Topic": "Economic status",
         "Question": "Which of the following best describes your current economic status? ",
         "Answers": {
-            "In full time paid work   ": {
+            "In full time paid work": {
                 "E02001958": 47.1429,
                 "E02001959": 45.7627,
                 "E02001961": 39.7059,
@@ -22271,7 +22271,7 @@
                 "E02001999": 28.2828,
                 "E02006805": 27.3973
             },
-            "In part time paid work ": {
+            "In part time paid work": {
                 "E02001958": 17.1429,
                 "E02001959": 13.5593,
                 "E02001961": 1.4706,
@@ -22315,7 +22315,7 @@
                 "E02001999": 10.101,
                 "E02006805": 17.8082
             },
-            "Self-employed  ": {
+            "Self-employed": {
                 "E02001958": 1.4286,
                 "E02001959": 8.4746,
                 "E02001961": 1.4706,
@@ -22359,7 +22359,7 @@
                 "E02001999": 4.0404,
                 "E02006805": 4.1096
             },
-            "Taking part in a government training programme (e.g. trade and modern apprenticeships, work based learning for adults)  ": {
+            "Taking part in a government training programme (e.g. trade and modern apprenticeships, work based learning for adults)": {
                 "E02001958": 0.0,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -22447,7 +22447,7 @@
                 "E02001999": 0.0,
                 "E02006805": 4.1096
             },
-            "Not registered unemployed but actively seeking work (i.e. have actively looked for work in the last 4 weeks) ": {
+            "Not registered unemployed but actively seeking work (i.e. have actively looked for work in the last 4 weeks)": {
                 "E02001958": 0.0,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -22491,7 +22491,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "At home/not seeking work - (looking after the home or family) ": {
+            "At home/not seeking work - (looking after the home or family)": {
                 "E02001958": 1.4286,
                 "E02001959": 6.7797,
                 "E02001961": 14.7059,
@@ -22535,7 +22535,7 @@
                 "E02001999": 3.0303,
                 "E02006805": 16.4384
             },
-            "Long-term sick or disabled ": {
+            "Long-term sick or disabled": {
                 "E02001958": 11.4286,
                 "E02001959": 0.0,
                 "E02001961": 4.4118,
@@ -22623,7 +22623,7 @@
                 "E02001999": 26.2626,
                 "E02006805": 9.589
             },
-            "In full-time education ": {
+            "In full-time education": {
                 "E02001958": 4.2857,
                 "E02001959": 0.0,
                 "E02001961": 4.4118,
@@ -22667,7 +22667,7 @@
                 "E02001999": 26.2626,
                 "E02006805": 15.0685
             },
-            "Doing unpaid/voluntary work ": {
+            "Doing unpaid/voluntary work": {
                 "E02001958": 0.0,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -23072,7 +23072,7 @@
         }
     },
     "Q42b": {
-        "Topic": "",
+        "Topic": "Feelings on income",
         "Question": "Which of these phrases comes closest to describing your feelings about your household income these days?",
         "Answers": {
             "Living comfortably on present income": {
@@ -23163,7 +23163,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Finding it difficult on present income ": {
+            "Finding it difficult on present income": {
                 "E02001958": 21.6216,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -23389,7 +23389,7 @@
                 "E02001999": 11.1111,
                 "E02006805": 0.0
             },
-            "Quite often ": {
+            "Quite often": {
                 "E02001958": 20.2899,
                 "E02001959": 10.1695,
                 "E02001961": 10.2941,
@@ -23433,7 +23433,7 @@
                 "E02001999": 7.0707,
                 "E02006805": 19.1781
             },
-            "Only sometimes ": {
+            "Only sometimes": {
                 "E02001958": 34.7826,
                 "E02001959": 42.3729,
                 "E02001961": 32.3529,
@@ -23477,7 +23477,7 @@
                 "E02001999": 24.2424,
                 "E02006805": 42.4658
             },
-            "Never ": {
+            "Never": {
                 "E02001958": 43.4783,
                 "E02001959": 45.7627,
                 "E02001961": 51.4706,
@@ -23885,7 +23885,7 @@
                 "E02001999": 14.1414,
                 "E02006805": 5.4795
             },
-            "75 and over ": {
+            "75 and over": {
                 "E02001958": 2.8571,
                 "E02001959": 8.4746,
                 "E02001961": 7.3529,
@@ -24293,7 +24293,7 @@
                 "E02001999": 10.101,
                 "E02006805": 8.2192
             },
-            "Married ": {
+            "Married": {
                 "E02001958": 31.8841,
                 "E02001959": 69.4915,
                 "E02001961": 48.5294,
@@ -24425,7 +24425,7 @@
                 "E02001999": 2.0202,
                 "E02006805": 2.7397
             },
-            "Widowed ": {
+            "Widowed": {
                 "E02001958": 5.7971,
                 "E02001959": 6.7797,
                 "E02001961": 2.9412,
@@ -24557,7 +24557,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Formally in a same-sex civil partnership that is now legally dissolved ": {
+            "Formally in a same-sex civil partnership that is now legally dissolved": {
                 "E02001958": 0.0,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -24651,7 +24651,7 @@
         "Topic": "Sexual orientation",
         "Question": "Please can you tell me which of the following best describes you?",
         "Answers": {
-            "Heterosexual ": {
+            "Heterosexual": {
                 "E02001958": 98.5294,
                 "E02001959": 98.3051,
                 "E02001961": 98.5294,
@@ -25185,7 +25185,7 @@
                 "E02001999": 6.3158,
                 "E02006805": 11.2676
             },
-            "Other religion (please specify) ": {
+            "Other religion (please specify)": {
                 "E02001958": 0.0,
                 "E02001959": 0.0,
                 "E02001961": 0.0,
@@ -25543,7 +25543,7 @@
                 "E02001999": 0.0,
                 "E02006805": 0.0
             },
-            "Mixed: Other ": {
+            "Mixed: Other": {
                 "E02001958": 1.4286,
                 "E02001959": 0.0,
                 "E02001961": 0.0,

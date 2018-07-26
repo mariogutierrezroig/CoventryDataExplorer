@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Coventry Data Explorer: Geographical Distribution</title>
+    <title>Coventry Data Explorer: Time Difference</title>
     
     <style>
         
@@ -14,9 +14,8 @@
 			width: 1200px;
             background-color: navy;
             padding-bottom: 20px;
-            margin-top : 0px;
 		}
-
+        
         h1 {
             text-align: center;
 			font-size: 60px;
@@ -56,7 +55,7 @@
         
         .mainrow {
 			width: 1200px;
-            height: 550px;
+            height: 800px;
             display: flex;
             flex-flow: row wrap;
             justify-content: space-between;
@@ -64,28 +63,11 @@
 		}
         
         .leftpan {
-            width: 500px;
-            height: 550px;
+            width: 400px;
+            height: 330px;
             vertical-align: top;
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
-        }
-        
-        .rightpan {
-            width: 700px;
-            height: 550px;
-            vertical-align: top;
-            font-size: 14px;
-            font-family: "Helvetica", Georgia, Serif;
-        }
-        
-        div.bottompan {
-            width: 1200px;
-            height: 600px;
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: space-between;
-            align-items: flex-start;
         }
         
         .menu {
@@ -106,20 +88,51 @@
             line-height: 16px;
             margin-bottom: 20px;
             margin-right: 40px;
-            height: 400px;
+            height: 150px;
             overflow-y: auto;
         }
         
-        .map {
+        .rightpan {
             width: 800px;
-            height: 550px;
+            height: 330px;
             vertical-align: top;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            font-size: 14px;
+            font-family: "Helvetica", Georgia, Serif;
         }
         
-        .plot {
-            width: 400px;
-            height: 400px;
-            margin-top: 50px;
+        .displaymodebar {
+            width: 800px;
+            height: 50px;
+            
+        }
+        
+        .radio-inline {
+            width: auto;
+            vertical-align: center;
+        }
+
+        .smallplots {
+            width: 800px;
+            height: 250px;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .smallplot {
+            width: 250px;
+            height: 250px;
+        }
+        
+        .bigplot {
+            width: 500px;
+            height: 500px;
+            horizontal-align: center;
         }
         
         div.tooltip {
@@ -169,7 +182,7 @@
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
             text-align: center;
-            padding-top: 2px;
+            padding: 2px;
             color: white;
 		}
         
@@ -190,11 +203,11 @@
             <h1>Coventry Data Explorer</h1>
             
             <div class='navmenu'>
-				<b> Geographical Distribution</b> | <a href="./differences_wards.html" style="text-decoration: none; color: LightSteelBlue">Differences in Wards</a> | <a href="./correlation.html" style="text-decoration: none; color: LightSteelBlue">Correlations in Wards</a> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a> | <a href="./scenicness.html" style="text-decoration: none; color: LightSteelBlue">Scenicness</a>
+				<a href="./geographical_distribution.html" style="text-decoration: none; color: LightSteelBlue"> Geographical Distribution</a> | <b>Differences in Wards</b> | <a href="./correlation.html" style="text-decoration: none; color: LightSteelBlue">Correlations in Wards</a> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a> | <a href="./scenicness.html" style="text-decoration: none; color: LightSteelBlue">Scenicness</a>
 			</div>
             
             <div class='description'>
-                <p>You can explore the geographical distribution across Coventry wards of different demographic and socio-economic indicators compiled in the UK ONS census, Household Surveys and Indigo Audience Data. You can select on the left menu the multiple topics and questions. Corresponding possible answers will appear beneath and by ticking them the map on the right will show its geographical distribution. You can also multiple tick answer boxes so the values will be aggregated.</p>
+                <p>You can explore the geographical distribution of different demographic, attitudes and levels of cultural participation and support across the city. The first map draws on the ONS Census to give data on age, ethnicity, religion, economic activity. The second draws on the Coventry Household Survey 2016 and gives insight into attitudes, health and neighborhood values. The third draws on cultural participation data. By picking variables is each map you can see connections between, for instance, ethnic group, quality of life and cultural participation. You can multiple click the values in each section as well.</p>
             </div>
         
         </div>
@@ -202,152 +215,140 @@
         <div id='row-main' class="mainrow">
             <div id='leftpanel' class='leftpan'> 
                 <div id='leftmenu' class='menu'>
-                    <p> Select a database </p>
-                    
-                    <select id="datasetselect" class="select">
-                      <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
-                      <option value="Coventry_Census_2011_MSOA.json">ONS Census 2011</option>
-                      <option value="Coventry_Household_Survey_2016_MSOA.json">Household Survey 2016</option>
-                      <option value="Coventry_Household_Survey_2018_MSOA.json">Household Survey 2018</option>
-                    </select>
+                    <p> Select item in ONS Census </p>
                 
                 </div>
-                <div id='question' class='question'> </div>
-                <div id='answers' class='answers'> </div>
+                <div id='leftquestion' class='question'> </div>
+                <div id='leftanswers' class='answers'> </div>
+                
             </div>
-            
+
             <div id='rightpanel' class='rightpan'>
-                <div id='map' class='map'> </div>
+                <div id='displaymodebar' class='displaymodebar'>
+                    
+                    <div>Display mode:</div>
+                    <form>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" checked>by area
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio">by gender
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio">by age
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio">by economic status
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio">by ethnicity
+                        </label>
+                    </form>
+                </div>
+                
+                <div id='smallplots' class='smallplots'>
+                    <div id='leftplot' class='smallplot'> </div>
+                    <div id='rightplot' class='smallplot'> </div>
+                </div>
+                <div id='bigplot' class='bigplot'> </div>
+                
             </div>
         </div>
         
         <div id='credits' class='credcls'>
             <p> Visualization by <a href="http://datasciencelab.co.uk/people/mario-gutierrez-roig/" style="text-decoration: none; color: SkyBlue">Mario Guti&#233;rrez-Roig</a> from <a href="http://datasciencelab.co.uk/" style="text-decoration: none; color: SkyBlue">WBS Data Science Lab</a>. Code available on <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer" style="text-decoration: none; color: SkyBlue">github</a> </p>
+        </div>
     
     </div>
     
     <script>
         
-        MAP = {}   // General variable for map objects
-        DATA = {}  // General variable for csvtab object
+        WARDS = {}   // General variable for ward objects
+        CSVTAB = {}  // General variable for csvtab object
+        QUESTION = {}  // General variable for question object
         
         var width = 500,
             height = 500;
          
         var projection = d3.geoAlbers()
-            .scale(260000)
+            .scale(160000)
             .rotate([0,0])
-            .center([-1.55, 52.42])
-            .translate([width/2,height/2.2]);
+            .center([-1.49, 52.39])
+            .translate([width/2,height/2.3]);
          
         var geoPath = d3.geoPath()
             .projection(projection);
   
-        var tooltip = d3.select('#rightpanel')
+        var tooltip = d3.select('#bottompanel')
             .append('div')
             .attr('class', 'hidden tooltip');
         
-        var dataset = d3.select('#datasetselect')
+        var leftselect = d3.select('#leftselect')
             .on('change', function(d){
-                change_dataset();
+                menuchange("left");
             });
-        
-        d3.queue()
-            .defer(d3.json, './Map/coventry_msoa.geojson')
-            //.defer(d3.json, './Map/coventry_wards.geojson')
-            //.defer(d3.json, './Map/coventry_wards.topojson')
-            .await(function(error, wards){
-                if (error) throw error;
-                plotmapnull(wards);
-            });
-        
-        function change_dataset() {
 
+        function menuchange(side) {
+                        
+            var values = d3.select("#" + side + "select").property('value');
+            csvpath = './Data/Census/Tables/'.concat(values, '.csv');
+            questionpath = './Data/Census/Questions/'.concat(values, '.txt');
+                        
             // Remove previous question and checkboxes
-            d3.select("#questionselect").remove();
-            d3.select("#question_p").remove();
-            d3.select("#question").selectAll("*").remove();
-            d3.select("#answers").selectAll("*").remove();
-            
-            var values = d3.select("#datasetselect").property('value');
-
-            datapath = './Data/'.concat(values);
+            d3.select("#" + side + "question").selectAll("*").remove();
+            d3.select("#" + side + "answers").selectAll("*").remove();
             
             // Loading data in this way prevents from ploting anything before loading finishes
             d3.queue()
-                .defer(d3.json, './Map/coventry_msoa.geojson')
-                .defer(d3.json, datapath)
-                .await(function(error, map, data){
+                .defer(d3.json, './Map/coventry_wards.topojson')
+                .defer(d3.csv, csvpath)
+                .defer(d3.text, questionpath)
+                .await(function(error, wards, csvtab, questiontext){
                     if (error) throw error;
             
                     // Assigning values to general variables, otherwise updating doesn't work
-                    MAP = map;
-                    DATA = data;
-                                        
-                    d3.select('#leftmenu')
-						.append('p')
-                        .attr('id','question_p')
-                        .text('Select a question')
+                    WARDS = wards;
+                    CSVTAB[side] = csvtab;
+                    QUESTION[side] = questiontext;
                     
-                    /* Adds Features Menu */
+                    /* Appends Questions */
+                    d3.select("#" + side + "question")
+                        .append("div")
+                        //.attr("class", "questpan")
+                        .text(QUESTION[side]);
+                    
+                    /* Adds the answers */
 
-					var options = d3.select('#leftmenu')
-						.append('select')
-                        .attr('id','questionselect')
-						.attr('class','select')
-						.on('change',function (d) { change_question(); return d; })
-						.selectAll('option')
-						.data(Object.keys(DATA))
-						.enter()
-						.append('option')
-						.text(function (d) { return DATA[d]["Topic"]; })
-                        .attr('value',function (d) { return d; });
+                    var answers = d3.keys(CSVTAB[side][0]); // Get the column names of csv
+                    answers.remove('name', true); // Remove the element "name"
+                    answers.remove('code', true); // Remove the element "code"
+                    
+                    /* Adds Checkboxes */
+                    
+                    answers.forEach(function(d,i) {
+                        // Append the checkboxes
+                        d3.select("#" + side + "answers")
+                            .append("div")
+                            .append("label")
+                            .attr("id", side + "answer" + i)
+                            .append("input")
+                            .attr("type", "checkbox")
+                            .attr("class", "mapCheckbox")
+                            .attr("value", d)
+                            .on("change", function(d){ 
+                                CheckboxUpdate(WARDS, CSVTAB[side], side);
+                            });
+                            
+                        // Append the text
+                        d3.select("#" + side + "answer" + i)
+                            .append("text")
+                            .text(d);
+                    });
+
+                    plotmapnull(WARDS, side); // Plots the initial null map in the left
             
                 });
-        }
 
-        function change_question() {
-            
-            var qvalue = d3.select('#questionselect').property('value');
-                                    
-            // Remove previous question and checkboxes
-            d3.select("#question").selectAll("*").remove();
-            d3.select("#answers").selectAll("*").remove();
-                    
-            /* Appends Questions */
-            d3.select("#question")
-                .append("div")
-                //.attr("class", "questpan")
-                .text(DATA[qvalue]["Question"]);
-            
-            /* Adds the answers */
-
-            var answers = Object.keys(DATA[qvalue]["Answers"]); // Get the column names of csv
-            
-            /* Adds Checkboxes */
-            
-            answers.forEach(function(d,i) {
-                // Append the checkboxes
-                d3.select("#answers")
-                    .append("div")
-                    .append("label")
-                    .attr("id", "answer" + i)
-                    .append("input")
-                    .attr("type", "checkbox")
-                    .attr("class", "mapCheckbox")
-                    .attr("value", d)
-                    .on("change", function(d){ 
-                        CheckboxUpdate();
-                    });
-                    
-                // Append the text
-                d3.select("#answer" + i)
-                    .append("text")
-                    .text(d);
-            });
-
-            plotmapnull(MAP); // Plots the initial null map in the left
-            
         };
         
         // Function that move object to front in order to avoid plotting border issues
@@ -370,11 +371,11 @@
         }
 
         // Plots the map
-        function plotmap(patches, values, legendtext) {
+        function plotmap(patches, values, legendtext, side) {
             
-            d3.select("#map").selectAll("*").remove();  // Remove previous objects
+            d3.select("#" + side + "plot").selectAll("*").remove();  // Remove previous objects
             
-            var svgelement = d3.select("#map")
+            var svgelement = d3.select("#" + side + "plot")
                 .append('svg')
                 .attr('class', 'map');
             
@@ -386,7 +387,7 @@
             
             var xScale = d3.scaleLinear()
                 .domain([minval, maxval])
-                .rangeRound([0, 500]);
+                .rangeRound([600, 900]);
                 
             var delta = (maxval - minval) / 5.0; // toFixed() for rounding it to int
             
@@ -405,7 +406,7 @@
             
 			svgelement.append("g")
                 .selectAll("path")
-                .data(patches.features)
+                .data(topojson.feature(patches, patches.objects.covwards).features)
                 .enter()
                 .append("path")
                 .attr( "d", geoPath )
@@ -417,22 +418,24 @@
 				})
 				.on('mouseover', function(d){
                     d3.select(this).moveToFront().attr("class","hover");
+                    d3.select("#scatterplot").select("#" + d.properties.code).attr("class","hover");
                 })
                 .on('mousemove', function(d){
                     tooltip.classed('hidden', false)
 						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
-						.html(d.properties.name + ': ' + Number(values[d.properties.code].toFixed(1)));
+						.html(d.properties.name + ': ' + Number(values[d.properties.code].toFixed(1)));                    
                 })
                 .on('mouseout', function(d){
                     tooltip.classed('hidden', true);
                     d3.select(this).attr("class","incident");
+                    d3.select("#scatterplot").select("#" + d.properties.code).attr("class","incident");
                 });
                 
                 /* Legend */
                 
                 svgelement.append("g")
                     .attr("class", "key")
-                    .attr("transform", "translate(80,510)")
+                    .attr("transform", "translate(-550,310)")
                     .selectAll("rect")
                     .data(color.range().map(function(d) {
                         d = color.invertExtent(d);
@@ -449,7 +452,7 @@
                     
                 svgelement.append("g")
                     .attr("class", "key")
-                    .attr("transform", "translate(80,510)")
+                    .attr("transform", "translate(-550,310)")
                     .append("text")
                     .attr("class", "caption")
                     .attr("x", xScale.range()[0])
@@ -462,7 +465,7 @@
 
                 svgelement.append("g")
                     .attr("class", "key")
-                    .attr("transform", "translate(80,510)")
+                    .attr("transform", "translate(-550,310)")
                     .call(d3.axisBottom(xScale)
                     .tickSize(13)
                     .tickFormat(function(xScale, i) { return i ? xScale : xScale; })
@@ -472,11 +475,11 @@
         }
         
         // Plots the map if there is no choice selected
-        function plotmapnull(patches) {
+        function plotmapnull(patches, side) {
             
-            d3.select("#map").selectAll("*").remove();  // Remove previous objects
+            d3.select("#" + side + "map").selectAll("*").remove();  // Remove previous objects
             
-            var svgelement = d3.select("#map")
+            var svgelement = d3.select("#" + side + "map")
                 .append('svg')
                 .attr('class', 'map');
             
@@ -484,7 +487,7 @@
             
 			svgelement.append("g")
                 .selectAll("path")
-                .data(patches.features)
+                .data(topojson.feature(patches, patches.objects.covwards).features)
                 .enter()
                 .append("path")
                 .attr("d", geoPath)
@@ -498,7 +501,7 @@
                 .on('mousemove', function(d){
                     tooltip.classed('hidden', false)
 						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
-						.html(d.properties.name);
+						.html(d.properties.name);                    
                 })
                 .on('mouseout', function(d){
                     d3.select(this)
@@ -510,25 +513,25 @@
         }
         
         // Updates the map according to checked boxes
-        function CheckboxUpdate(){
+        function CheckboxUpdate(wards, data, side){
 
-            var paneltoplot = "#map";
-            var valuestoplot = computevalues();
+            var paneltoplot = "#" + side + "map";
+            var valuestoplot = computevalues(data,side);
             
             if (Object.keys(valuestoplot).length == 0)
             {
-                plotmapnull(MAP); // Plots the map again
+                plotmapnull(wards, side); // Plots the map again
             }
             else
             {                
-                plotmap(MAP, valuestoplot, "Percentage"); // Plots the map again
+                plotmap(wards, valuestoplot, "Percentage", side); // Plots the map again
             }
         }
         
         // Looks which checkboxes are selected and returns the corresponding data
-        function computevalues(){
+        function computevalues(data, side){
             
-            var paneltolook = "#leftpanel";
+            var paneltolook = "#" + side + "panel";
             
             var choices = [];
             
@@ -541,17 +544,15 @@
                 }
             });
             
-            var qvalue = d3.select('#questionselect').property('value');
-            
-            var valuestoplot = {};
-
-            choices.forEach(function(c) {
-                var keys = Object.keys(DATA[qvalue]["Answers"][c]);
-                keys.forEach(function(k) {
+            var valuestoplot = {};  
+                
+            data.forEach(function(d) {
+                choices.forEach(function(c) {
+                    var k = d.code;
                     if (k in valuestoplot) {
-                        valuestoplot[k] += Number(DATA[qvalue]["Answers"][c][k]);
+                        valuestoplot[k] += Number(d[c]);
                     } else {
-                        valuestoplot[k] = Number(DATA[qvalue]["Answers"][c][k]);
+                        valuestoplot[k] = Number(d[c]);
                     }
                 });
             });
