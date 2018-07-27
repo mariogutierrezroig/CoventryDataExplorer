@@ -56,7 +56,6 @@
         
         .mainrow {
 			width: 1200px;
-            height: 550px;
             display: flex;
             flex-flow: row wrap;
             justify-content: space-between;
@@ -65,7 +64,6 @@
         
         .leftpan {
             width: 500px;
-            height: 550px;
             vertical-align: top;
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
@@ -73,7 +71,6 @@
 
         .rightpan {
             width: 700px;
-            height: 550px;
             vertical-align: top;
             display: flex;
             flex-flow: row wrap;
@@ -95,8 +92,7 @@
         }
         
         .bigplot {
-            width: 500px;
-            height: 500px;
+            width: 700px;
             horizontal-align: center;
         }
         
@@ -136,10 +132,19 @@
             height: 550px;
             vertical-align: top;
         }
+
+        .bar {
+            fill: steelblue;
+        }
+        .bar-hover {
+            fill: steelblue;
+            stroke: black;
+            stroke-width: 2px;
+        }
         
         .plot {
-            width: 400px;
-            height: 400px;
+            width: 700px;
+            height: 550px;
             margin-top: 50px;
         }
         
@@ -211,7 +216,7 @@
             <h1>Coventry Data Explorer</h1>
             
             <div class='navmenu'>
-				<b> Geographical Distribution</b> | <a href="./differences_wards.html" style="text-decoration: none; color: LightSteelBlue">Differences in Wards</a> | <a href="./correlation.html" style="text-decoration: none; color: LightSteelBlue">Correlations in Wards</a> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a> | <a href="./scenicness.html" style="text-decoration: none; color: LightSteelBlue">Scenicness</a>
+				<b> Data Exploration</b> | <a href="./time_difference.html" style="text-decoration: none; color: LightSteelBlue">Time Difference</a> | <a href="./correlation.html" style="text-decoration: none; color: LightSteelBlue">Correlations in Wards</a> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a> | <a href="./scenicness.html" style="text-decoration: none; color: LightSteelBlue">Scenicness</a>
 			</div>
             
             <div class='description'>
@@ -227,9 +232,11 @@
                     
                     <select id="datasetselect" class="select">
                       <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
+<!--
                       <option value="Coventry_Census_2011_MSOA.json">ONS Census 2011</option>
-                      <option value="Coventry_Household_Survey_2016_MSOA.json">Household Survey 2016</option>
-                      <option value="Coventry_Household_Survey_2018_MSOA.json">Household Survey 2018</option>
+-->
+                      <option value="Coventry_Household_Survey_2016.json">Household Survey 2016</option>
+                      <option value="Coventry_Household_Survey_2018.json">Household Survey 2018</option>
                     </select>
                 
                 </div>
@@ -240,25 +247,25 @@
             <div id='rightpanel' class='rightpan'>
                 <div id='displaymodebar' class='displaymodebar'>
                     
-                    <div>Display mode:</div>
+                    <div>Group by:</div>
                     <form id='displaygroup'>
                         <label class="radio-inline">
-                            <input type="radio" name="optradio" value="MSOA" onchange="radioChange()" checked>by area
+                            <input type="radio" name="optradio" value="MSOA" onchange="radioChange()" checked>area
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="optradio" value="Gender" onchange="radioChange()">by gender
+                            <input type="radio" name="optradio" value="Gender" onchange="radioChange()">gender
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="optradio" value="Age" onchange="radioChange()">by age
+                            <input type="radio" name="optradio" value="Age" onchange="radioChange()">age
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="optradio" value="Income" onchange="radioChange()">by economic status
+                            <input type="radio" name="optradio" value="Economic Status" onchange="radioChange()">economic status
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="optradio" value="Ethnicity" onchange="radioChange()">by ethnicity
+                            <input type="radio" name="optradio" value="Ethnicity" onchange="radioChange()">ethnicity
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="optradio" value="Education" onchange="radioChange()">by education
+                            <input type="radio" name="optradio" value="Education" onchange="radioChange()">education
                         </label>
                     </form>
                 </div>
@@ -269,7 +276,7 @@
         </div>
         
         <div id='credits' class='credcls'>
-            <p> Visualization by <a href="http://datasciencelab.co.uk/people/mario-gutierrez-roig/" style="text-decoration: none; color: SkyBlue">Mario Guti&#233;rrez-Roig</a> from <a href="http://datasciencelab.co.uk/" style="text-decoration: none; color: SkyBlue">WBS Data Science Lab</a>. Code available on <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer" style="text-decoration: none; color: SkyBlue">github</a> </p>
+            <p> Visualization by <a href="http://datasciencelab.co.uk/people/mario-gutierrez-roig/" style="text-decoration: none; color: SkyBlue">Mario Guti&#233;rrez-Roig</a> and <a href="http://datasciencelab.co.uk/people/federico-botta/" style="text-decoration: none; color: SkyBlue">Federico Botta</a> from <a href="http://datasciencelab.co.uk/" style="text-decoration: none; color: SkyBlue">WBS Data Science Lab</a>. Code available on <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer" style="text-decoration: none; color: SkyBlue">github</a> </p>
     
     </div>
     
@@ -393,7 +400,7 @@
                     .text(DATA[qvalue]["Answers"][d]["Text"]);
             });
 
-            plotmapnull(MAP); // Plots the initial null map in the left
+            CheckboxUpdate();
             
         };
         
@@ -569,20 +576,12 @@
             /* Domain and Colors */
 
             // set the dimensions and margins of the graph
-            var margin = {top: 20, right: 20, bottom: 30, left: 40},
-                width = 500 - margin.left - margin.right,
-                height = 500 - margin.top - margin.bottom;
+            var margin = {top: 20, right: 20, bottom: 50, left: 120},
+                width = 700 - margin.left - margin.right,
+                height = 550 - margin.top - margin.bottom;
             
-            var arr = Object.keys(values).map(function (key) { return values[key]; });
-            var minval = Math.min.apply(null, arr);
-            var maxval = Math.max.apply(null, arr);
-            
-            //var xScale = d3.scaleLinear()
-                //.domain([minval, maxval])
-                //.rangeRound([0, 500]);
-                
-            var delta = (maxval - minval) / 5.0; // toFixed() for rounding it to int
-
+            var names = Object.keys(values);
+            var vals = Object.values(values);
 
             // set the ranges
             var y = d3.scaleBand()
@@ -591,21 +590,10 @@
 
             var x = d3.scaleLinear()
                       .range([0, width]);
-            
-            var domainArray = new Array();
-            for (i = minval + delta; i <= maxval; i+=delta){
-                domainArray.push(Number(i.toFixed(1)));
-            }
 
-            var x = d3.scaleLinear()
-                .range([0, width])
-                .domain([minval, maxval]);
-
-            var y = d3.scaleOrdinal()
-                .rangeRound([height, 0])
-                .domain(data.map(function (d) {
-                    return d.name;
-                }));
+            // Scale the range of the data in the domains
+            x.domain([0, 100])
+            y.domain(names);
 
             var svg = d3.select("#bigplot")
                 .append('svg')
@@ -613,43 +601,49 @@
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-                      
-            // append the svg object to the body of the page
-            // append a 'group' element to 'svg'
-            // moves the 'group' element to the top left margin
-            var svg = d3.select("body").append("svg")
-                .attr("width", width + margin.left + margin.right)
-
-
-              // format the data
-              data.forEach(function(d) {
-                d.sales = +d.sales;
-              });
-
-              // Scale the range of the data in the domains
-              x.domain([0, d3.max(data, function(d){ return d.sales; })])
-              y.domain(data.map(function(d) { return d.salesperson; }));
-              //y.domain([0, d3.max(data, function(d) { return d.sales; })]);
-
-              // append the rectangles for the bar chart
-              svg.selectAll(".bar")
-                  .data(data)
+                
+            // append the rectangles for the bar chart
+            svg.selectAll(".bar")
+                .data(names)
                 .enter().append("rect")
-                  .attr("class", "bar")
-                  //.attr("x", function(d) { return x(d.sales); })
-                  .attr("width", function(d) {return x(d.sales); } )
-                  .attr("y", function(d) { return y(d.salesperson); })
-                  .attr("height", y.bandwidth());
+                .attr("class", "bar")
+                .attr("y", function(d) { return y(d); })
+                .attr("height", y.bandwidth())
+                .on('mousemove', function(d){
+                    d3.select(this)
+                        .attr("class","bar-hover");
+                        
+                    tooltip.classed('hidden', false)
+						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
+						.html(d + ': ' + Number(values[d].toFixed(1)));
+                })
+                .on('mouseout', function(d){
+                    d3.select(this)
+                        .attr("class","bar");
+                    
+                    tooltip.classed('hidden', true);
+                })
+                .attr("width", function(d) {return x(0); } )
+                .transition()
+                .duration(500)
+                .attr("width", function(d) {return x(values[d]) });
 
-              // add the x Axis
-              svg.append("g")
-                  .attr("transform", "translate(0," + height + ")")
-                  .call(d3.axisBottom(x));
+            // add the x Axis
+            svg.append("g")
+              .attr("transform", "translate(0," + height + ")")
+              .call(d3.axisBottom(x));
 
-              // add the y Axis
-              svg.append("g")
-                  .call(d3.axisLeft(y));
-            
+            // add the y Axis
+            svg.append("g")
+              .call(d3.axisLeft(y));
+              
+            // text label for the x axis
+            svg.append("text")
+                .attr("class", "plotlabels")            
+                .attr("transform", "translate(" + (width/2) + " ," + 
+                                   (height + margin.top + 20) + ")")
+                .style("text-anchor", "middle")
+                .text("Percentage");
         }       
         
         

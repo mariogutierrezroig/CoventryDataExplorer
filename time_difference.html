@@ -55,7 +55,6 @@
         
         .mainrow {
 			width: 1200px;
-            height: 800px;
             display: flex;
             flex-flow: row wrap;
             justify-content: space-between;
@@ -64,7 +63,6 @@
         
         .leftpan {
             width: 400px;
-            height: 330px;
             vertical-align: top;
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
@@ -72,6 +70,12 @@
         
         .menu {
             margin-bottom: 14px;
+        }
+
+        .map {
+            width: 250px;
+            height: 250px;
+            vertical-align: top;
         }
         
         .question {
@@ -94,7 +98,6 @@
         
         .rightpan {
             width: 800px;
-            height: 330px;
             vertical-align: top;
             display: flex;
             flex-flow: row wrap;
@@ -125,14 +128,23 @@
         }
         
         .smallplot {
-            width: 250px;
-            height: 250px;
+            width: 400px;
+            height: 400px;
         }
         
         .bigplot {
             width: 500px;
             height: 500px;
             horizontal-align: center;
+        }
+
+        .bar {
+            fill: steelblue;
+        }
+        .bar-hover {
+            fill: steelblue;
+            stroke: black;
+            stroke-width: 2px;
         }
         
         div.tooltip {
@@ -202,7 +214,7 @@
             <h1>Coventry Data Explorer</h1>
             
             <div class='navmenu'>
-				<a href="./geographical_distribution.html" style="text-decoration: none; color: LightSteelBlue"> Geographical Distribution</a> | <a href="./differences_wards.html" style="text-decoration: none; color: LightSteelBlue">Differences in Wards</a> | <b>Correlations in Wards</b> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a> | <a href="./scenicness.html" style="text-decoration: none; color: LightSteelBlue">Scenicness</a>
+				<a href="./data_exploration.html" style="text-decoration: none; color: LightSteelBlue"> Data Exploration</a> | <b>Time Difference</b> | <a href="./differences_wards.html" style="text-decoration: none; color: LightSteelBlue">Correlation in Wards</a> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a> | <a href="./scenicness.html" style="text-decoration: none; color: LightSteelBlue">Scenicness</a>
 			</div>
             
             <div class='description'>
@@ -215,39 +227,47 @@
             <div id='leftpanel' class='leftpan'> 
                 <div id='leftmenu' class='menu'>
                     
-                    <p> Select a database </p>
+                    <p> Select two different time periods: </p>
                     
-                    <select id="leftdatasetselect" class="select">
+                    <select id="lefttimeselect" class="select">
                       <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
-                      <option value="Coventry_Census_2011_MSOA.json">ONS Census 2011</option>
-                      <option value="Coventry_Household_Survey_2016_MSOA.json">Household Survey 2016</option>
-                      <option value="Coventry_Household_Survey_2018_MSOA.json">Household Survey 2018</option>
+                      <option value="2016">2016</option>
+                      <option value="2018">2018</option>
+                    </select>
+
+                    <select id="righttimeselect" class="select">
+                      <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
+                      <option value="2016">2016</option>
+                      <option value="2018">2018</option>
                     </select>
                 
                 </div>
-                <div id='leftquestion' class='question'> </div>
-                <div id='leftanswers' class='answers'> </div>
+                <div id='question' class='question'> </div>
+                <div id='answers' class='answers'> </div>
             </div>
                 
             <div id='rightpanel' class='rightpan'>
                 <div id='displaymodebar' class='displaymodebar'>
                     
-                    <div>Display mode:</div>
-                    <form>
+                    <div>Group by:</div>
+                    <form id='displaygroup'>
                         <label class="radio-inline">
-                            <input type="radio" name="optradio" checked>by area
+                            <input type="radio" name="optradio" value="MSOA" onchange="radioChange()" checked>area
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="optradio">by gender
+                            <input type="radio" name="optradio" value="Gender" onchange="radioChange()">gender
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="optradio">by age
+                            <input type="radio" name="optradio" value="Age" onchange="radioChange()">age
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="optradio">by economic status
+                            <input type="radio" name="optradio" value="Economic Status" onchange="radioChange()">economic status
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="optradio">by ethnicity
+                            <input type="radio" name="optradio" value="Ethnicity" onchange="radioChange()">ethnicity
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Education" onchange="radioChange()">education
                         </label>
                     </form>
                 </div>
@@ -273,11 +293,11 @@
         MAP = {}   // General variable for ward objects
         DATA = {}  // General variable for csvtab object
         
-        var width = 500,
-            height = 500;
+        var width = 400,
+            height = 400;
          
         var projection = d3.geoAlbers()
-            .scale(160000)
+            .scale(120000)
             .rotate([0,0])
             .center([-1.49, 52.39])
             .translate([width/2,height/2.3]);
@@ -289,178 +309,111 @@
             .append('div')
             .attr('class', 'hidden tooltip');
         
-        var leftselect = d3.select('#leftdatasetselect')
+        var leftselect = d3.select('#lefttimeselect')
             .on('change', function(d){
-                change_dataset("left");
+                CheckboxUpdate("left");
             });
         
-        var rightselect = d3.select('#rightdatasetselect')
+        var rightselect = d3.select('#righttimeselect')
             .on('change', function(d){
-                change_dataset("right");
+                CheckboxUpdate("right");
             });
+        
+        start();
 
-        function change_dataset(side) {
-
+        function start() {
+            
             // Remove previous question and checkboxes
             d3.select("#questionselect").remove();
             d3.select("#question_p").remove();
             d3.select("#question").selectAll("*").remove();
             d3.select("#answers").selectAll("*").remove();
             
-            var leftvalues = d3.select("#leftdatasetselect").property('value');
-            var rightvalues = d3.select("#leftdatasetselect").property('value');
-            
-            // Fix this!!
-            ssadf/aksndagdsn
-            
-            datapathleft = './Data/'.concat(leftvalues);
-            datapathright = './Data/'.concat(rightvalues);
-            
             // Loading data in this way prevents from ploting anything before loading finishes
             d3.queue()
                 .defer(d3.json, './Map/coventry_msoa.geojson')
-                .defer(d3.json, datapathleft)
-                .defer(d3.json, datapathright)
-                .await(function(error, map, dataleft, dataright){
+                .defer(d3.json, './Data/Coventry_Household_Survey_2016_2018.json')
+                .await(function(error, map, data){
                     if (error) throw error;
             
                     // Assigning values to general variables, otherwise updating doesn't work
                     MAP = map;
-                    DATA[side] = data;
+                    DATA = data;
                                         
-                    d3.select("#" + side + "menu")
+                    d3.select("#leftmenu")
 						.append('p')
-                        .attr('id', side + "question_p")
+                        .attr('id', "question_p")
                         .text('Select a question')
                     
                     /* Adds Features Menu */
 
-					var options = d3.select("#" + side + "menu")
+					var options = d3.select("#leftmenu")
 						.append('select')
-                        .attr('id', side + "questionselect")
+                        .attr('id', "questionselect")
 						.attr('class','select')
-						.on('change',function (d) { change_question(side); return d; })
+						.on('change',function (d) { change_question(); return d; })
 						.selectAll('option')
-						.data(Object.keys(DATA[side]))
+						.data(Object.keys(DATA))
 						.enter()
 						.append('option')
-						.text(function (d) { return DATA[side][d]["Topic"]; })
+						.text(function (d) { return DATA[d]["Topic"]; })
                         .attr('value',function (d) { return d; });
             
                 });
         }
         
-        function change_question(side) {
-                        
-            var qvalue = d3.select("#" + side + "questionselect").property('value');
+        function change_question() {
+            
+            var qvalue = d3.select('#questionselect').property('value');
                                     
             // Remove previous question and checkboxes
-            d3.select("#" + side + "question").selectAll("*").remove();
-            d3.select("#" + side + "answers").selectAll("*").remove();
+            d3.select("#question").selectAll("*").remove();
+            d3.select("#answers").selectAll("*").remove();
                     
             /* Appends Questions */
-            d3.select("#" + side + "question")
+            d3.select("#question")
                 .append("div")
                 //.attr("class", "questpan")
-                .text(DATA[side][qvalue]["Question"]);
+                .text(DATA[qvalue]["Question"]);
             
             /* Adds the answers */
 
-            var answers = Object.keys(DATA[side][qvalue]["Answers"]); // Get the column names of csv
+            var answers = Object.keys(DATA[qvalue]["Answers"]); // Get the column names of csv
+            
+            console.log(answers);
             
             /* Adds Checkboxes */
             
             answers.forEach(function(d,i) {
                 // Append the checkboxes
-                d3.select("#" + side + "answers")
+                d3.select("#answers")
                     .append("div")
                     .append("label")
-                    .attr("id", side + "answer" + i)
+                    .attr("id", "answer" + i)
                     .append("input")
                     .attr("type", "checkbox")
                     .attr("class", "mapCheckbox")
                     .attr("value", d)
                     .on("change", function(d){ 
-                        CheckboxUpdate(side);
-                        plotscatterplot();
+                        CheckboxUpdate("left");
+                        CheckboxUpdate("right");
                     });
                     
                 // Append the text
-                d3.select("#" + side + "answer" + i)
+                d3.select("#answer" + i)
                     .append("text")
-                    .text(d);
+                    .text(DATA[qvalue]["Answers"][d]["Text"]);
             });
 
-            d3.select("#scatterplot").selectAll("*").remove();  // Remove previous objects
-            d3.select("#analysisbox").selectAll("*").remove();  // Remove previous objects
-            plotmapnull(MAP, side); // Plots the initial null map in the left
+            CheckboxUpdate("left");
+            CheckboxUpdate("right");
             
         };
 
-        function menuchange(side) {
-                        
-            var values = d3.select("#" + side + "select").property('value');
-            csvpath = './Data/Census/Tables/'.concat(values, '.csv');
-            questionpath = './Data/Census/Questions/'.concat(values, '.txt');
-                        
-            // Remove previous question and checkboxes
-            d3.select("#" + side + "question").selectAll("*").remove();
-            d3.select("#" + side + "answers").selectAll("*").remove();
-            
-            // Loading data in this way prevents from ploting anything before loading finishes
-            d3.queue()
-                .defer(d3.json, './Map/coventry_wards.topojson')
-                .defer(d3.csv, csvpath)
-                .defer(d3.text, questionpath)
-                .await(function(error, wards, csvtab, questiontext){
-                    if (error) throw error;
-            
-                    // Assigning values to general variables, otherwise updating doesn't work
-                    WARDS = wards;
-                    CSVTAB[side] = csvtab;
-                    QUESTION[side] = questiontext;
-                    
-                    /* Appends Questions */
-                    d3.select("#" + side + "question")
-                        .append("div")
-                        //.attr("class", "questpan")
-                        .text(QUESTION[side]);
-                    
-                    /* Adds the answers */
-                    var answers = d3.keys(CSVTAB[side][0]); // Get the column names of csv
-                    answers.remove('name', true); // Remove the element "name"
-                    answers.remove('code', true); // Remove the element "code"
-                    
-                    /* Adds Checkboxes */
-                    
-                    answers.forEach(function(d,i) {
-                        // Append the checkboxes
-                        d3.select("#" + side + "answers")
-                            .append("div")
-                            .append("label")
-                            .attr("id", side + "answer" + i)
-                            .append("input")
-                            .attr("type", "checkbox")
-                            .attr("class", "mapCheckbox")
-                            .attr("value", d)
-                            .on("change", function(d){ 
-                                CheckboxUpdate(WARDS, CSVTAB[side], side);
-                                plotscatterplot();
-                            });
-                            
-                        // Append the text
-                        d3.select("#" + side + "answer" + i)
-                            .append("text")
-                            .text(d);
-                    });
-
-                    d3.select("#scatterplot").selectAll("*").remove();  // Remove previous objects
-                    d3.select("#analysisbox").selectAll("*").remove();  // Remove previous objects
-                    plotmapnull(WARDS, side); // Plots the initial null map in the left
-            
-                });
-
-        };
+        function radioChange() {
+            CheckboxUpdate("left");
+            CheckboxUpdate("right");
+        }
         
         // Function that move object to front in order to avoid plotting border issues
         d3.selection.prototype.moveToFront = function() {
@@ -749,30 +702,124 @@
                 });
         }
 
+         // Updates the map according to checked boxes
+        function barchart(values, legendtext, side){
+            
+            d3.select("#" + side + "plot").selectAll("*").remove();  // Remove previous objects
+            
+            /* Domain and Colors */
+
+            // set the dimensions and margins of the graph
+            var margin = {top: 20, right: 20, bottom: 30, left: 70},
+                width = 400 - margin.left - margin.right,
+                height = 300 - margin.top - margin.bottom;
+            
+            var names = Object.keys(values);
+            var vals = Object.values(values);
+
+            // set the ranges
+            var y = d3.scaleBand()
+                      .range([height, 0])
+                      .padding(0.1);
+
+            var x = d3.scaleLinear()
+                      .range([0, width]);
+
+            // Scale the range of the data in the domains
+            x.domain([0, 100])
+            y.domain(names);
+
+            var svg = d3.select("#" + side + "plot")
+                .append('svg')
+                .attr('class', 'plot')
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                
+            // append the rectangles for the bar chart
+            svg.selectAll(".bar")
+                .data(names)
+                .enter().append("rect")
+                .attr("class", "bar")
+                .attr("y", function(d) { return y(d); })
+                .attr("height", y.bandwidth())
+                .on('mousemove', function(d){
+                    d3.select(this)
+                        .attr("class","bar-hover");
+                        
+                    tooltip.classed('hidden', false)
+						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
+						.html(d + ': ' + Number(values[d].toFixed(1)));
+                })
+                .on('mouseout', function(d){
+                    d3.select(this)
+                        .attr("class","bar");
+                    
+                    tooltip.classed('hidden', true);
+                })
+                .attr("width", function(d) {return x(0); } )
+                .transition()
+                .duration(500)
+                .attr("width", function(d) {return x(values[d]) });
+
+            // add the x Axis
+            svg.append("g")
+              .attr("transform", "translate(0," + height + ")")
+              .call(d3.axisBottom(x));
+
+            // add the y Axis
+            svg.append("g")
+              .call(d3.axisLeft(y));
+              
+            // text label for the x axis
+            svg.append("text")
+                .attr("class", "plotlabels")            
+                .attr("transform", "translate(" + (width/2) + " ," + 
+                                   (height + margin.top + 20) + ")")
+                .style("text-anchor", "middle")
+                .text("Percentage");
+        }     
+
         // Updates the map according to checked boxes
         function CheckboxUpdate(side){
+            
+            var time = d3.select("#" + side + "timeselect").property('value');
+            var group = d3.select('input[name="optradio"]:checked').node().value;
 
             var paneltoplot = "#" + side + "map";
-            var valuestoplot = computevalues(side);
+            var valuestoplot = computevalues(group,time);
             
+
             if (Object.keys(valuestoplot).length == 0)
             {
-                plotmapnull(MAP,side); // Plots the map again
+                if (group == "MSOA")
+                {
+                    plotmapnull(MAP,side); // Plots the map again
+                }
+                else
+                {
+                    d3.select("#bigplot").selectAll("*").remove();
+                }
             }
             else
-            {                
-                plotmap(MAP, valuestoplot, "Percentage",side); // Plots the map again
+            {
+                if (group == "MSOA")
+                {
+                    plotmap(MAP, valuestoplot, "Percentage", side); // Plots the map again
+                }
+                else
+                {
+                    barchart(valuestoplot, "Percentage", side);
+                }
             }
         }
         
         // Looks which checkboxes are selected and returns the corresponding data
-        function computevalues(side){
-            
-            var paneltolook = "#" + side + "panel";
+        function computevalues(group,time){
             
             var choices = [];
             
-            d3.select(paneltolook)
+            d3.select("#leftpanel")
                 .selectAll(".mapCheckbox")
                 .each(function(d){
                     cb = d3.select(this);
@@ -780,18 +827,19 @@
                         choices.push(cb.property("value"));
                 }
             });
-            
-            var qvalue = d3.select("#" + side + "questionselect").property('value');
+
+            var qvalue = d3.select('#questionselect').property('value');
             
             var valuestoplot = {};
 
             choices.forEach(function(c) {
-                var keys = Object.keys(DATA[side][qvalue]["Answers"][c]);
+                var keys = Object.keys(DATA[qvalue]["Answers"][c][group][time]);
+
                 keys.forEach(function(k) {
                     if (k in valuestoplot) {
-                        valuestoplot[k] += Number(DATA[side][qvalue]["Answers"][c][k]);
+                        valuestoplot[k] += Number(DATA[qvalue]["Answers"][c][group][time][k]);
                     } else {
-                        valuestoplot[k] = Number(DATA[side][qvalue]["Answers"][c][k]);
+                        valuestoplot[k] = Number(DATA[qvalue]["Answers"][c][group][time][k]);
                     }
                 });
             });

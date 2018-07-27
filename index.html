@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Coventry Data Explorer: Visual Landscape</title>
+    <title>Coventry Data Explorer: Exploration</title>
     
     <style>
         
@@ -14,8 +14,9 @@
 			width: 1200px;
             background-color: navy;
             padding-bottom: 20px;
+            margin-top : 0px;
 		}
-        
+
         h1 {
             text-align: center;
 			font-size: 60px;
@@ -55,7 +56,6 @@
         
         .mainrow {
 			width: 1200px;
-            height: 600px;
             display: flex;
             flex-flow: row wrap;
             justify-content: space-between;
@@ -63,23 +63,42 @@
 		}
         
         .leftpan {
-            width: 600px;
-            height: 400px;
+            width: 500px;
             vertical-align: top;
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
         }
-        
+
         .rightpan {
-            width: 600px;
-            height: 400px;
+            width: 700px;
             vertical-align: top;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: flex-start;
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
+        }
+        
+        .displaymodebar {
+            width: 800px;
+            height: 50px;
+            
+        }
+        
+        .radio-inline {
+            width: auto;
+            vertical-align: center;
+        }
+        
+        .bigplot {
+            width: 700px;
+            horizontal-align: center;
         }
         
         div.bottompan {
             width: 1200px;
+            height: 600px;
             display: flex;
             flex-flow: row wrap;
             justify-content: space-between;
@@ -90,40 +109,49 @@
             margin-bottom: 14px;
         }
         
-        .icon {
-            width: 20px;
-            height: 30px;
-            vertical-align: top;
-        }
-        .map {
-            width: 600px;
-            height: 400px;
-            vertical-align: top;
+        .question {
+            font-size: 14px;
+            font-family: "Helvetica", Georgia, Serif;
+            line-height: 16px;
+            margin-bottom: 14px;
+            margin-right: 40px;
         }
         
-        .winfo {
-            height: 50px;
-            font-size: 30px;
+        .answers {
+            font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
-            font-weight: bold;
-            margin-left: 5px;
-            flex-flow: row wrap;
-            justify-content: space-between;
-            align-items: flex-start;
+            line-height: 16px;
+            margin-bottom: 20px;
+            margin-right: 40px;
+            height: 400px;
+            overflow-y: auto;
+        }
+        
+        .map {
+            width: 800px;
+            height: 550px;
+            vertical-align: top;
+        }
+
+        .bar {
+            fill: steelblue;
+        }
+        .bar-hover {
+            fill: steelblue;
+            stroke: black;
+            stroke-width: 2px;
         }
         
         .plot {
-            width: 400px;
-            height: 400px;
+            width: 700px;
+            height: 550px;
             margin-top: 50px;
         }
         
         div.tooltip {
-            font-size: 14px;
-            font-family: "Helvetica", Georgia, Serif;
             color: #222;
-            background-color: white;
-            padding: 10px;
+            background-color: #fff;
+            padding: .5em;
             text-shadow: #f5f5f5 0 1px 0;
             border-radius: 2px;
             opacity: 0.9;
@@ -148,20 +176,14 @@
             z-index: 10000;
         }
         
-        .plotlabels{
+        .mapCheckbox{
+            vertical-align: center;
             font-size: 16px;
             font-family: "Helvetica", Georgia, Serif;
+            cursor: pointer;
         }
         
-        .bar1{
-			fill: steelblue;
-		}
-		
-		.bar2{
-			fill: orange;
-		}
-        
-        .legendtext {
+        .plotlabels{
             font-size: 16px;
             font-family: "Helvetica", Georgia, Serif;
         }
@@ -173,7 +195,7 @@
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
             text-align: center;
-            padding: 2px;
+            padding-top: 2px;
             color: white;
 		}
         
@@ -194,127 +216,198 @@
             <h1>Coventry Data Explorer</h1>
             
             <div class='navmenu'>
-				<a href="./geographical_distribution.html" style="text-decoration: none; color: LightSteelBlue"> Geographical Distribution</a> | <a href="./differences_wards.html" style="text-decoration: none; color: LightSteelBlue">Differences in Wards</a> | <a href="./correlation.html" style="text-decoration: none; color: LightSteelBlue">Correlation in Wards</a> | <b>Visual Landscape</b> | <a href="./scenicness.html" style="text-decoration: none; color: LightSteelBlue">Scenicness</a>
+				<b> Data Exploration</b> | <a href="./time_difference.html" style="text-decoration: none; color: LightSteelBlue">Time Difference</a> | <a href="./correlation.html" style="text-decoration: none; color: LightSteelBlue">Correlations in Wards</a> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a> | <a href="./scenicness.html" style="text-decoration: none; color: LightSteelBlue">Scenicness</a>
 			</div>
             
             <div class='description'>
-                <p>Here you can explore the visual landscape of Coventry, generated with the same methodology used in <a href="https://datasciencelab.co.uk/publications/"> this article</a>. The map is generated from extracting visual features using a Machine Learning algorithm, called <a href="http://places.csail.mit.edu/">Places</a> and developed by MIT. The images were downloaded from <a href="https://www.google.com/streetview/#"> Google Street View</a> pictures across the different wards of Coventry. All plots are interactive, so feel free to hover and click in order to discover Coventry wards' visual DNA. </p>
+                <p>You can explore the geographical distribution across Coventry wards of different demographic and socio-economic indicators compiled in the UK ONS census, Household Surveys and Indigo Audience Data. You can select on the left menu the multiple topics and questions. Corresponding possible answers will appear beneath and by ticking them the map on the right will show its geographical distribution. You can also multiple tick answer boxes so the values will be aggregated.</p>
             </div>
         
         </div>
         
         <div id='row-main' class="mainrow">
-            <div id='leftpanel' class='leftpan'>
+            <div id='leftpanel' class='leftpan'> 
+                <div id='leftmenu' class='menu'>
+                    <p> Select a database </p>
+                    
+                    <select id="datasetselect" class="select">
+                      <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
+<!--
+                      <option value="Coventry_Census_2011_MSOA.json">ONS Census 2011</option>
+-->
+                      <option value="Coventry_Household_Survey_2016.json">Household Survey 2016</option>
+                      <option value="Coventry_Household_Survey_2018.json">Household Survey 2018</option>
+                    </select>
                 
-                <div id='featuremenu'>  
-                    <p> Select Visual Feature: </p>
+                </div>
+                <div id='question' class='question'> </div>
+                <div id='answers' class='answers'> </div>
+            </div>
+            
+            <div id='rightpanel' class='rightpan'>
+                <div id='displaymodebar' class='displaymodebar'>
+                    
+                    <div>Group by:</div>
+                    <form id='displaygroup'>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="MSOA" onchange="radioChange()" checked>area
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Gender" onchange="radioChange()">gender
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Age" onchange="radioChange()">age
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Economic Status" onchange="radioChange()">economic status
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Ethnicity" onchange="radioChange()">ethnicity
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Education" onchange="radioChange()">education
+                        </label>
+                    </form>
                 </div>
                 
-                <div> <p> Select Ward in the map: </p> </div>
+                <div id='bigplot' class='bigplot'> </div>
                 
-                <div id='wardinfo' class='info'>  </div>
-                
-                <div id='sun102plot'>  </div>
-                
-                
-            </div>
-
-            <div id='rightpanel' class='rightpan'>
-                
-                <div id='map'>  </div>
-
-            </div>
-            <div id='bottompanel' class='bottompan'>
-				
-				<div id='places205plot'> </div>
-				
             </div>
         </div>
         
         <div id='credits' class='credcls'>
-            <p> Visualization by <a href="http://datasciencelab.co.uk/people/mario-gutierrez-roig/" style="text-decoration: none; color: SkyBlue">Mario Guti&#233;rrez-Roig</a> from <a href="http://datasciencelab.co.uk/" style="text-decoration: none; color: SkyBlue">WBS Data Science Lab</a>. Code available on <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer" style="text-decoration: none; color: SkyBlue">github</a> </p>
-        </div>
+            <p> Visualization by <a href="http://datasciencelab.co.uk/people/mario-gutierrez-roig/" style="text-decoration: none; color: SkyBlue">Mario Guti&#233;rrez-Roig</a> and <a href="http://datasciencelab.co.uk/people/federico-botta/" style="text-decoration: none; color: SkyBlue">Federico Botta</a> from <a href="http://datasciencelab.co.uk/" style="text-decoration: none; color: SkyBlue">WBS Data Science Lab</a>. Code available on <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer" style="text-decoration: none; color: SkyBlue">github</a> </p>
     
     </div>
     
     <script>
         
-        WARDS = {}   // General variable for ward objects
-        CSVTAB = {}  // General variable for csvtab object
-        QUESTION = {}  // General variable for question object
+        MAP = {}   // General variable for map objects
+        DATA = {}  // General variable for csvtab object
         
         var width = 500,
-            height = 400;
-            
+            height = 500;
+         
         var projection = d3.geoAlbers()
-			.rotate([0,0])
-			.center([-1.49, 52.39])
-			//.parallels([-23, -24])
-			.scale(200000)
-			.translate([width / 1.5, height / 1.4]);
+            .scale(260000)
+            .rotate([0,0])
+            .center([-1.55, 52.42])
+            .translate([width/2,height/2.2]);
          
         var geoPath = d3.geoPath()
             .projection(projection);
   
-        var tooltip = d3.select('#row-main')
+        var tooltip = d3.select('#rightpanel')
             .append('div')
             .attr('class', 'hidden tooltip');
         
-        /*
-        var rightselect = d3.select('#rightselect')
+        var dataset = d3.select('#datasetselect')
             .on('change', function(d){
-                menuchange("right");
+                change_dataset();
             });
-		*/
-		
-        function start() {
-                        
-            csvpath = './Data/Visual/Coventry_Wards_features.csv';
+        
+        d3.queue()
+            .defer(d3.json, './Map/coventry_msoa.geojson')
+            //.defer(d3.json, './Map/coventry_wards.geojson')
+            //.defer(d3.json, './Map/coventry_wards.topojson')
+            .await(function(error, wards){
+                if (error) throw error;
+                plotmapnull(wards);
+            });
+        
+        function change_dataset() {
+
+            // Remove previous question and checkboxes
+            d3.select("#questionselect").remove();
+            d3.select("#question_p").remove();
+            d3.select("#question").selectAll("*").remove();
+            d3.select("#answers").selectAll("*").remove();
+            
+            var values = d3.select("#datasetselect").property('value');
+
+            datapath = './Data/'.concat(values);
             
             // Loading data in this way prevents from ploting anything before loading finishes
             d3.queue()
-                .defer(d3.json, './Map/coventry_wards.json')
-                .defer(d3.csv, csvpath)
-                .await(function(error, wards, csvtab){
+                .defer(d3.json, './Map/coventry_msoa.geojson')
+                .defer(d3.json, datapath)
+                .await(function(error, map, data){
                     if (error) throw error;
             
                     // Assigning values to general variables, otherwise updating doesn't work
-                    WARDS = wards;
-                    //CSVTAB = csvtab;
-                    
-                    features = Object.keys(csvtab[1])
-                    features.shift();
-                    
-                    csvtab.forEach(function(d) {
-                        var key = d.code;
-                         
-                        aux = {}
-                        features.forEach(function(e) {
-                            aux[e] = d[e];
-                        });
-                        
-                        CSVTAB[key]=aux;
-                    });
+                    MAP = map;
+                    DATA = data;
+                                        
+                    d3.select('#leftmenu')
+						.append('p')
+                        .attr('id','question_p')
+                        .text('Select a question')
                     
                     /* Adds Features Menu */
 
-					var options = d3.select('#featuremenu')
+					var options = d3.select('#leftmenu')
 						.append('select')
+                        .attr('id','questionselect')
 						.attr('class','select')
-						.on('change',function (d) { featchange(); return d; })
+						.on('change',function (d) { change_question(); return d; })
 						.selectAll('option')
-						.data(features)
+						.data(Object.keys(DATA))
 						.enter()
 						.append('option')
-						.text(function (d) { return d; });
-
-                    plotmapnull(WARDS); // Plots the initial null map in the left
+						.text(function (d) { return DATA[d]["Topic"]; })
+                        .attr('value',function (d) { return d; });
             
                 });
+        }
 
+        function change_question() {
+            
+            var qvalue = d3.select('#questionselect').property('value');
+                                    
+            // Remove previous question and checkboxes
+            d3.select("#question").selectAll("*").remove();
+            d3.select("#answers").selectAll("*").remove();
+                    
+            /* Appends Questions */
+            d3.select("#question")
+                .append("div")
+                //.attr("class", "questpan")
+                .text(DATA[qvalue]["Question"]);
+            
+            /* Adds the answers */
+
+            var answers = Object.keys(DATA[qvalue]["Answers"]); // Get the column names of csv
+            
+            /* Adds Checkboxes */
+            
+            answers.forEach(function(d,i) {
+                // Append the checkboxes
+                d3.select("#answers")
+                    .append("div")
+                    .append("label")
+                    .attr("id", "answer" + i)
+                    .append("input")
+                    .attr("type", "checkbox")
+                    .attr("class", "mapCheckbox")
+                    .attr("value", d)
+                    .on("change", function(d){ 
+                        CheckboxUpdate();
+                    });
+                    
+                // Append the text
+                d3.select("#answer" + i)
+                    .append("text")
+                    .text(DATA[qvalue]["Answers"][d]["Text"]);
+            });
+
+            CheckboxUpdate();
+            
         };
         
-        start();
+        // Function triggered when radio changes
+        function radioChange() {
+            CheckboxUpdate()
+        }
         
         // Function that move object to front in order to avoid plotting border issues
         d3.selection.prototype.moveToFront = function() {
@@ -334,28 +427,13 @@
             }
             return this;
         }
-        
-        // Activated when feature selected is changed
-        function featchange() {
-            selectValue = d3.select('select').property('value')
-            
-            var values = {}
-            
-            Object.keys(CSVTAB).map(function(key, index) {
-                var ward = CSVTAB[key];
-                var val = ward[selectValue];
-                values[key] = Number(val);
-            });
-            
-            plotmap(WARDS, values);
-        };
 
         // Plots the map
-        function plotmap(patches, values) {
+        function plotmap(patches, values, legendtext) {
             
-            d3.select("#map").selectAll("*").remove();  // Remove previous objects
+            d3.select("#bigplot").selectAll("*").remove();  // Remove previous objects
             
-            var svgelement = d3.select("#map")
+            var svgelement = d3.select("#bigplot")
                 .append('svg')
                 .attr('class', 'map');
             
@@ -365,148 +443,107 @@
             var minval = Math.min.apply(null, arr);
             var maxval = Math.max.apply(null, arr);
             
-            var yScale = d3.scaleLinear()
+            var xScale = d3.scaleLinear()
                 .domain([minval, maxval])
-                .rangeRound([300, 0]);
+                .rangeRound([0, 500]);
                 
-            var delta = (maxval - minval) / 7.0; // toFixed() for rounding it to int
+            var delta = (maxval - minval) / 5.0; // toFixed() for rounding it to int
             
             var domainArray = new Array();
             for (i = minval + delta; i <= maxval; i+=delta){
-                domainArray.push(Number(i.toFixed(5)));
+                domainArray.push(Number(i.toFixed(1)));
             }
 
             var color = d3.scaleThreshold()
                 .domain(domainArray)
-                //.range(["#ffffcc", "#a1dab4", "#41b6c4", "#2c7fb8", "#253494"]);
-                .range(["#ffffcc", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#0c2c84"]);
-                //.range(["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#0c2c84"]);                
+                .range(["#ffffcc", "#a1dab4", "#41b6c4", "#2c7fb8", "#253494"]);
+                //.range(["#ffffcc", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#0c2c84"]);
+                //.range(["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#0c2c84"]);
             
             /* Map */
             
 			svgelement.append("g")
                 .selectAll("path")
-                .data(topojson.feature(patches, patches.objects.cov).features)
+                .data(patches.features)
                 .enter()
                 .append("path")
                 .attr( "d", geoPath )
                 .attr("class","incident")
                 .attr("id", function(d) {return d.properties.code})
-                //.style("fill", function(d) {
-				//	return color(values[d.properties.code]); // get rate value for property matching data ID
+                .style("fill", function(d) {
+					return color(values[d.properties.code]); // get rate value for property matching data ID
 					// pass rate value to color function, return color based on domain and range
-				//})
+				})
 				.on('mouseover', function(d){
-                    d3.select(this).moveToFront()
-                        .attr("class","hover")
-                        .style("cursor", "pointer");
+                    d3.select(this).moveToFront().attr("class","hover");
                 })
                 .on('mousemove', function(d){
                     tooltip.classed('hidden', false)
 						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
-						.html(d.properties.name + ': ' + Number(values[d.properties.code].toFixed(5)));                    
+						.html(d.properties.name + ': ' + Number(values[d.properties.code].toFixed(1)));
                 })
                 .on('mouseout', function(d){
                     tooltip.classed('hidden', true);
-                    d3.select(this)
-                        .attr("class","incident")
-                        .style("cursor", "default");
-                })
-                .on('click', function(d){
-                    plotbarchart(d.properties.code, d.properties.name);
-                    tooltip.classed('hidden', false)
-                })
-                .style("fill", "white")
-                .transition()
-                .duration(200)
-                .delay(function (d, i) {
-                    var r = d3.randomNormal(15, 5)().toFixed(0)
-                    return i * r;
-                })
-                .style("fill", function(d) {
-                    return color(values[d.properties.code]);
+                    d3.select(this).attr("class","incident");
                 });
                 
-            /* Legend */
-            
-            // Colorbar
-            svgelement.append("g")
-                .attr("class", "key")
-                .attr("transform", "translate(500, 65)")
-                .selectAll("rect")
-                .data(color.range().map(function(d) {
-                    d = color.invertExtent(d);
-                    if (d[0] == null) d[0] = yScale.domain()[0];
-                    if (d[1] == null) d[1] = yScale.domain()[1];
-                    return d;
-                }))
-                .enter()
-                .append("rect")
-                .attr("width", 8)
-                .attr("y", function(d) { return yScale(d[1]); })
-                .attr("height", function(d) { return yScale(d[0]) - yScale(d[1]); })
-                .attr("fill", function(d) { return color(d[0]); })
-                .attr("opacity", "0.7");
-            
-            // Caption
-            svgelement.append("g")
-                .attr("class", "key")
-                .attr("transform", "translate(500, 65)")
-                .append("text")
-                .attr("class", "caption")
-                .attr("x", -40)
-                .attr("y", yScale.range()[1] - 25)
-                .attr("fill", "#000")
-                .attr("text-anchor", "start")
-                .attr("font-weight", "bold")
-                .attr("font-family", "Helvetica")
-                .text("Feature Value");
-
-            // Ticks
-            svgelement.append("g")
-                .attr("class", "key")
-                .attr("transform", "translate(500, 65)")
-                .call(d3.axisRight(yScale)
-                .tickSize(13)
-                .tickFormat(function(yScale, i) { return i ? yScale : yScale; })
-                .tickValues(color.domain()))
-                .select(".domain")
-                .remove();
+                /* Legend */
+                
+                svgelement.append("g")
+                    .attr("class", "key")
+                    .attr("transform", "translate(80,510)")
+                    .selectAll("rect")
+                    .data(color.range().map(function(d) {
+                        d = color.invertExtent(d);
+                        if (d[0] == null) d[0] = xScale.domain()[0];
+                        if (d[1] == null) d[1] = xScale.domain()[1];
+                        return d;
+                    }))
+                    .enter().append("rect")
+                    .attr("height", 8)
+                    .attr("x", function(d) { return xScale(d[0]); })
+                    .attr("width", function(d) { return xScale(d[1]) - xScale(d[0]); })
+                    .attr("fill", function(d) { return color(d[0]); })
+                    .attr("opacity", "0.7");
                     
-            /* Interactive Icon */
-            
-            d3.select(".map")
-                .append("image")
-                .attr("width", "24px")
-                .attr("height", "36px")
-                .attr("x", 15)
-                .attr("y", 15)
-                .attr("xlink:href","./Images/Interactive_icon.png")
-                .on('mousemove', function(d){
-                    tooltip.classed('hidden', false)
-						.attr('style', 'left:' + (d3.event.pageX + 5) +  'px; top:' + (d3.event.pageY - 0) + 'px')
-                        .style("width", "220")
-						.html("This is an interactive plot. Hover the wards of Coventry to display its name and feature value and click on them to plot their visual DNA.");                    
-                })
-                .on('mouseout', function(d){
-                    tooltip.classed('hidden', true);
-                });
+                svgelement.append("g")
+                    .attr("class", "key")
+                    .attr("transform", "translate(80,510)")
+                    .append("text")
+                    .attr("class", "caption")
+                    .attr("x", xScale.range()[0])
+                    .attr("y", -6)
+                    .attr("fill", "#000")
+                    .attr("text-anchor", "start")
+                    .attr("font-weight", "bold")
+                    .attr("font-family", "Helvetica")
+                    .text(legendtext);
+
+                svgelement.append("g")
+                    .attr("class", "key")
+                    .attr("transform", "translate(80,510)")
+                    .call(d3.axisBottom(xScale)
+                    .tickSize(13)
+                    .tickFormat(function(xScale, i) { return i ? xScale : xScale; })
+                    .tickValues(color.domain()))
+                    .select(".domain")
+                    .remove();
         }
         
         // Plots the map if there is no choice selected
-        function plotmapnull(patches) {                
+        function plotmapnull(patches) {
             
-            d3.select("#map").selectAll("*").remove();  // Remove previous objects
+            d3.select("#bigplot").selectAll("*").remove();  // Remove previous objects
             
-            var svg = d3.select("#map")
+            var svgelement = d3.select("#bigplot")
                 .append('svg')
                 .attr('class', 'map');
             
             /* Map */
             
-			svg.append("g")
+			svgelement.append("g")
                 .selectAll("path")
-                .data(topojson.feature(patches, patches.objects.cov).features)
+                .data(patches.features)
                 .enter()
                 .append("path")
                 .attr("d", geoPath)
@@ -515,312 +552,167 @@
 				.on('mouseover', function(d){
                     d3.select(this)
                         .moveToFront()
-                        .style("fill","steelblue")
-                        .style("cursor", "pointer");
+                        .style("fill","steelblue");
                 })
                 .on('mousemove', function(d){
                     tooltip.classed('hidden', false)
-						.attr('style', 'left:' + (d3.event.pageX + 5) +  'px; top:' + (d3.event.pageY - 50) + 'px')
-						.html(d.properties.name);                    
+						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
+						.html(d.properties.name);
                 })
                 .on('mouseout', function(d){
                     d3.select(this)
                         .attr("class","incident")
-                        .style("fill", "#e5e5e5")
-                        .style("cursor", "default");
+                        .style("fill", "#e5e5e5");
                     
-                    tooltip.classed('hidden', true);
-                })
-                .on('click', function(d){
-                    plotbarchart(d.properties.code, d.properties.name);
-                    tooltip.classed('hidden', false)
-                });
-                
-            
-            /* Interactive Icon */
-            
-            d3.select(".map")
-                .append("image")
-                .attr("width", "24px")
-                .attr("height", "36px")
-                .attr("x", 15)
-                .attr("y", 15)
-                .attr("xlink:href","./Images/Interactive_icon.png")
-                .on('mousemove', function(d){
-                    tooltip.classed('hidden', false)
-						.attr('style', 'left:' + (d3.event.pageX + 5) +  'px; top:' + (d3.event.pageY - 0) + 'px')
-                        .style("width", "220")
-						.html("This is an interactive plot. Hover the wards of Coventry to display its name and feature value and click on them to plot their visual DNA.");                    
-                })
-                .on('mouseout', function(d){
                     tooltip.classed('hidden', true);
                 });
         }
-        
-        function plotbarchart(code, name) {
-			
-			d3.select("#wardinfo").selectAll("*").remove();  // Remove previous objects
+ 
+         // Updates the map according to checked boxes
+        function barchart(values, legendtext){
+
+            d3.select("#bigplot").selectAll("*").remove();  // Remove previous objects
             
-            d3.select("#wardinfo")
-                .append("svg")
-                .attr("width", "24px")
-                .attr("height", "36px")
-                .style("margin-right","20")
-                .style("margin-top","5")
-                .append("image")
-                .attr("width", "24px")
-                .attr("height", "36px")
-                .attr("xlink:href","./Images/Interactive_icon.png")
-                .on('mousemove', function(d){
-                    tooltip.classed('hidden', false)
-						.attr('style', 'left:' + (d3.event.pageX + 5) +  'px; top:' + (d3.event.pageY - 110) + 'px')
-                        .style("width", "220")
-						.html("This is an interactive plot. Hover the histogram bars to display the feature and click on them to plot the selected feature on the map");                    
-                })
-                .on('mouseout', function(d){
-                    tooltip.classed('hidden', true);
-                });
-			
-			d3.select("#wardinfo")
-                .attr("class", "winfo")
-				.append("text")
-				.text(name)
-                .on('mouseover', function(d){
-                    d3.select(this).style("text-decoration", "underline");
-                    d3.selectAll("#" + code).moveToFront().attr("class","hover");
-                })
-                .on('mouseout', function(d){
-                    d3.select(this).style("text-decoration", "none");
-                    d3.selectAll("#" + code).moveToFront().attr("class","incident");
-                });
-			
-			/* Places205 Feature Map */
-			
-			var places205labels = Object.keys(CSVTAB[code]).slice(0,206);
-			var places205values = Object.values(CSVTAB[code]).map(Number).slice(0,206);
-			
-			// set the dimensions and margins of the graph
-			var margin = {top: 20, right: 20, bottom: 30, left: 40},
-				width = 1200 - margin.left - margin.right,
-				height = 200 - margin.top - margin.bottom;
+            /* Domain and Colors */
 
-			// set the ranges
-			var x = d3.scaleBand()
-					  .range([0, width])
-					  .padding(0.1);
-			var y = d3.scaleLinear()
-					  .range([height, 0]);
-
-            d3.select("#places205plot").selectAll("*").remove();  // Remove previous objects
+            // set the dimensions and margins of the graph
+            var margin = {top: 20, right: 20, bottom: 50, left: 120},
+                width = 700 - margin.left - margin.right,
+                height = 550 - margin.top - margin.bottom;
             
-			var svg = d3.select("#places205plot")
-						.append("svg")
-						.attr("width", width + margin.left + margin.right)
-						.attr("height", height + margin.top + margin.bottom)
-						.append("g")
-						.attr("transform", 
-							"translate(" + margin.left + "," + margin.top + ")");
+            var names = Object.keys(values);
+            var vals = Object.values(values);
 
+            // set the ranges
+            var y = d3.scaleBand()
+                      .range([height, 0])
+                      .padding(0.1);
 
-			x.domain(places205labels);
-			y.domain([0, d3.max(places205values)]);
+            var x = d3.scaleLinear()
+                      .range([0, width]);
 
-			svg.selectAll(".bar1")
-				.data(d3.zip(places205labels,places205values))
-				.enter()
-				.append("rect")
-				.attr("class", "bar1")
-				.attr("x", function(d) { return x(d[0]); })
-				.attr("width", x.bandwidth())
-				//.attr("y", function(d) { return y(d[1]); })
-				//.attr("height", function(d) { return height - y(d[1]); })
-				.on('mouseover', function(d){
-                    d3.select(this).attr("class","hover");
-                    d3.select(this).style("cursor", "pointer");
-                })
-                .on('mousemove', function(d){
-                    tooltip.classed('hidden', false)
-						.attr('style', 'left:' + (d3.event.pageX + 5) +  'px; top:' + (d3.event.pageY - 30) + 'px')
-						.html(d[0]);                    
-                })
-                .on('mouseout', function(d){
-                    tooltip.classed('hidden', true);
-                    d3.select(this).attr("class","bar1");
-                    d3.select(this).style("cursor", "default");
-                })
-                .on('click', function(d){
-                    d3.select(".select").property('value', d[0]);
-                    featchange();
-                })
-                .attr("height", 0)
-                .attr("y", height)
-                .transition()
-                .duration(50)
-                .delay(function (d, i) {
-                    return i * 7;
-                })
-                .attr("y", function (d, i) {
-                    return y(d[1]);
-                })
-                .attr("height", function (d, i) {
-                    return height - y(d[1]);
-                });
+            // Scale the range of the data in the domains
+            x.domain([0, 100])
+            y.domain(names);
 
-
-			// add the x Axis
-			svg.append("g")
-				.attr("transform", "translate(0," + height + ")")
-				.call(d3.axisBottom(x))
-				.selectAll("text")
-				.remove();
-
-			// add the y Axis
-			svg.append("g")
-				.call(d3.axisLeft(y))
-				.selectAll("text");
-				//.remove();
-            
-            // add legend
-            svg.append("rect")
-                .attr("width", 20)
-                .attr("x", 40)
-                .attr("y", 10)
-                .attr("height", 20)
-                .style("fill", "steelblue");
-            
-            svg.append("text")
-                .attr("class", "legendtext")
-                .attr("x", 70)
-                .attr("y", 25)
-                .text("Places features");
-				
-			
-			/* SUN102 Feature Map */
-			
-			var sun102labels = Object.keys(CSVTAB[code]).slice(206,307);
-			var sun102values = Object.values(CSVTAB[code]).map(Number).slice(206,307);
-			
-			// set the dimensions and margins of the graph
-			var margin = {top: 20, right: 20, bottom: 30, left: 40},
-				width = 600 - margin.left - margin.right,
-				height = 200 - margin.top - margin.bottom;
-
-			// set the ranges
-			var x = d3.scaleBand()
-					  .range([0, width])
-					  .padding(0.1);
-			var y = d3.scaleLinear()
-					  .range([height, 0]);
-                      
-            d3.select("#sun102plot").selectAll("*").remove();  // Remove previous objects
-
-			var svg = d3.select("#sun102plot")
-						.append("svg")
-						.attr("width", width + margin.left + margin.right)
-						.attr("height", height + margin.top + margin.bottom)
-						.append("g")
-						.attr("transform", 
-							"translate(" + margin.left + "," + margin.top + ")");
-
-
-			x.domain(sun102labels);
-			y.domain([0, d3.max(sun102values)]);
-
-			svg.selectAll(".bar2")
-				.data(d3.zip(sun102labels, sun102values))
-				.enter()
-				.append("rect")
-				.attr("class", "bar2")
-				.attr("x", function(d) { return x(d[0]); })
-				.attr("width", x.bandwidth())
-				//.attr("y", function(d) { return y(d[1]); })
-				//.attr("height", function(d) { return height - y(d[1]); })
-				.on('mouseover', function(d){
-                    d3.select(this).attr("class","hover");
-                    d3.select(this).style("cursor", "pointer");
-                })
-                .on('mousemove', function(d){
-                    tooltip.classed('hidden', false)
-						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 30) + 'px')
-						.html(d[0]);                    
-                })
-                .on('mouseout', function(d){
-                    tooltip.classed('hidden', true);
-                    d3.select(this).attr("class","bar2");
-                    d3.select(this).style("cursor", "default");
-                })
-                .on('click', function(d){
-                    d3.select(".select").property('value', d[0]);
-                    featchange();
-                })
-                .attr("height", 0)
-                .attr("y", height)
-                .transition()
-                .duration(50)
-                .delay(function (d, i) {
-                    return i * 7;
-                })
-                .attr("y", function (d, i) {
-                    return y(d[1]);
-                })
-                .attr("height", function (d, i) {
-                    return height - y(d[1]);
-                });
-
-
-			// add the x Axis
-			svg.append("g")
-				.attr("transform", "translate(0," + height + ")")
-				.call(d3.axisBottom(x))
-				.selectAll("text")
-				.remove();
-				//.style("text-anchor", "end")
-				//.attr("dx", "-.8em")
-				//.attr("dy", ".15em")
-				//.attr("transform", "rotate(-60)");
-
-			// add the y Axis
-			svg.append("g")
-				.call(d3.axisLeft(y));
-				//.selectAll("text")
-				//.remove();
+            var svg = d3.select("#bigplot")
+                .append('svg')
+                .attr('class', 'plot')
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
                 
-            // add legend
-            svg.append("rect")
-                .attr("width", 20)
-                .attr("x", 40)
-                .attr("y", 10)
-                .attr("height", 20)
-                .style("fill", "orange");
-            
+            // append the rectangles for the bar chart
+            svg.selectAll(".bar")
+                .data(names)
+                .enter().append("rect")
+                .attr("class", "bar")
+                .attr("y", function(d) { return y(d); })
+                .attr("height", y.bandwidth())
+                .on('mousemove', function(d){
+                    d3.select(this)
+                        .attr("class","bar-hover");
+                        
+                    tooltip.classed('hidden', false)
+						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
+						.html(d + ': ' + Number(values[d].toFixed(1)));
+                })
+                .on('mouseout', function(d){
+                    d3.select(this)
+                        .attr("class","bar");
+                    
+                    tooltip.classed('hidden', true);
+                })
+                .attr("width", function(d) {return x(0); } )
+                .transition()
+                .duration(500)
+                .attr("width", function(d) {return x(values[d]) });
+
+            // add the x Axis
+            svg.append("g")
+              .attr("transform", "translate(0," + height + ")")
+              .call(d3.axisBottom(x));
+
+            // add the y Axis
+            svg.append("g")
+              .call(d3.axisLeft(y));
+              
+            // text label for the x axis
             svg.append("text")
-                .attr("class", "legendtext")
-                .attr("x", 70)
-                .attr("y", 25)
-                .text("SUN attributes");
-			
-			/*
-			var yAxis = d3.svg.axis()
-			  .scale(y)
-			  .orient("left")
-			  .tickSize(-width, 0, 0)
-			  .tickFormat(d3.format("d"));
+                .attr("class", "plotlabels")            
+                .attr("transform", "translate(" + (width/2) + " ," + 
+                                   (height + margin.top + 20) + ")")
+                .style("text-anchor", "middle")
+                .text("Percentage");
+        }       
+        
+        
+        // Updates the map according to checked boxes
+        function CheckboxUpdate(){
+            
+            var group = d3.select('input[name="optradio"]:checked').node().value;
 
-			var xAxis = d3.svg.axis()
-			  .scale(x)
-			  .orient("bottom");
-			  //.tickFormat(d3.time.format("%Y"));
-			  
-			svg.append("g")
-				.attr("class", "y axis")
-				.call(yAxis);
+            var valuestoplot = computevalues(group);
+            
+            if (Object.keys(valuestoplot).length == 0)
+            {
+                if (group == "MSOA")
+                {
+                    plotmapnull(MAP); // Plots the map again
+                }
+                else
+                {
+                    d3.select("#bigplot").selectAll("*").remove();
+                }
+            }
+            else
+            {
+                if (group == "MSOA")
+                {
+                    plotmap(MAP, valuestoplot, "Percentage"); // Plots the map again
+                }
+                else
+                {
+                    barchart(valuestoplot, "Percentage");
+                }
+            }
+        }
+        
+        // Looks which checkboxes are selected and returns the corresponding data
+        function computevalues(group){
+            
+            var paneltolook = "#leftpanel";
+            
+            var choices = [];
+            
+            d3.select(paneltolook)
+                .selectAll(".mapCheckbox")
+                .each(function(d){
+                    cb = d3.select(this);
+                    if(cb.property("checked")){
+                        choices.push(cb.property("value"));
+                }
+            });
+            
+            var group = d3.select('input[name="optradio"]:checked').node().value;
+            
+            var qvalue = d3.select('#questionselect').property('value');
+            
+            var valuestoplot = {};
 
-			svg.append("g")
-				.attr("class", "x axis")
-				.attr("transform", "translate(0," + height + ")")
-				.call(xAxis);
-			*/
-		}
+            choices.forEach(function(c) {
+                var keys = Object.keys(DATA[qvalue]["Answers"][c][group]);
+                keys.forEach(function(k) {
+                    if (k in valuestoplot) {
+                        valuestoplot[k] += Number(DATA[qvalue]["Answers"][c][group][k]);
+                    } else {
+                        valuestoplot[k] = Number(DATA[qvalue]["Answers"][c][group][k]);
+                    }
+                });
+            });
+            
+            return(valuestoplot);
+        }
 
     </script>
 
