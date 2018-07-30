@@ -73,8 +73,13 @@
         }
 
         .map {
-            width: 250px;
+            width: 400px;
             height: 250px;
+            vertical-align: top;
+        }
+        .bigmap {
+            width: 800px;
+            height: 500px;
             vertical-align: top;
         }
         
@@ -120,7 +125,6 @@
 
         .smallplots {
             width: 800px;
-            height: 250px;
             display: flex;
             flex-flow: row wrap;
             justify-content: space-between;
@@ -129,12 +133,10 @@
         
         .smallplot {
             width: 400px;
-            height: 400px;
         }
         
         .bigplot {
-            width: 500px;
-            height: 500px;
+            width: 800px;
             horizontal-align: center;
         }
 
@@ -142,9 +144,15 @@
             fill: steelblue;
         }
         .bar-hover {
-            fill: steelblue;
             stroke: black;
             stroke-width: 2px;
+        }
+        .bar--positive {
+          fill: #006837;
+        }
+
+        .bar--negative {
+          fill: #d7191c;
         }
         
         div.tooltip {
@@ -230,13 +238,13 @@
                     <p> Select two different time periods: </p>
                     
                     <select id="lefttimeselect" class="select">
-                      <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
+                      <option value="None" style="background-color: #cccccc;" disabled selected>Select An Option</option>
                       <option value="2016">2016</option>
                       <option value="2018">2018</option>
                     </select>
 
                     <select id="righttimeselect" class="select">
-                      <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
+                      <option value="None" style="background-color: #cccccc;" disabled selected>Select An Option</option>
                       <option value="2016">2016</option>
                       <option value="2018">2018</option>
                     </select>
@@ -261,13 +269,19 @@
                             <input type="radio" name="optradio" value="Age" onchange="radioChange()">age
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="optradio" value="Economic Status" onchange="radioChange()">economic status
-                        </label>
-                        <label class="radio-inline">
                             <input type="radio" name="optradio" value="Ethnicity" onchange="radioChange()">ethnicity
                         </label>
                         <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Religion" onchange="radioChange()">religion
+                        </label>
+                        <label class="radio-inline">
                             <input type="radio" name="optradio" value="Education" onchange="radioChange()">education
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Economic Status" onchange="radioChange()">economic status
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Health" onchange="radioChange()">health
                         </label>
                     </form>
                 </div>
@@ -292,20 +306,8 @@
         
         MAP = {}   // General variable for ward objects
         DATA = {}  // General variable for csvtab object
-        
-        var width = 400,
-            height = 400;
-         
-        var projection = d3.geoAlbers()
-            .scale(120000)
-            .rotate([0,0])
-            .center([-1.49, 52.39])
-            .translate([width/2,height/2.3]);
-         
-        var geoPath = d3.geoPath()
-            .projection(projection);
   
-        var tooltip = d3.select('#bottompanel')
+        var tooltip = d3.select('#rightpanel')
             .append('div')
             .attr('class', 'hidden tooltip');
         
@@ -379,9 +381,7 @@
             /* Adds the answers */
 
             var answers = Object.keys(DATA[qvalue]["Answers"]); // Get the column names of csv
-            
-            console.log(answers);
-            
+                        
             /* Adds Checkboxes */
             
             answers.forEach(function(d,i) {
@@ -436,12 +436,39 @@
 
         // Plots the map
         function plotmap(patches, values, legendtext, side) {
-            
+
             d3.select("#" + side + "plot").selectAll("*").remove();  // Remove previous objects
+
+            // set the dimensions and margins of the graph
+            var margin = {top: 10, right: 10, bottom: 10, left: 10},
+                width = 400 - margin.left - margin.right,
+                height = 250 - margin.top - margin.bottom;
+
+            var projection = d3.geoAlbers()
+                .scale(100000)
+                .rotate([0,0])
+                .center([-1.49, 52.39])
+                .translate([width/1.8, height/1.6]);
+             
+            var geoPath = d3.geoPath()
+                .projection(projection);
             
             var svgelement = d3.select("#" + side + "plot")
                 .append('svg')
-                .attr('class', 'map');
+                .attr('class', 'map')
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            // Title
+            
+            var time = d3.select("#" + side + "timeselect").property('value');
+                
+            svgelement.append("text")
+                    .attr("x", (width / 2) - margin.left)             
+                    .attr("y", margin.top)
+                    .attr("text-anchor", "middle")  
+                    .style("font-size", "16px") 
+                    .text(time);
             
             /* Domain and Colors */
             
@@ -451,7 +478,7 @@
             
             var xScale = d3.scaleLinear()
                 .domain([minval, maxval])
-                .rangeRound([600, 900]);
+                .rangeRound([0, width/2]);
                 
             var delta = (maxval - minval) / 5.0; // toFixed() for rounding it to int
             
@@ -462,9 +489,9 @@
 
             var color = d3.scaleThreshold()
                 .domain(domainArray)
-                .range(["#ffffcc", "#a1dab4", "#41b6c4", "#2c7fb8", "#253494"]);
-                //.range(["#ffffcc", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#0c2c84"]);
-                //.range(["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#0c2c84"]);
+                //.range(["#ffffcc", "#a1dab4", "#41b6c4", "#2c7fb8", "#253494"]);
+                //.range(["#DCDCF0", "#B4B4F0", "#7878F0", "#3C3CF0", "#0000F0"]);
+                .range(["#ffffcc", "#c2e699", "#78c679", "#31a354", "#006837"]);
             
             /* Map */
             
@@ -476,9 +503,7 @@
                 .attr( "d", geoPath )
                 .attr("class","incident")
                 .attr("id", function(d) {return d.properties.code})
-                .style("fill", function(d) {
-					return color(values[d.properties.code]); // get rate value for property matching data ID
-					// pass rate value to color function, return color based on domain and range
+                .style("fill", function(d) { return color(values[d.properties.code]); // get rate value for property matching data ID
 				})
 				.on('mouseover', function(d){
                     d3.select(this).moveToFront().attr("class","hover");
@@ -486,7 +511,7 @@
                 .on('mousemove', function(d){
                     tooltip.classed('hidden', false)
 						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
-						.html(d.properties.name + ': ' + Number(values[d.properties.code].toFixed(1)));                    
+						.html(d.properties.name + ': ' + Number(values[d.properties.code].toFixed(1)) + '%');                    
                 })
                 .on('mouseout', function(d){
                     tooltip.classed('hidden', true);
@@ -497,7 +522,7 @@
                 
                 svgelement.append("g")
                     .attr("class", "key")
-                    .attr("transform", "translate(-550,310)")
+                    .attr("transform", "translate(" + width/5 +",210)")
                     .selectAll("rect")
                     .data(color.range().map(function(d) {
                         d = color.invertExtent(d);
@@ -514,164 +539,85 @@
                     
                 svgelement.append("g")
                     .attr("class", "key")
-                    .attr("transform", "translate(-550,310)")
+                    .attr("transform", "translate(" + width/5 +",210)")
                     .append("text")
                     .attr("class", "caption")
                     .attr("x", xScale.range()[0])
                     .attr("y", -6)
                     .attr("fill", "#000")
                     .attr("text-anchor", "start")
+                    .attr("font-size", "12")
                     .attr("font-weight", "bold")
                     .attr("font-family", "Helvetica")
                     .text(legendtext);
 
                 svgelement.append("g")
                     .attr("class", "key")
-                    .attr("transform", "translate(-550,310)")
+                    .attr("transform", "translate(" + width/5 +",210)")
                     .call(d3.axisBottom(xScale)
-                    .tickSize(13)
-                    .tickFormat(function(xScale, i) { return i ? xScale : xScale; })
-                    .tickValues(color.domain()))
-                    .select(".domain")
-                    .remove();
-        }
-
-        // Plots the map of the difference
-        function plotmapdiff(patches, values, legendtext) {
-            
-            d3.select("#bigplot").selectAll("*").remove();  // Remove previous objects
-            
-            var svgelement = d3.select("#" + side + "map")
-                .append('svg')
-                .attr('class', 'map');
-            
-            /* Domain and Colors */
-            
-            var arr = Object.keys(values).map(function (key) { return values[key]; });
-            var minval = Math.min.apply(null, arr);
-            var maxval = Math.max.apply(null, arr);
-            
-            var xScale = d3.scaleLinear()
-                .domain([minval, maxval])
-                .rangeRound([600, 900]);
-                
-            var delta = (maxval - minval) / 5.0; // toFixed() for rounding it to int
-            
-            var domainArray = new Array();
-            for (i = minval + delta; i <= maxval; i+=delta){
-                domainArray.push(Number(i.toFixed(1)));
-            }
-
-            var color = d3.scaleThreshold()
-                .domain(domainArray)
-                .range(["#ffffcc", "#a1dab4", "#41b6c4", "#2c7fb8", "#253494"]);
-                //.range(["#ffffcc", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#0c2c84"]);
-                //.range(["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#0c2c84"]);
-            
-            /* Map */
-            
-			svgelement.append("g")
-                .selectAll("path")
-                .data(patches.features)
-                .enter()
-                .append("path")
-                .attr( "d", geoPath )
-                .attr("class","incident")
-                .attr("id", function(d) {return d.properties.code})
-                .style("fill", function(d) {
-					return color(values[d.properties.code]); // get rate value for property matching data ID
-					// pass rate value to color function, return color based on domain and range
-				})
-				.on('mouseover', function(d){
-                    d3.select(this).moveToFront().attr("class","hover");
-                    d3.select("#scatterplot").select("#" + d.properties.code).attr("class","hover");
-                    
-                    var cx = Number(d3.select("#scatterplot").select("#" + d.properties.code).attr("cx"));
-                    var cy = Number(d3.select("#scatterplot").select("#" + d.properties.code).attr("cy"));
-                    var cr = Number(d3.select("#scatterplot").select("#" + d.properties.code).attr("r"));
-                    var height = d3.select("#plotcanvas").attr("height");                
-                    
-                    d3.select("#plotcanvas")
-                        .append("line")
-                        .attr("class", "gridline")
-                        .attr("x1", cx - cr)
-                        .attr("y1", cy)
-                        .attr("x2", 0)
-                        .attr("y2", cy);
-                            
-                    d3.select("#plotcanvas")
-                        .append("line")
-                        .attr("class", "gridline")
-                        .attr("x1", cx)
-                        .attr("y1", cy + cr)
-                        .attr("x2", cx)
-                        .attr("y2", height);
-                        
-                })
-                .on('mousemove', function(d){
-                    tooltip.classed('hidden', false)
-						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
-						.html(d.properties.name + ': ' + Number(values[d.properties.code].toFixed(1)));                    
-                })
-                .on('mouseout', function(d){
-                    tooltip.classed('hidden', true);
-                    d3.select(this).attr("class","incident");
-                    d3.select("#scatterplot").select("#" + d.properties.code).attr("class","incident");
-                    
-                    d3.select("#plotcanvas").selectAll(".gridline").remove();
-                });
-                
-                /* Legend */
-                
-                svgelement.append("g")
-                    .attr("class", "key")
-                    .attr("transform", "translate(-550,310)")
-                    .selectAll("rect")
-                    .data(color.range().map(function(d) {
-                        d = color.invertExtent(d);
-                        if (d[0] == null) d[0] = xScale.domain()[0];
-                        if (d[1] == null) d[1] = xScale.domain()[1];
-                        return d;
-                    }))
-                    .enter().append("rect")
-                    .attr("height", 8)
-                    .attr("x", function(d) { return xScale(d[0]); })
-                    .attr("width", function(d) { return xScale(d[1]) - xScale(d[0]); })
-                    .attr("fill", function(d) { return color(d[0]); })
-                    .attr("opacity", "0.7");
-                    
-                svgelement.append("g")
-                    .attr("class", "key")
-                    .attr("transform", "translate(-550,310)")
-                    .append("text")
-                    .attr("class", "caption")
-                    .attr("x", xScale.range()[0])
-                    .attr("y", -6)
-                    .attr("fill", "#000")
-                    .attr("text-anchor", "start")
-                    .attr("font-weight", "bold")
-                    .attr("font-family", "Helvetica")
-                    .text(legendtext);
-
-                svgelement.append("g")
-                    .attr("class", "key")
-                    .attr("transform", "translate(-550,310)")
-                    .call(d3.axisBottom(xScale)
-                    .tickSize(13)
+                    .tickSize(12)
                     .tickFormat(function(xScale, i) { return i ? xScale : xScale; })
                     .tickValues(color.domain()))
                     .select(".domain")
                     .remove();
         }
         
-        // Plots the map if there is no choice selected
-        function plotmapnull(patches, side) {
+        // Plots the map of differences
+        function plotmapdiff(patches, values1, values2, legendtext) {
+
+            d3.select("#bigplot").selectAll("*").remove();  // Remove previous objects
+
+            // set the dimensions and margins of the graph
+            var margin = {top: 10, right: 10, bottom: 10, left: 10},
+                width = 800 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+            var projection = d3.geoAlbers()
+                .scale(200000)
+                .rotate([0,0])
+                .center([-1.49, 52.39])
+                .translate([width/1.8, height/1.6]);
+             
+            var geoPath = d3.geoPath()
+                .projection(projection);
             
-            d3.select("#" + side + "map").selectAll("*").remove();  // Remove previous objects
-            
-            var svgelement = d3.select("#" + side + "map")
+            var svgelement = d3.select("#bigplot")
                 .append('svg')
-                .attr('class', 'map');
+                .attr('class', 'bigmap')
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            // Title
+                            
+            svgelement.append("text")
+                    .attr("x", (width / 2) - margin.left)             
+                    .attr("y", margin.top)
+                    .attr("text-anchor", "middle")  
+                    .style("font-size", "16px") 
+                    .text("Difference");
+            
+            /* Domain and Colors */
+            
+            var valuesdiff = computedifference(values1, values2);
+            
+            var arr = Object.keys(valuesdiff).map(function (key) { return valuesdiff[key]; });
+            
+            var maxval = Math.max.apply(null, arr.map(Math.abs));
+            
+            var xScale = d3.scaleLinear()
+                .domain([-maxval, maxval])
+                .rangeRound([0, width/2]);
+                
+            var delta = (2 * maxval) / 5.0; // toFixed() for rounding it to int
+            
+            var domainArray = new Array();
+            for (i = -maxval + delta; i <= maxval; i+=delta){
+                domainArray.push(Number(i.toFixed(1)));
+            }
+
+            var color = d3.scaleThreshold()
+                .domain(domainArray)
+                .range(["#d7191c", "#fdae61", "#ffffbf", "#abd9e9", "#2c7bb6"]);
             
             /* Map */
             
@@ -680,26 +626,66 @@
                 .data(patches.features)
                 .enter()
                 .append("path")
-                .attr("d", geoPath)
+                .attr( "d", geoPath )
                 .attr("class","incident")
-                .style("fill", "#e5e5e5")
+                .attr("id", function(d) {return d.properties.code})
+                .style("fill", function(d) { return color(valuesdiff[d.properties.code]); // get rate value for property matching data ID
+				})
 				.on('mouseover', function(d){
-                    d3.select(this)
-                        .moveToFront()
-                        .style("fill","steelblue");
+                    d3.select(this).moveToFront().attr("class","hover");
                 })
                 .on('mousemove', function(d){
                     tooltip.classed('hidden', false)
 						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
-						.html(d.properties.name);                    
+						.html(d.properties.name + ': ' + Number(valuesdiff[d.properties.code].toFixed(1)) + '%');                    
                 })
                 .on('mouseout', function(d){
-                    d3.select(this)
-                        .attr("class","incident")
-                        .style("fill", "#e5e5e5");
-                    
                     tooltip.classed('hidden', true);
+                    d3.select(this).attr("class","incident");
                 });
+                
+                /* Legend */
+                
+                svgelement.append("g")
+                    .attr("class", "key")
+                    .attr("transform", "translate(" + width/5 +",410)")
+                    .selectAll("rect")
+                    .data(color.range().map(function(d) {
+                        d = color.invertExtent(d);
+                        if (d[0] == null) d[0] = xScale.domain()[0];
+                        if (d[1] == null) d[1] = xScale.domain()[1];
+                        return d;
+                    }))
+                    .enter().append("rect")
+                    .attr("height", 8)
+                    .attr("x", function(d) { return xScale(d[0]); })
+                    .attr("width", function(d) { return xScale(d[1]) - xScale(d[0]); })
+                    .attr("fill", function(d) { return color(d[0]); })
+                    .attr("opacity", "0.7");
+                    
+                svgelement.append("g")
+                    .attr("class", "key")
+                    .attr("transform", "translate(" + width/5 +",410)")
+                    .append("text")
+                    .attr("class", "caption")
+                    .attr("x", xScale.range()[0])
+                    .attr("y", -6)
+                    .attr("fill", "#000")
+                    .attr("text-anchor", "start")
+                    .attr("font-size", "12")
+                    .attr("font-weight", "bold")
+                    .attr("font-family", "Helvetica")
+                    .text(legendtext);
+
+                svgelement.append("g")
+                    .attr("class", "key")
+                    .attr("transform", "translate(" + width/5 +",410)")
+                    .call(d3.axisBottom(xScale)
+                    .tickSize(12)
+                    .tickFormat(function(xScale, i) { return i ? xScale : xScale; })
+                    .tickValues(color.domain()))
+                    .select(".domain")
+                    .remove();
         }
 
          // Updates the map according to checked boxes
@@ -710,7 +696,7 @@
             /* Domain and Colors */
 
             // set the dimensions and margins of the graph
-            var margin = {top: 20, right: 20, bottom: 30, left: 70},
+            var margin = {top: 20, right: 20, bottom: 50, left: 120},
                 width = 400 - margin.left - margin.right,
                 height = 300 - margin.top - margin.bottom;
             
@@ -731,10 +717,22 @@
 
             var svg = d3.select("#" + side + "plot")
                 .append('svg')
-                .attr('class', 'plot')
+                .attr('class', 'smallplot')
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                
+            
+            // Title
+            
+            var time = d3.select("#" + side + "timeselect").property('value');
+                
+            svg.append("text")
+                    .attr("x", (width / 2))             
+                    .attr("y", 0 - (margin.top / 2.5))
+                    .attr("text-anchor", "middle")  
+                    .style("font-size", "16px") 
+                    .text(time);
                 
             // append the rectangles for the bar chart
             svg.selectAll(".bar")
@@ -749,7 +747,7 @@
                         
                     tooltip.classed('hidden', false)
 						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
-						.html(d + ': ' + Number(values[d].toFixed(1)));
+						.html(d + ': ' + Number(values[d].toFixed(1)) + '%');
                 })
                 .on('mouseout', function(d){
                     d3.select(this)
@@ -778,38 +776,180 @@
                                    (height + margin.top + 20) + ")")
                 .style("text-anchor", "middle")
                 .text("Percentage");
+        }
+
+         // Updates the map according to checked boxes
+        function barchartdiff(values1, values2, legendtext){
+            
+            d3.select("#bigplot").selectAll("*").remove();  // Remove previous objects
+            
+            /* Domain and Colors */
+
+            // set the dimensions and margins of the graph
+            var margin = {top: 20, right: 20, bottom: 50, left: 70},
+                width = 800 - margin.left - margin.right,
+                height = 300 - margin.top - margin.bottom;
+            
+            var valuesdiff = computedifference(values1, values2);
+            
+            var names = Object.keys(valuesdiff);
+            var vals = Object.values(valuesdiff);
+
+            // set the ranges
+            var x = d3.scaleLinear()
+                      .range([0, width]);
+                      
+            var y = d3.scaleBand()
+              .range([height, 0])
+              .padding(0.1);
+              
+            var maxval = Math.max.apply(null, vals.map(Math.abs));
+            
+            // Scale the range of the data in the domains
+            x.domain([-maxval,maxval])
+            y.domain(names);
+
+            var svg = d3.select("#bigplot")
+                .append('svg')
+                .attr('class', 'bigplot')
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            // Title
+                            
+            svg.append("text")
+                    .attr("x", (width / 2))             
+                    .attr("y", 0 - (margin.top / 2.5))
+                    .attr("text-anchor", "middle")  
+                    .style("font-size", "16px") 
+                    .text("Difference");
+
+            svg.selectAll('.bar')
+                .data(names)
+                .enter().append('rect')
+                .attr('class', function (d) {
+                    return "bar bar--" + (valuesdiff[d] < 0 ? "negative" : "positive");
+                })
+                .attr('y', function (d) {return y(d);})
+                .attr('height', y.bandwidth())
+                .on('mousemove', function(d){
+                    d3.select(this)
+                        .attr("class","bar-hover");
+                        
+                    tooltip.classed('hidden', false)
+						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
+						.html(d + ': ' + Number(valuesdiff[d].toFixed(1)) + '%');
+                })
+                .on('mouseout', function(d){
+                    d3.select(this)
+                        .attr('class', function (d) {
+                            return "bar bar--" + (valuesdiff[d] < 0 ? "negative" : "positive");
+                        });
+                        
+                    tooltip.classed('hidden', true);
+                })
+                .attr("width", "0" )
+                .attr("x", function (d) {return x(0);} )
+                .transition()
+                .duration(500)
+                .attr('width', function (d) {return Math.abs(x(valuesdiff[d]) - x(0));})
+                .attr('x', function (d) {return x(Math.min(0, valuesdiff[d]));});
+
+            svg.append('g')
+                .attr('class', 'x axis')
+                .attr('transform', 'translate(0,' + height + ')')
+                .call(d3.axisBottom(x));
+
+            var tickNegative = svg.append('g')
+                .attr('class', 'y axis')
+                .attr('transform', 'translate(' + x(0) + ',0)')
+                .call(d3.axisLeft(y))
+                .selectAll('.tick')
+                .filter(function (d, i) {return vals[i] < 0;});
+
+            tickNegative.select('line')
+                .attr('x2', 6);
+
+            tickNegative.select('text')
+                .attr('x', 9)
+                .style('text-anchor', 'start');
+              
+            // text label for the x axis
+            svg.append("text")
+                .attr("class", "plotlabels")            
+                .attr("transform", "translate(" + (width/2) + " ," + 
+                                   (height + margin.top + 20) + ")")
+                .style("text-anchor", "middle")
+                .text("Percentage");
         }     
 
         // Updates the map according to checked boxes
         function CheckboxUpdate(side){
             
-            var time = d3.select("#" + side + "timeselect").property('value');
+            var lefttime = d3.select("#lefttimeselect").property('value');
+            var righttime = d3.select("#righttimeselect").property('value');
+                        
             var group = d3.select('input[name="optradio"]:checked').node().value;
-
-            var paneltoplot = "#" + side + "map";
-            var valuestoplot = computevalues(group,time);
+            
+            var ticked_answers = [];
+            
+            d3.select("#leftpanel")
+                .selectAll(".mapCheckbox")
+                .each(function(d){
+                    cb = d3.select(this);
+                    if(cb.property("checked")){
+                        ticked_answers.push(cb.property("value"));
+                }
+            });
             
 
-            if (Object.keys(valuestoplot).length == 0)
+            if (Object.keys(ticked_answers).length == 0)
             {
-                if (group == "MSOA")
-                {
-                    plotmapnull(MAP,side); // Plots the map again
-                }
-                else
-                {
-                    d3.select("#bigplot").selectAll("*").remove();
-                }
+                d3.select("#leftplot").selectAll("*").remove();
+                d3.select("#rightplot").selectAll("*").remove();
+                d3.select("#bigplot").selectAll("*").remove();
             }
             else
             {
-                if (group == "MSOA")
+                if (lefttime != "None")
                 {
-                    plotmap(MAP, valuestoplot, "Percentage", side); // Plots the map again
+                    var leftvalues = computevalues(group,lefttime);
+                    
+                    if (group == "MSOA")
+                    {
+                        plotmap(MAP, leftvalues, "Percentage", "left"); // Plots the map again
+                    }
+                    else
+                    {
+                        barchart(leftvalues, "Percentage", "left");
+                    }
                 }
-                else
+
+                if (righttime != "None")
                 {
-                    barchart(valuestoplot, "Percentage", side);
+                    var rightvalues = computevalues(group,righttime);
+                    
+                    if (group == "MSOA")
+                    {
+                        plotmap(MAP, rightvalues, "Percentage", "right"); // Plots the map again
+                    }
+                    else
+                    {
+                        barchart(rightvalues, "Percentage", "right");
+                    }
+                }
+                
+                if ((lefttime != "None") && (righttime != "None"))
+                {
+                    if (group == "MSOA")
+                    {
+                        plotmapdiff(MAP, leftvalues, rightvalues, "Percentage"); // Plots the map again
+                    }
+                    else
+                    {
+                        barchartdiff(leftvalues, rightvalues, "Percentage");
+                    }
                 }
             }
         }
@@ -847,6 +987,17 @@
             return(valuestoplot);
         }
         
+        function computedifference(values1, values2){
+            
+            var values = {};
+            Object.keys(values2).forEach( function(k) {
+                
+                if (k in values1){
+                    values[k] = values2[k] - values1[k];
+                }
+            });
+            return(values);
+        }
 
         
 

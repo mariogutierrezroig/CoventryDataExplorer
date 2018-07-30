@@ -1,0 +1,1074 @@
+<html>
+<head>
+    <title>Coventry Data Explorer: Time Difference</title>
+    
+    <style>
+        
+        .layout {
+            width: 1200px;
+            margin: auto;
+            margin-top : 0px;
+        }
+        
+        .header {
+			width: 1200px;
+            background-color: navy;
+            padding-bottom: 20px;
+		}
+        
+        h1 {
+            text-align: center;
+			font-size: 60px;
+            font-family: "Helvetica", Georgia, Serif;
+            color: white;
+            margin-top: 0px;
+            margin-bottom: 10px;
+        }
+        
+        .navmenu {
+			width: 1100px;
+			font-size: 20px;
+            font-family: "Helvetica", Georgia, Serif;
+            color: white;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .description {
+			width: 1100px;
+			font-size: 16px;
+            font-family: "Helvetica", Georgia, Serif;
+            background-color: aliceblue;
+            border-radius: 20px;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            margin: auto;
+            text-align: justify;
+		}
+        
+        .mainrow {
+			width: 1200px;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+		}
+        
+        .leftpan {
+            width: 400px;
+            vertical-align: top;
+            font-size: 14px;
+            font-family: "Helvetica", Georgia, Serif;
+        }
+        
+        .menu {
+            margin-bottom: 14px;
+        }
+
+        .map {
+            width: 250px;
+            vertical-align: top;
+        }
+        
+        .question {
+            font-size: 14px;
+            font-family: "Helvetica", Georgia, Serif;
+            line-height: 16px;
+            margin-bottom: 14px;
+            margin-right: 40px;
+        }
+        
+        .answers {
+            font-size: 14px;
+            font-family: "Helvetica", Georgia, Serif;
+            line-height: 16px;
+            margin-bottom: 20px;
+            margin-right: 40px;
+            height: 150px;
+            overflow-y: auto;
+        }
+        
+        .rightpan {
+            width: 800px;
+            vertical-align: top;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            font-size: 14px;
+            font-family: "Helvetica", Georgia, Serif;
+        }
+        
+        .displaymodebar {
+            width: 800px;
+            height: 50px;
+            
+        }
+        
+        .radio-inline {
+            width: auto;
+            vertical-align: center;
+        }
+
+        .smallplots {
+            width: 800px;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .smallplot {
+            width: 400px;
+            height: 350px;
+        }
+        
+        .bigplot {
+            width: 800px;
+            horizontal-align: center;
+        }
+
+        .bar {
+            fill: steelblue;
+        }
+        .bar-hover {
+            stroke: black;
+            stroke-width: 2px;
+        }
+        .bar--positive {
+          fill: green;
+        }
+
+        .bar--negative {
+          fill: red;
+        }
+        
+        div.tooltip {
+            color: #222;
+            background-color: #fff;
+            padding: .5em;
+            text-shadow: #f5f5f5 0 1px 0;
+            border-radius: 2px;
+            opacity: 0.9;
+            position: absolute;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .incident {
+            width: 200px;
+            height: 200px;
+            opacity: 0.75;
+            stroke: #fff;
+            stroke-width:1px;
+        }
+        .hover {
+            opacity: 1.0;
+            stroke: #000;
+            stroke-width:2px;
+            z-index: 10000;
+        }
+        
+        .mapCheckbox{
+            vertical-align: center;
+            font-size: 16px;
+            font-family: "Helvetica", Georgia, Serif;
+            cursor: pointer;
+        }
+        
+        .plotlabels{
+            font-size: 16px;
+            font-family: "Helvetica", Georgia, Serif;
+        }
+        
+        .credcls {
+			width: 1200px;
+            height: 50px;
+            background-color: navy;
+            font-size: 14px;
+            font-family: "Helvetica", Georgia, Serif;
+            text-align: center;
+            padding: 2px;
+            color: white;
+		}        
+
+    </style>
+</head>
+<body>
+    
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://d3js.org/d3-array.v1.min.js"></script>
+	<script src="https://d3js.org/d3-geo.v1.min.js"></script>
+	<script src="https://d3js.org/d3-queue.v3.min.js"></script>
+	<script src="https://d3js.org/topojson.v1.min.js"></script>
+    
+    <div class='layout'>
+
+        <div class='header'>
+            <h1>Coventry Data Explorer</h1>
+            
+            <div class='navmenu'>
+				<a href="./data_exploration.html" style="text-decoration: none; color: LightSteelBlue"> Data Exploration</a> | <b>Time Difference</b> | <a href="./differences_wards.html" style="text-decoration: none; color: LightSteelBlue">Correlation in Wards</a> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a> | <a href="./scenicness.html" style="text-decoration: none; color: LightSteelBlue">Scenicness</a>
+			</div>
+            
+            <div class='description'>
+                <p>This is a tool for exploring the correlation between two different variables selected from 3 different data categories: ONS Census, Households Survey and Cultural Participation. First, select the items in the menu and tick the boxes to create and display the desired variables you want to analyse. Note that you can tick multiple boxes adding the values up. A scatter plot in the center will show a two-dimensional point for each ward and the correlation between the selected variables. A correlation analysis can be performed underneath by pressing run.</p>
+            </div>
+        
+        </div>
+        
+        <div id='row-main' class="mainrow">
+            <div id='leftpanel' class='leftpan'> 
+                <div id='leftmenu' class='menu'>
+                    
+                    <p> Select two different time periods: </p>
+                    
+                    <select id="lefttimeselect" class="select">
+                      <option value="None" style="background-color: #cccccc;" disabled selected>Select An Option</option>
+                      <option value="2016">2016</option>
+                      <option value="2018">2018</option>
+                    </select>
+
+                    <select id="righttimeselect" class="select">
+                      <option value="None" style="background-color: #cccccc;" disabled selected>Select An Option</option>
+                      <option value="2016">2016</option>
+                      <option value="2018">2018</option>
+                    </select>
+                
+                </div>
+                <div id='question' class='question'> </div>
+                <div id='answers' class='answers'> </div>
+            </div>
+                
+            <div id='rightpanel' class='rightpan'>
+                <div id='displaymodebar' class='displaymodebar'>
+                    
+                    <div>Group by:</div>
+                    <form id='displaygroup'>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="MSOA" onchange="radioChange()" checked>area
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Gender" onchange="radioChange()">gender
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Age" onchange="radioChange()">age
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Economic Status" onchange="radioChange()">economic status
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Ethnicity" onchange="radioChange()">ethnicity
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" value="Education" onchange="radioChange()">education
+                        </label>
+                    </form>
+                </div>
+                
+                <div id='smallplots' class='smallplots'>
+                    <div id='leftplot' class='smallplot'> </div>
+                    <div id='rightplot' class='smallplot'> </div>
+                </div>
+                
+                <div id='bigplot' class='bigplot'> </div>
+                
+            </div>
+        </div>
+        
+        <div id='credits' class='credcls'>
+            <p> Visualization by <a href="http://datasciencelab.co.uk/people/mario-gutierrez-roig/" style="text-decoration: none; color: SkyBlue">Mario Guti&#233;rrez-Roig</a> from <a href="http://datasciencelab.co.uk/" style="text-decoration: none; color: SkyBlue">WBS Data Science Lab</a>. Code available on <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer" style="text-decoration: none; color: SkyBlue">github</a> </p>
+        </div>
+    
+    </div>
+    
+    <script>
+        
+        MAP = {}   // General variable for ward objects
+        DATA = {}  // General variable for csvtab object
+        
+        var width = 400,
+            height = 400;
+         
+        var projection = d3.geoAlbers()
+            .scale(120000)
+            .rotate([0,0])
+            .center([-1.49, 52.39])
+            .translate([width/2,height/2.3]);
+         
+        var geoPath = d3.geoPath()
+            .projection(projection);
+  
+        var tooltip = d3.select('#rightpanel')
+            .append('div')
+            .attr('class', 'hidden tooltip');
+        
+        var leftselect = d3.select('#lefttimeselect')
+            .on('change', function(d){
+                CheckboxUpdate("left");
+            });
+        
+        var rightselect = d3.select('#righttimeselect')
+            .on('change', function(d){
+                CheckboxUpdate("right");
+            });
+        
+        start();
+
+        function start() {
+            
+            // Remove previous question and checkboxes
+            d3.select("#questionselect").remove();
+            d3.select("#question_p").remove();
+            d3.select("#question").selectAll("*").remove();
+            d3.select("#answers").selectAll("*").remove();
+            
+            // Loading data in this way prevents from ploting anything before loading finishes
+            d3.queue()
+                .defer(d3.json, './Map/coventry_msoa.geojson')
+                .defer(d3.json, './Data/Coventry_Household_Survey_2016_2018.json')
+                .await(function(error, map, data){
+                    if (error) throw error;
+            
+                    // Assigning values to general variables, otherwise updating doesn't work
+                    MAP = map;
+                    DATA = data;
+                                        
+                    d3.select("#leftmenu")
+						.append('p')
+                        .attr('id', "question_p")
+                        .text('Select a question')
+                    
+                    /* Adds Features Menu */
+
+					var options = d3.select("#leftmenu")
+						.append('select')
+                        .attr('id', "questionselect")
+						.attr('class','select')
+						.on('change',function (d) { change_question(); return d; })
+						.selectAll('option')
+						.data(Object.keys(DATA))
+						.enter()
+						.append('option')
+						.text(function (d) { return DATA[d]["Topic"]; })
+                        .attr('value',function (d) { return d; });
+            
+                });
+        }
+        
+        function change_question() {
+            
+            var qvalue = d3.select('#questionselect').property('value');
+                                    
+            // Remove previous question and checkboxes
+            d3.select("#question").selectAll("*").remove();
+            d3.select("#answers").selectAll("*").remove();
+                    
+            /* Appends Questions */
+            d3.select("#question")
+                .append("div")
+                //.attr("class", "questpan")
+                .text(DATA[qvalue]["Question"]);
+            
+            /* Adds the answers */
+
+            var answers = Object.keys(DATA[qvalue]["Answers"]); // Get the column names of csv
+                        
+            /* Adds Checkboxes */
+            
+            answers.forEach(function(d,i) {
+                // Append the checkboxes
+                d3.select("#answers")
+                    .append("div")
+                    .append("label")
+                    .attr("id", "answer" + i)
+                    .append("input")
+                    .attr("type", "checkbox")
+                    .attr("class", "mapCheckbox")
+                    .attr("value", d)
+                    .on("change", function(d){ 
+                        CheckboxUpdate("left");
+                        CheckboxUpdate("right");
+                    });
+                    
+                // Append the text
+                d3.select("#answer" + i)
+                    .append("text")
+                    .text(DATA[qvalue]["Answers"][d]["Text"]);
+            });
+
+            CheckboxUpdate("left");
+            CheckboxUpdate("right");
+            
+        };
+
+        function radioChange() {
+            CheckboxUpdate("left");
+            CheckboxUpdate("right");
+        }
+        
+        // Function that move object to front in order to avoid plotting border issues
+        d3.selection.prototype.moveToFront = function() {
+          return this.each(function(){
+            this.parentNode.appendChild(this);
+          });
+        };
+        
+        // Function for removing specific string from array of strings
+        Array.prototype.remove= function(){
+            var what, a= arguments, L= a.length, ax;
+            while(L && this.length){
+                what= a[--L];
+                while((ax= this.indexOf(what))!= -1){
+                    this.splice(ax, 1);
+                }
+            }
+            return this;
+        }
+
+        // Plots the map
+        function plotmap(patches, values, legendtext, side) {
+            
+            d3.select("#" + side + "plot").selectAll("*").remove();  // Remove previous objects
+
+            // set the dimensions and margins of the graph
+            var margin = {top: 20, right: 20, bottom: 30, left: 70},
+                width = 400 - margin.left - margin.right,
+                height = 300 - margin.top - margin.bottom;
+            
+            var svgelement = d3.select("#" + side + "plot")
+                .append('svg')
+                .attr('class', 'map');
+            
+            /* Domain and Colors */
+            
+            var arr = Object.keys(values).map(function (key) { return values[key]; });
+            var minval = Math.min.apply(null, arr);
+            var maxval = Math.max.apply(null, arr);
+            
+            var xScale = d3.scaleLinear()
+                .domain([minval, maxval])
+                .rangeRound([600, 900]);
+                
+            var delta = (maxval - minval) / 5.0; // toFixed() for rounding it to int
+            
+            var domainArray = new Array();
+            for (i = minval + delta; i <= maxval; i+=delta){
+                domainArray.push(Number(i.toFixed(1)));
+            }
+
+            var color = d3.scaleThreshold()
+                .domain(domainArray)
+                .range(["#ffffcc", "#a1dab4", "#41b6c4", "#2c7fb8", "#253494"]);
+                //.range(["#ffffcc", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#0c2c84"]);
+                //.range(["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#0c2c84"]);
+            
+            /* Map */
+            
+			svgelement.append("g")
+                .selectAll("path")
+                .data(patches.features)
+                .enter()
+                .append("path")
+                .attr( "d", geoPath )
+                .attr("class","incident")
+                .attr("id", function(d) {return d.properties.code})
+                .style("fill", function(d) {
+					return color(values[d.properties.code]); // get rate value for property matching data ID
+					// pass rate value to color function, return color based on domain and range
+				})
+				.on('mouseover', function(d){
+                    d3.select(this).moveToFront().attr("class","hover");
+                })
+                .on('mousemove', function(d){
+                    tooltip.classed('hidden', false)
+						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
+						.html(d.properties.name + ': ' + Number(values[d.properties.code].toFixed(1)));                    
+                })
+                .on('mouseout', function(d){
+                    tooltip.classed('hidden', true);
+                    d3.select(this).attr("class","incident");
+                });
+                
+                /* Legend */
+                
+                svgelement.append("g")
+                    .attr("class", "key")
+                    .attr("transform", "translate(-550,310)")
+                    .selectAll("rect")
+                    .data(color.range().map(function(d) {
+                        d = color.invertExtent(d);
+                        if (d[0] == null) d[0] = xScale.domain()[0];
+                        if (d[1] == null) d[1] = xScale.domain()[1];
+                        return d;
+                    }))
+                    .enter().append("rect")
+                    .attr("height", 8)
+                    .attr("x", function(d) { return xScale(d[0]); })
+                    .attr("width", function(d) { return xScale(d[1]) - xScale(d[0]); })
+                    .attr("fill", function(d) { return color(d[0]); })
+                    .attr("opacity", "0.7");
+                    
+                svgelement.append("g")
+                    .attr("class", "key")
+                    .attr("transform", "translate(-550,310)")
+                    .append("text")
+                    .attr("class", "caption")
+                    .attr("x", xScale.range()[0])
+                    .attr("y", -6)
+                    .attr("fill", "#000")
+                    .attr("text-anchor", "start")
+                    .attr("font-weight", "bold")
+                    .attr("font-family", "Helvetica")
+                    .text(legendtext);
+
+                svgelement.append("g")
+                    .attr("class", "key")
+                    .attr("transform", "translate(-550,310)")
+                    .call(d3.axisBottom(xScale)
+                    .tickSize(13)
+                    .tickFormat(function(xScale, i) { return i ? xScale : xScale; })
+                    .tickValues(color.domain()))
+                    .select(".domain")
+                    .remove();
+        }
+
+        // Plots the map of the difference
+        function plotmapdiff(patches, values, legendtext) {
+            
+            d3.select("#bigplot").selectAll("*").remove();  // Remove previous objects
+            
+            var svgelement = d3.select("#" + side + "map")
+                .append('svg')
+                .attr('class', 'map');
+            
+            // Title
+            
+            var time = d3.select("#" + side + "timeselect").property('value');
+                
+            svgelement.append("text")
+                    .attr("x", (width / 2))             
+                    .attr("y", 0 - (margin.top / 2.5))
+                    .attr("text-anchor", "middle")  
+                    .style("font-size", "16px") 
+                    .text(time);
+            
+            /* Domain and Colors */
+            
+            var arr = Object.keys(values).map(function (key) { return values[key]; });
+            var minval = Math.min.apply(null, arr);
+            var maxval = Math.max.apply(null, arr);
+            
+            var xScale = d3.scaleLinear()
+                .domain([minval, maxval])
+                .rangeRound([600, 900]);
+                
+            var delta = (maxval - minval) / 5.0; // toFixed() for rounding it to int
+            
+            var domainArray = new Array();
+            for (i = minval + delta; i <= maxval; i+=delta){
+                domainArray.push(Number(i.toFixed(1)));
+            }
+
+            var color = d3.scaleThreshold()
+                .domain(domainArray)
+                .range(["#ffffcc", "#a1dab4", "#41b6c4", "#2c7fb8", "#253494"]);
+                //.range(["#ffffcc", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#0c2c84"]);
+                //.range(["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#0c2c84"]);
+            
+            /* Map */
+            
+			svgelement.append("g")
+                .selectAll("path")
+                .data(patches.features)
+                .enter()
+                .append("path")
+                .attr( "d", geoPath )
+                .attr("class","incident")
+                .attr("id", function(d) {return d.properties.code})
+                .style("fill", function(d) {
+					return color(values[d.properties.code]); // get rate value for property matching data ID
+					// pass rate value to color function, return color based on domain and range
+				})
+				.on('mouseover', function(d){
+                    d3.select(this).moveToFront().attr("class","hover");                        
+                })
+                .on('mousemove', function(d){
+                    tooltip.classed('hidden', false)
+						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
+						.html(d.properties.name + ': ' + Number(values[d.properties.code].toFixed(1)));                    
+                })
+                .on('mouseout', function(d){
+                    tooltip.classed('hidden', true);
+                    d3.select(this).attr("class","incident");
+                });
+                
+                /* Legend */
+                
+                svgelement.append("g")
+                    .attr("class", "key")
+                    .attr("transform", "translate(-550,310)")
+                    .selectAll("rect")
+                    .data(color.range().map(function(d) {
+                        d = color.invertExtent(d);
+                        if (d[0] == null) d[0] = xScale.domain()[0];
+                        if (d[1] == null) d[1] = xScale.domain()[1];
+                        return d;
+                    }))
+                    .enter().append("rect")
+                    .attr("height", 8)
+                    .attr("x", function(d) { return xScale(d[0]); })
+                    .attr("width", function(d) { return xScale(d[1]) - xScale(d[0]); })
+                    .attr("fill", function(d) { return color(d[0]); })
+                    .attr("opacity", "0.7");
+                    
+                svgelement.append("g")
+                    .attr("class", "key")
+                    .attr("transform", "translate(-550,310)")
+                    .append("text")
+                    .attr("class", "caption")
+                    .attr("x", xScale.range()[0])
+                    .attr("y", -6)
+                    .attr("fill", "#000")
+                    .attr("text-anchor", "start")
+                    .attr("font-weight", "bold")
+                    .attr("font-family", "Helvetica")
+                    .text(legendtext);
+
+                svgelement.append("g")
+                    .attr("class", "key")
+                    .attr("transform", "translate(-550,310)")
+                    .call(d3.axisBottom(xScale)
+                    .tickSize(13)
+                    .tickFormat(function(xScale, i) { return i ? xScale : xScale; })
+                    .tickValues(color.domain()))
+                    .select(".domain")
+                    .remove();
+        }
+        
+        // Plots the map if there is no choice selected
+        function plotmapnull(patches, side) {
+            
+            d3.select("#" + side + "map").selectAll("*").remove();  // Remove previous objects
+            
+            var svgelement = d3.select("#" + side + "map")
+                .append('svg')
+                .attr('class', 'map');
+            
+            /* Map */
+            
+			svgelement.append("g")
+                .selectAll("path")
+                .data(patches.features)
+                .enter()
+                .append("path")
+                .attr("d", geoPath)
+                .attr("class","incident")
+                .style("fill", "#e5e5e5")
+				.on('mouseover', function(d){
+                    d3.select(this)
+                        .moveToFront()
+                        .style("fill","steelblue");
+                })
+                .on('mousemove', function(d){
+                    tooltip.classed('hidden', false)
+						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
+						.html(d.properties.name);                    
+                })
+                .on('mouseout', function(d){
+                    d3.select(this)
+                        .attr("class","incident")
+                        .style("fill", "#e5e5e5");
+                    
+                    tooltip.classed('hidden', true);
+                });
+        }
+
+         // Updates the map according to checked boxes
+        function barchart(values, legendtext, side){
+            
+            d3.select("#" + side + "plot").selectAll("*").remove();  // Remove previous objects
+            
+            /* Domain and Colors */
+
+            // set the dimensions and margins of the graph
+            var margin = {top: 20, right: 20, bottom: 30, left: 70},
+                width = 400 - margin.left - margin.right,
+                height = 300 - margin.top - margin.bottom;
+            
+            var names = Object.keys(values);
+            var vals = Object.values(values);
+
+            // set the ranges
+            var y = d3.scaleBand()
+                      .range([height, 0])
+                      .padding(0.1);
+
+            var x = d3.scaleLinear()
+                      .range([0, width]);
+
+            // Scale the range of the data in the domains
+            x.domain([0, 100])
+            y.domain(names);
+
+            var svg = d3.select("#" + side + "plot")
+                .append('svg')
+                .attr('class', 'smallplot')
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                
+            
+            // Title
+            
+            var time = d3.select("#" + side + "timeselect").property('value');
+                
+            svg.append("text")
+                    .attr("x", (width / 2))             
+                    .attr("y", 0 - (margin.top / 2.5))
+                    .attr("text-anchor", "middle")  
+                    .style("font-size", "16px") 
+                    .text(time);
+                
+            // append the rectangles for the bar chart
+            svg.selectAll(".bar")
+                .data(names)
+                .enter().append("rect")
+                .attr("class", "bar")
+                .attr("y", function(d) { return y(d); })
+                .attr("height", y.bandwidth())
+                .on('mousemove', function(d){
+                    d3.select(this)
+                        .attr("class","bar-hover");
+                        
+                    tooltip.classed('hidden', false)
+						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
+						.html(d + ': ' + Number(values[d].toFixed(1)));
+                })
+                .on('mouseout', function(d){
+                    d3.select(this)
+                        .attr("class","bar");
+                    
+                    tooltip.classed('hidden', true);
+                })
+                .attr("width", function(d) {return x(0); } )
+                .transition()
+                .duration(500)
+                .attr("width", function(d) {return x(values[d]) });
+
+            // add the x Axis
+            svg.append("g")
+              .attr("transform", "translate(0," + height + ")")
+              .call(d3.axisBottom(x));
+
+            // add the y Axis
+            svg.append("g")
+              .call(d3.axisLeft(y));
+              
+            // text label for the x axis
+            svg.append("text")
+                .attr("class", "plotlabels")            
+                .attr("transform", "translate(" + (width/2) + " ," + 
+                                   (height + margin.top + 20) + ")")
+                .style("text-anchor", "middle")
+                .text("Percentage");
+        }
+        
+        // Horizontal barchart with comparison
+        function barchart_horizontal_grouped(values){
+
+            d3.select("#compplot").selectAll("*").remove();  // Remove previous objects
+    
+            // set the dimensions and margins of the graph
+            var margin = {top: 20, right: 20, bottom: 30, left: 70},
+                width = 400 - margin.left - margin.right,
+                height = 300 - margin.top - margin.bottom;
+                
+            var svg = d3.select("#" + side + "plot")
+                .append('svg')
+                .attr('class', 'compplot')
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            var x0 = d3.scaleBand()
+                .rangeRound([0, width])
+                .paddingInner(0.1);
+
+            var x1 = d3.scaleBand()
+                .padding(0.05);
+
+            var y = d3.scaleLinear()
+                .rangeRound([height, 0]);
+
+            var z = d3.scaleOrdinal()
+                .range(["#98abc5", "#8a89a6"]);
+
+
+            var keys = data.columns.slice(1);
+
+            x0.domain(data.map(function(d) { return d.State; }));
+            x1.domain(keys).rangeRound([0, x0.bandwidth()]);
+            y.domain([0, d3.max(data, function(d) { return d3.max(keys, function(key) { return d[key]; }); })]).nice();
+
+            svg.selectAll("g")
+                .data(data)
+                .enter().append("g")
+                .attr("transform", function(d) { return "translate(" + x0(d.State) + ",0)"; })
+                .selectAll("rect")
+                .data(function(d) { return keys.map(function(key) { return {key: key, value: d[key]}; }); })
+                .enter().append("rect")
+                .attr("x", function(d) { return x1(d.key); })
+                .attr("y", function(d) { return y(d.value); })
+                .attr("width", x1.bandwidth())
+                .attr("height", function(d) { return height - y(d.value); })
+                .attr("fill", function(d) { return z(d.key); });
+
+            g.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x0));
+
+            g.append("g")
+                .attr("class", "axis")
+                .call(d3.axisLeft(y).ticks(null, "s"))
+                .append("text")
+                .attr("x", 2)
+                .attr("y", y(y.ticks().pop()) + 0.5)
+                .attr("dy", "0.32em")
+                .attr("fill", "#000")
+                .attr("font-weight", "bold")
+                .attr("text-anchor", "start")
+                .text("Population");
+
+            var legend = g.append("g")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", 10)
+                .attr("text-anchor", "end")
+                .selectAll("g")
+                .data(keys.slice().reverse())
+                .enter().append("g")
+                .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+            legend.append("rect")
+                .attr("x", width - 19)
+                .attr("width", 19)
+                .attr("height", 19)
+                .attr("fill", z);
+
+            legend.append("text")
+                .attr("x", width - 24)
+                .attr("y", 9.5)
+                .attr("dy", "0.32em")
+                .text(function(d) { return d; });
+        }
+        
+
+         // Horizontal barchart with differences
+        function barchartdiff(values1, values2, legendtext){
+            
+            d3.select("#bigplot").selectAll("*").remove();  // Remove previous objects
+            
+            /* Domain and Colors */
+
+            // set the dimensions and margins of the graph
+            var margin = {top: 20, right: 20, bottom: 30, left: 70},
+                width = 800 - margin.left - margin.right,
+                height = 300 - margin.top - margin.bottom;
+            
+            var valuesdiff = computedifference(values1, values2);
+            
+            var names = Object.keys(valuesdiff);
+            var vals = Object.values(valuesdiff);
+
+            // set the ranges
+            var x = d3.scaleLinear()
+                      .range([0, width]);
+                      
+            var y = d3.scaleBand()
+              .range([height, 0])
+              .padding(0.1);
+              
+            var maxval = Math.max.apply(null, vals.map(Math.abs));
+            
+            // Scale the range of the data in the domains
+            x.domain([-maxval,maxval])
+            y.domain(names);
+
+            var svg = d3.select("#bigplot")
+                .append('svg')
+                .attr('class', 'bigplot')
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            // Title
+                            
+            svg.append("text")
+                    .attr("x", (width / 2))             
+                    .attr("y", 0 - (margin.top / 2.5))
+                    .attr("text-anchor", "middle")  
+                    .style("font-size", "16px") 
+                    .text("Difference");
+            
+            console.log(valuesdiff);
+
+            svg.selectAll('.bar')
+                .data(names)
+                .enter().append('rect')
+                .attr('class', function (d) {
+                    return "bar bar--" + (valuesdiff[d] < 0 ? "negative" : "positive");
+                })
+                .attr('x', function (d) {return x(Math.min(0, valuesdiff[d]));})
+                .attr('y', function (d) {return y(d);})
+                .attr('width', function (d) {console.log(Math.abs(x(valuesdiff[d]) - x(0))); return Math.abs(x(valuesdiff[d]) - x(0));})
+                .attr('height', y.bandwidth());
+
+            svg.append('g')
+                .attr('class', 'x axis')
+                .attr('transform', 'translate(0,' + height + ')')
+                .call(d3.axisBottom(x));
+
+            var tickNegative = svg.append('g')
+                .attr('class', 'y axis')
+                .attr('transform', 'translate(' + x(0) + ',0)')
+                .call(d3.axisLeft(y))
+                .selectAll('.tick')
+                .filter(function (d, i) {return vals[i] < 0;});
+
+            tickNegative.select('line')
+                .attr('x2', 6);
+
+            tickNegative.select('text')
+                .attr('x', 9)
+                .style('text-anchor', 'start');
+              
+            // text label for the x axis
+            svg.append("text")
+                .attr("class", "plotlabels")            
+                .attr("transform", "translate(" + (width/2) + " ," + 
+                                   (height + margin.top + 20) + ")")
+                .style("text-anchor", "middle")
+                .text("Percentage");
+        }     
+
+        // Updates the map according to checked boxes
+        function CheckboxUpdate(side){
+            
+            var lefttime = d3.select("#lefttimeselect").property('value');
+            var righttime = d3.select("#righttimeselect").property('value');
+                        
+            var group = d3.select('input[name="optradio"]:checked').node().value;
+
+            
+            var ticked_answers = [];
+            
+            d3.select("#leftpanel")
+                .selectAll(".mapCheckbox")
+                .each(function(d){
+                    cb = d3.select(this);
+                    if(cb.property("checked")){
+                        ticked_answers.push(cb.property("value"));
+                }
+            });
+            
+
+            if (Object.keys(ticked_answers).length == 0)
+            {
+                d3.select("#leftplot").selectAll("*").remove();
+                d3.select("#rightplot").selectAll("*").remove();
+                d3.select("#bigplot").selectAll("*").remove();
+            }
+            else
+            {                
+                if ((lefttime != "None") && (righttime != "None"))
+                {
+                    if (group == "MSOA")
+                    {
+                        //plotmap(MAP, valuestoplot, "Percentage", "right"); // Plots the map again
+                    }
+                    else
+                    {
+                        var leftvalues = computevalues(group,lefttime);
+                        var rightvalues = computevalues(group,righttime);
+                        
+                        compvalues = comparedvalues(leftvalues, rightvalues, lefttime, righttime);
+                        barchart_horizontal_grouped(compvalues);
+                        
+                        barchartdiff(leftvalues, rightvalues, "Percentage");
+                    }
+                }
+            }
+        }
+        
+        // Looks which checkboxes are selected and returns the corresponding data
+        function computevalues(group,time){
+            
+            var choices = [];
+            
+            d3.select("#leftpanel")
+                .selectAll(".mapCheckbox")
+                .each(function(d){
+                    cb = d3.select(this);
+                    if(cb.property("checked")){
+                        choices.push(cb.property("value"));
+                }
+            });
+
+            var qvalue = d3.select('#questionselect').property('value');
+            
+            var valuestoplot = {};
+
+            choices.forEach(function(c) {
+                var keys = Object.keys(DATA[qvalue]["Answers"][c][group][time]);
+
+                keys.forEach(function(k) {
+                    if (k in valuestoplot) {
+                        valuestoplot[k] += Number(DATA[qvalue]["Answers"][c][group][time][k]);
+                    } else {
+                        valuestoplot[k] = Number(DATA[qvalue]["Answers"][c][group][time][k]);
+                    }
+                });
+            });
+            
+            return(valuestoplot);
+        }
+        
+        function computedifference(values1, values2){
+            
+            var values = {};
+            Object.keys(values2).forEach( function(k) {
+                values[k] = values2[k] - values1[k];
+                console.log(k,values2[k],values1[k],values2[k] - values1[k]);
+            });
+            return(values);
+        }
+        
+        function comparedvalues(values1, values2, label1, label2){
+            
+            var values = {};
+            Object.keys(values2).forEach( function(k) {
+                values[k] = {};
+                values[k][label1] = values1[k];
+                values[k][label2] = values2[k];
+            });
+            return(values);
+        }
+
+        
+
+
+
+    </script>
+
+</body>
+</html>
