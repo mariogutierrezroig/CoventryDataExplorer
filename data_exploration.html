@@ -136,10 +136,11 @@
         .bar {
             fill: steelblue;
         }
-        .bar-hover {
-            fill: steelblue;
-            stroke: black;
-            stroke-width: 2px;
+
+        .bar--total {
+          fill: #bfbfbf;
+          stroke: black;
+          stroke-width: 1px;
         }
         
         .plot {
@@ -220,7 +221,7 @@
 			</div>
             
             <div class='description'>
-                <p>You can explore the geographical distribution across Coventry wards of different demographic and socio-economic indicators compiled in the UK ONS census, Household Surveys and Indigo Audience Data. You can select on the left menu the multiple topics and questions. Corresponding possible answers will appear beneath and by ticking them the map on the right will show its geographical distribution. You can also multiple tick answer boxes so the values will be aggregated.</p>
+                <p>Here you can explore the data for Households Survey which is run every two years in Coventry. After specifying the database you want to explore you can select the different questions on the surveys in the left dropdown menu. The plots will appear on the right when ticking the different answers. Note that you can multiple tick so that the values will be added. Finally, you can group the answers by several demographic categories that are shown on the top right.</p>
             </div>
         
         </div>
@@ -612,21 +613,18 @@
             svg.selectAll(".bar")
                 .data(names)
                 .enter().append("rect")
-                .attr("class", "bar")
+                .attr("class", function(d) {
+                    if (d == "All Groups") {return "bar--total"}
+                    else 	{ return "bar" }
+                ;})
                 .attr("y", function(d) { return y(d); })
                 .attr("height", y.bandwidth())
                 .on('mousemove', function(d){
-                    d3.select(this)
-                        .attr("class","bar-hover");
-                        
                     tooltip.classed('hidden', false)
 						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
 						.html(d + ': ' + Number(values[d].toFixed(1)) + '%');
                 })
                 .on('mouseout', function(d){
-                    d3.select(this)
-                        .attr("class","bar");
-                    
                     tooltip.classed('hidden', true);
                 })
                 .attr("width", function(d) {return x(0); } )
@@ -715,6 +713,12 @@
                         valuestoplot[k] = Number(DATA[qvalue]["Answers"][c][group][k]);
                     }
                 });
+                
+                if ("All Groups" in valuestoplot) {
+                    valuestoplot["All Groups"] += Number(DATA[qvalue]["Answers"][c]["Total"]);
+                } else {
+                    valuestoplot["All Groups"] = Number(DATA[qvalue]["Answers"][c]["Total"]);
+                }
             });
             
             return(valuestoplot);
