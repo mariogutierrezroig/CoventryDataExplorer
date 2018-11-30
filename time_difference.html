@@ -1,21 +1,21 @@
 <html>
 <head>
     <title>Coventry Data Explorer: Time Difference</title>
-    
+
     <style>
-        
+
         .layout {
             width: 1200px;
             margin: auto;
             margin-top : 0px;
         }
-        
+
         .header {
 			width: 1200px;
             background-color: navy;
             padding-bottom: 20px;
 		}
-        
+
         h1 {
             text-align: center;
 			font-size: 60px;
@@ -24,7 +24,7 @@
             margin-top: 0px;
             margin-bottom: 10px;
         }
-        
+
         .navmenu {
 			width: 1100px;
 			font-size: 20px;
@@ -38,7 +38,7 @@
             margin-bottom: 10px;
             text-align: center;
         }
-        
+
         .description {
 			width: 1100px;
 			font-size: 16px;
@@ -52,7 +52,7 @@
             margin: auto;
             text-align: justify;
 		}
-        
+
         .mainrow {
 			width: 1200px;
             display: flex;
@@ -60,14 +60,14 @@
             justify-content: space-between;
             align-items: flex-start;
 		}
-        
+
         .leftpan {
             width: 400px;
             vertical-align: top;
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
         }
-        
+
         .menu {
             margin-bottom: 14px;
         }
@@ -82,7 +82,7 @@
             height: 500px;
             vertical-align: top;
         }
-        
+
         .question {
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
@@ -90,7 +90,7 @@
             margin-bottom: 14px;
             margin-right: 40px;
         }
-        
+
         .answers {
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
@@ -100,7 +100,7 @@
             height: 150px;
             overflow-y: auto;
         }
-        
+
         .rightpan {
             width: 800px;
             vertical-align: top;
@@ -111,13 +111,13 @@
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
         }
-        
+
         .displaymodebar {
             width: 800px;
             height: 50px;
-            
+
         }
-        
+
         .radio-inline {
             width: auto;
             vertical-align: center;
@@ -130,11 +130,11 @@
             justify-content: space-between;
             align-items: flex-start;
         }
-        
+
         .smallplot {
             width: 400px;
         }
-        
+
         .bigplot {
             width: 800px;
             horizontal-align: center;
@@ -160,7 +160,7 @@
           stroke: black;
           stroke-width: 1px;
         }
-        
+
         div.tooltip {
             color: #222;
             background-color: #fff;
@@ -170,11 +170,11 @@
             opacity: 0.9;
             position: absolute;
         }
-        
+
         .hidden {
             display: none;
         }
-        
+
         .incident {
             width: 200px;
             height: 200px;
@@ -188,19 +188,19 @@
             stroke-width:2px;
             z-index: 10000;
         }
-        
+
         .mapCheckbox{
             vertical-align: center;
             font-size: 16px;
             font-family: "Helvetica", Georgia, Serif;
             cursor: pointer;
         }
-        
+
         .plotlabels{
             font-size: 16px;
             font-family: "Helvetica", Georgia, Serif;
         }
-        
+
         .credcls {
 			width: 1200px;
             height: 50px;
@@ -210,39 +210,39 @@
             text-align: center;
             padding: 2px;
             color: white;
-		}        
+		}
 
     </style>
 </head>
 <body>
-    
+
     <script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="https://d3js.org/d3-array.v1.min.js"></script>
 	<script src="https://d3js.org/d3-geo.v1.min.js"></script>
 	<script src="https://d3js.org/d3-queue.v3.min.js"></script>
 	<script src="https://d3js.org/topojson.v1.min.js"></script>
-    
+
     <div class='layout'>
 
         <div class='header'>
             <h1>Coventry Data Explorer</h1>
-            
+
             <div class='navmenu'>
-				<a href="./data_exploration.html" style="text-decoration: none; color: LightSteelBlue"> Data Exploration</a> | <b>Time Difference</b> | <a href="./differences_wards.html" style="text-decoration: none; color: LightSteelBlue">Correlation in Wards</a> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a> | <a href="./scenicness.html" style="text-decoration: none; color: LightSteelBlue">Scenicness</a>
+				<a href="./data_exploration.html" style="text-decoration: none; color: LightSteelBlue"> Data Exploration</a> | <b>Time Difference</b> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a> | <a href="./scenicness.html" style="text-decoration: none; color: LightSteelBlue">Scenicness</a>
 			</div>
-            
+
             <div class='description'>
                 <p>This page allows you to explore the changes in time of the Coventry Households Survey, which is run every two years. You should first select the time period you want to compare the data over. Then select the different questions on the surveys in the left dropdown menu. The plots will appear on the right when ticking the different answers. Note that you can multiple tick so that the values will be added. Finally, you can group the answers by several demographic categories that are shown on the top right.</p>
             </div>
-        
+
         </div>
-        
+
         <div id='row-main' class="mainrow">
-            <div id='leftpanel' class='leftpan'> 
+            <div id='leftpanel' class='leftpan'>
                 <div id='leftmenu' class='menu'>
-                    
+
                     <p> Select two different time periods: </p>
-                    
+
                     <select id="lefttimeselect" class="select">
                       <option value="None" style="background-color: #cccccc;" disabled selected>Select An Option</option>
                       <option value="2016">2016</option>
@@ -254,15 +254,15 @@
                       <option value="2016">2016</option>
                       <option value="2018">2018</option>
                     </select>
-                
+
                 </div>
                 <div id='question' class='question'> </div>
                 <div id='answers' class='answers'> </div>
             </div>
-                
+
             <div id='rightpanel' class='rightpan'>
                 <div id='displaymodebar' class='displaymodebar'>
-                    
+
                     <div>Group by:</div>
                     <form id='displaygroup'>
                         <label class="radio-inline">
@@ -291,68 +291,68 @@
                         </label>
                     </form>
                 </div>
-                
+
                 <div id='smallplots' class='smallplots'>
                     <div id='leftplot' class='smallplot'> </div>
                     <div id='rightplot' class='smallplot'> </div>
                 </div>
-                
+
                 <div id='bigplot' class='bigplot'> </div>
-                
+
             </div>
         </div>
-        
+
         <div id='credits' class='credcls'>
             <p> Visualization by <a href="http://datasciencelab.co.uk/people/mario-gutierrez-roig/" style="text-decoration: none; color: SkyBlue">Mario Guti&#233;rrez-Roig</a> and <a href="http://datasciencelab.co.uk/people/federico-botta/" style="text-decoration: none; color: SkyBlue">Federico Botta</a> from <a href="http://datasciencelab.co.uk/" style="text-decoration: none; color: SkyBlue">WBS Data Science Lab</a>. Code available on <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer" style="text-decoration: none; color: SkyBlue">github</a> </p>
         </div>
-    
+
     </div>
-    
+
     <script>
-        
+
         MAP = {}   // General variable for ward objects
         DATA = {}  // General variable for csvtab object
-  
+
         var tooltip = d3.select('#rightpanel')
             .append('div')
             .attr('class', 'hidden tooltip');
-        
+
         var leftselect = d3.select('#lefttimeselect')
             .on('change', function(d){
                 CheckboxUpdate("left");
             });
-        
+
         var rightselect = d3.select('#righttimeselect')
             .on('change', function(d){
                 CheckboxUpdate("right");
             });
-        
+
         start();
 
         function start() {
-            
+
             // Remove previous question and checkboxes
             d3.select("#questionselect").remove();
             d3.select("#question_p").remove();
             d3.select("#question").selectAll("*").remove();
             d3.select("#answers").selectAll("*").remove();
-            
+
             // Loading data in this way prevents from ploting anything before loading finishes
             d3.queue()
                 .defer(d3.json, './Map/coventry_msoa.geojson')
                 .defer(d3.json, './Data/Coventry_Household_Survey_2016_2018.json')
                 .await(function(error, map, data){
                     if (error) throw error;
-            
+
                     // Assigning values to general variables, otherwise updating doesn't work
                     MAP = map;
                     DATA = data;
-                                        
+
                     d3.select("#leftmenu")
 						.append('p')
                         .attr('id', "question_p")
                         .text('Select a question')
-                    
+
                     /* Adds Features Menu */
 
 					var options = d3.select("#leftmenu")
@@ -366,30 +366,30 @@
 						.append('option')
 						.text(function (d) { return DATA[d]["Topic"]; })
                         .attr('value',function (d) { return d; });
-            
+
                 });
         }
-        
+
         function change_question() {
-            
+
             var qvalue = d3.select('#questionselect').property('value');
-                                    
+
             // Remove previous question and checkboxes
             d3.select("#question").selectAll("*").remove();
             d3.select("#answers").selectAll("*").remove();
-                    
+
             /* Appends Questions */
             d3.select("#question")
                 .append("div")
                 //.attr("class", "questpan")
                 .text(DATA[qvalue]["Question"]);
-            
+
             /* Adds the answers */
 
             var answers = Object.keys(DATA[qvalue]["Answers"]); // Get the column names of csv
-                        
+
             /* Adds Checkboxes */
-            
+
             answers.forEach(function(d,i) {
                 // Append the checkboxes
                 d3.select("#answers")
@@ -400,11 +400,11 @@
                     .attr("type", "checkbox")
                     .attr("class", "mapCheckbox")
                     .attr("value", d)
-                    .on("change", function(d){ 
+                    .on("change", function(d){
                         CheckboxUpdate("left");
                         CheckboxUpdate("right");
                     });
-                    
+
                 // Append the text
                 d3.select("#answer" + i)
                     .append("text")
@@ -413,21 +413,21 @@
 
             CheckboxUpdate("left");
             CheckboxUpdate("right");
-            
+
         };
 
         function radioChange() {
             CheckboxUpdate("left");
             CheckboxUpdate("right");
         }
-        
+
         // Function that move object to front in order to avoid plotting border issues
         d3.selection.prototype.moveToFront = function() {
           return this.each(function(){
             this.parentNode.appendChild(this);
           });
         };
-        
+
         // Function for removing specific string from array of strings
         Array.prototype.remove= function(){
             var what, a= arguments, L= a.length, ax;
@@ -455,10 +455,10 @@
                 .rotate([0,0])
                 .center([-1.49, 52.39])
                 .translate([width/1.8, height/1.6]);
-             
+
             var geoPath = d3.geoPath()
                 .projection(projection);
-            
+
             var svgelement = d3.select("#" + side + "plot")
                 .append('svg')
                 .attr('class', 'map')
@@ -466,28 +466,28 @@
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
             // Title
-            
+
             var time = d3.select("#" + side + "timeselect").property('value');
-                
+
             svgelement.append("text")
-                    .attr("x", (width / 2) - margin.left)             
+                    .attr("x", (width / 2) - margin.left)
                     .attr("y", margin.top)
-                    .attr("text-anchor", "middle")  
-                    .style("font-size", "16px") 
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "16px")
                     .text(time);
-            
+
             /* Domain and Colors */
-            
+
             var arr = Object.keys(values).map(function (key) { return values[key]; });
             var minval = Math.min.apply(null, arr);
             var maxval = Math.max.apply(null, arr);
-            
+
             var xScale = d3.scaleLinear()
                 .domain([minval, maxval])
                 .rangeRound([0, width/2]);
-                
+
             var delta = (maxval - minval) / 5.0; // toFixed() for rounding it to int
-            
+
             var domainArray = new Array();
             for (i = minval + delta; i <= maxval; i+=delta){
                 domainArray.push(Number(i.toFixed(1)));
@@ -498,9 +498,9 @@
                 //.range(["#ffffcc", "#a1dab4", "#41b6c4", "#2c7fb8", "#253494"]);
                 //.range(["#DCDCF0", "#B4B4F0", "#7878F0", "#3C3CF0", "#0000F0"]);
                 .range(["#ffffcc", "#c2e699", "#78c679", "#31a354", "#006837"]);
-            
+
             /* Map */
-            
+
 			svgelement.append("g")
                 .selectAll("path")
                 .data(patches.features)
@@ -517,15 +517,15 @@
                 .on('mousemove', function(d){
                     tooltip.classed('hidden', false)
 						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
-						.html(d.properties.name + ': ' + Number(values[d.properties.code].toFixed(1)) + '%');                    
+						.html(d.properties.name + ': ' + Number(values[d.properties.code].toFixed(1)) + '%');
                 })
                 .on('mouseout', function(d){
                     tooltip.classed('hidden', true);
                     d3.select(this).attr("class","incident");
                 });
-                
+
                 /* Legend */
-                
+
                 svgelement.append("g")
                     .attr("class", "key")
                     .attr("transform", "translate(" + width/5 +",210)")
@@ -542,7 +542,7 @@
                     .attr("width", function(d) { return xScale(d[1]) - xScale(d[0]); })
                     .attr("fill", function(d) { return color(d[0]); })
                     .attr("opacity", "0.7");
-                    
+
                 svgelement.append("g")
                     .attr("class", "key")
                     .attr("transform", "translate(" + width/5 +",210)")
@@ -567,7 +567,7 @@
                     .select(".domain")
                     .remove();
         }
-        
+
         // Plots the map of differences
         function plotmapdiff(patches, values1, values2, legendtext) {
 
@@ -583,10 +583,10 @@
                 .rotate([0,0])
                 .center([-1.49, 52.39])
                 .translate([width/1.8, height/1.6]);
-             
+
             var geoPath = d3.geoPath()
                 .projection(projection);
-            
+
             var svgelement = d3.select("#bigplot")
                 .append('svg')
                 .attr('class', 'bigmap')
@@ -594,28 +594,28 @@
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
             // Title
-                            
+
             svgelement.append("text")
-                    .attr("x", (width / 2) - margin.left)             
+                    .attr("x", (width / 2) - margin.left)
                     .attr("y", margin.top)
-                    .attr("text-anchor", "middle")  
-                    .style("font-size", "16px") 
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "16px")
                     .text("Difference");
-            
+
             /* Domain and Colors */
-            
+
             var valuesdiff = computedifference(values1, values2);
-            
+
             var arr = Object.keys(valuesdiff).map(function (key) { return valuesdiff[key]; });
-            
+
             var maxval = Math.max.apply(null, arr.map(Math.abs));
-            
+
             var xScale = d3.scaleLinear()
                 .domain([-maxval, maxval])
                 .rangeRound([0, width/2]);
-                
+
             var delta = (2 * maxval) / 5.0; // toFixed() for rounding it to int
-            
+
             var domainArray = new Array();
             for (i = -maxval + delta; i <= maxval; i+=delta){
                 domainArray.push(Number(i.toFixed(1)));
@@ -624,9 +624,9 @@
             var color = d3.scaleThreshold()
                 .domain(domainArray)
                 .range(["#d7191c", "#fdae61", "#ffffbf", "#abd9e9", "#2c7bb6"]);
-            
+
             /* Map */
-            
+
 			svgelement.append("g")
                 .selectAll("path")
                 .data(patches.features)
@@ -643,15 +643,15 @@
                 .on('mousemove', function(d){
                     tooltip.classed('hidden', false)
 						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
-						.html(d.properties.name + ': ' + Number(valuesdiff[d.properties.code].toFixed(1)) + '%');                    
+						.html(d.properties.name + ': ' + Number(valuesdiff[d.properties.code].toFixed(1)) + '%');
                 })
                 .on('mouseout', function(d){
                     tooltip.classed('hidden', true);
                     d3.select(this).attr("class","incident");
                 });
-                
+
                 /* Legend */
-                
+
                 svgelement.append("g")
                     .attr("class", "key")
                     .attr("transform", "translate(" + width/5 +",410)")
@@ -668,7 +668,7 @@
                     .attr("width", function(d) { return xScale(d[1]) - xScale(d[0]); })
                     .attr("fill", function(d) { return color(d[0]); })
                     .attr("opacity", "0.7");
-                    
+
                 svgelement.append("g")
                     .attr("class", "key")
                     .attr("transform", "translate(" + width/5 +",410)")
@@ -696,16 +696,16 @@
 
          // Updates the map according to checked boxes
         function barchart(values, legendtext, side){
-            
+
             d3.select("#" + side + "plot").selectAll("*").remove();  // Remove previous objects
-            
+
             /* Domain and Colors */
 
             // set the dimensions and margins of the graph
             var margin = {top: 20, right: 20, bottom: 50, left: 120},
                 width = 400 - margin.left - margin.right,
                 height = 300 - margin.top - margin.bottom;
-            
+
             var names = Object.keys(values);
             var vals = Object.values(values);
 
@@ -727,19 +727,19 @@
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-                
-            
+
+
             // Title
-            
+
             var time = d3.select("#" + side + "timeselect").property('value');
-                
+
             svg.append("text")
-                    .attr("x", (width / 2))             
+                    .attr("x", (width / 2))
                     .attr("y", 0 - (margin.top / 2.5))
-                    .attr("text-anchor", "middle")  
-                    .style("font-size", "16px") 
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "16px")
                     .text(time);
-                
+
             // append the rectangles for the bar chart
             svg.selectAll(".bar")
                 .data(names)
@@ -755,7 +755,7 @@
 						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
 						.html(d + ': ' + Number(values[d].toFixed(1)) + '%');
                 })
-                .on('mouseout', function(d){                    
+                .on('mouseout', function(d){
                     tooltip.classed('hidden', true);
                 })
                 .attr("width", function(d) {return x(0); } )
@@ -771,11 +771,11 @@
             // add the y Axis
             svg.append("g")
               .call(d3.axisLeft(y));
-              
+
             // text label for the x axis
             svg.append("text")
-                .attr("class", "plotlabels")            
-                .attr("transform", "translate(" + (width/2) + " ," + 
+                .attr("class", "plotlabels")
+                .attr("transform", "translate(" + (width/2) + " ," +
                                    (height + margin.top + 20) + ")")
                 .style("text-anchor", "middle")
                 .text("Percentage");
@@ -783,31 +783,31 @@
 
          // Updates the map according to checked boxes
         function barchartdiff(values1, values2, legendtext){
-            
+
             d3.select("#bigplot").selectAll("*").remove();  // Remove previous objects
-            
+
             /* Domain and Colors */
 
             // set the dimensions and margins of the graph
             var margin = {top: 20, right: 20, bottom: 50, left: 70},
                 width = 800 - margin.left - margin.right,
                 height = 300 - margin.top - margin.bottom;
-            
+
             var valuesdiff = computedifference(values1, values2);
-            
+
             var names = Object.keys(valuesdiff);
             var vals = Object.values(valuesdiff);
 
             // set the ranges
             var x = d3.scaleLinear()
                       .range([0, width]);
-                      
+
             var y = d3.scaleBand()
               .range([height, 0])
               .padding(0.1);
-              
+
             var maxval = Math.max.apply(null, vals.map(Math.abs));
-            
+
             // Scale the range of the data in the domains
             //x.domain([-maxval,maxval])
             x.domain([-100,100])
@@ -821,12 +821,12 @@
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
             // Title
-                            
+
             svg.append("text")
-                    .attr("x", (width / 2))             
+                    .attr("x", (width / 2))
                     .attr("y", 0 - (margin.top / 2.5))
-                    .attr("text-anchor", "middle")  
-                    .style("font-size", "16px") 
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "16px")
                     .text("Difference");
 
             svg.selectAll('.bar')
@@ -839,7 +839,7 @@
                 ;})
                 .attr('y', function (d) {return y(d);})
                 .attr('height', y.bandwidth())
-                .on('mousemove', function(d){                        
+                .on('mousemove', function(d){
                     tooltip.classed('hidden', false)
 						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
 						.html(d + ': ' + Number(valuesdiff[d].toFixed(1)) + '%');
@@ -872,26 +872,26 @@
             tickNegative.select('text')
                 .attr('x', 9)
                 .style('text-anchor', 'start');
-              
+
             // text label for the x axis
             svg.append("text")
-                .attr("class", "plotlabels")            
-                .attr("transform", "translate(" + (width/2) + " ," + 
+                .attr("class", "plotlabels")
+                .attr("transform", "translate(" + (width/2) + " ," +
                                    (height + margin.top + 20) + ")")
                 .style("text-anchor", "middle")
                 .text("Percentage");
-        }     
+        }
 
         // Updates the map according to checked boxes
         function CheckboxUpdate(side){
-            
+
             var lefttime = d3.select("#lefttimeselect").property('value');
             var righttime = d3.select("#righttimeselect").property('value');
-                        
+
             var group = d3.select('input[name="optradio"]:checked').node().value;
-            
+
             var ticked_answers = [];
-            
+
             d3.select("#leftpanel")
                 .selectAll(".mapCheckbox")
                 .each(function(d){
@@ -900,7 +900,7 @@
                         ticked_answers.push(cb.property("value"));
                 }
             });
-            
+
 
             if (Object.keys(ticked_answers).length == 0)
             {
@@ -913,7 +913,7 @@
                 if (lefttime != "None")
                 {
                     var leftvalues = computevalues(group,lefttime);
-                    
+
                     if (group == "MSOA")
                     {
                         plotmap(MAP, leftvalues, "Percentage", "left"); // Plots the map again
@@ -927,7 +927,7 @@
                 if (righttime != "None")
                 {
                     var rightvalues = computevalues(group,righttime);
-                    
+
                     if (group == "MSOA")
                     {
                         plotmap(MAP, rightvalues, "Percentage", "right"); // Plots the map again
@@ -937,7 +937,7 @@
                         barchart(rightvalues, "Percentage", "right");
                     }
                 }
-                
+
                 if ((lefttime != "None") && (righttime != "None"))
                 {
                     if (group == "MSOA")
@@ -951,12 +951,12 @@
                 }
             }
         }
-        
+
         // Looks which checkboxes are selected and returns the corresponding data
         function computevalues(group,time){
-            
+
             var choices = [];
-            
+
             d3.select("#leftpanel")
                 .selectAll(".mapCheckbox")
                 .each(function(d){
@@ -967,7 +967,7 @@
             });
 
             var qvalue = d3.select('#questionselect').property('value');
-            
+
             var valuestoplot = {};
 
             choices.forEach(function(c) {
@@ -980,23 +980,23 @@
                         valuestoplot[k] = Number(DATA[qvalue]["Answers"][c][group][time][k]);
                     }
                 });
-                
+
                 if ("All Groups" in valuestoplot) {
                     valuestoplot["All Groups"] += Number(DATA[qvalue]["Answers"][c]["Total"][time]);
                 } else {
                     valuestoplot["All Groups"] = Number(DATA[qvalue]["Answers"][c]["Total"][time]);
                 }
-                
+
             });
-            
+
             return(valuestoplot);
         }
-        
+
         function computedifference(values1, values2){
-            
+
             var values = {};
             Object.keys(values2).forEach( function(k) {
-                
+
                 if (k in values1){
                     values[k] = values2[k] - values1[k];
                 }
@@ -1004,7 +1004,7 @@
             return(values);
         }
 
-        
+
 
 
 
