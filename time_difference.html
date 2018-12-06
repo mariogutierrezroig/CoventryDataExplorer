@@ -228,11 +228,13 @@
             <h1>Coventry Data Explorer</h1>
 
             <div class='navmenu'>
-				<a href="./data_exploration.html" style="text-decoration: none; color: LightSteelBlue"> Data Exploration</a> | <b>Time Difference</b> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a> | <a href="./scenicness.html" style="text-decoration: none; color: LightSteelBlue">Scenicness</a>
+				<a href="./data_exploration.html" style="text-decoration: none; color: LightSteelBlue"> Data Exploration</a> | <a href="./correlation.html" style="text-decoration: none; color: LightSteelBlue">Geographical Correlations</a> | <b>Time Difference</b> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a> | <a href="./scenicness.html" style="text-decoration: none; color: LightSteelBlue">Scenicness</a>
 			</div>
 
             <div class='description'>
                 <p>This page allows you to explore the changes in time of the Coventry Households Survey, which is run every two years. You should first select the time period you want to compare the data over. Then select the different questions on the surveys in the left dropdown menu. The plots will appear on the right when ticking the different answers. Note that you can multiple tick so that the values will be added. Finally, you can group the answers by several demographic categories that are shown on the top right.</p>
+
+                <p style="font-size: 12px"> <b>Statistics Disclaimer</b>: This tool is for an exploratory analysis. Be careful when drawing conclusions from the plots, further analyses must be run in order to establish a reliable truth.</p>
             </div>
 
         </div>
@@ -340,7 +342,7 @@
             // Loading data in this way prevents from ploting anything before loading finishes
             d3.queue()
                 .defer(d3.json, './Map/coventry_msoa.geojson')
-                .defer(d3.json, './Data/Coventry_Household_Survey_2016_2018.json')
+                .defer(d3.json, './Data/HouseholdSurveys/Coventry_Household_Survey_2016_2018.json')
                 .await(function(error, map, data){
                     if (error) throw error;
 

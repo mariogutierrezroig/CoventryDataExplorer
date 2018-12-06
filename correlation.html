@@ -1,21 +1,21 @@
 <html>
 <head>
     <title>Coventry Data Explorer: correlation</title>
-    
+
     <style>
-        
+
         .layout {
             width: 1200px;
             margin: auto;
             margin-top : 0px;
         }
-        
+
         .header {
 			width: 1200px;
             background-color: navy;
             padding-bottom: 20px;
 		}
-        
+
         h1 {
             text-align: center;
 			font-size: 60px;
@@ -24,7 +24,7 @@
             margin-top: 0px;
             margin-bottom: 10px;
         }
-        
+
         .navmenu {
 			width: 1100px;
 			font-size: 20px;
@@ -38,7 +38,7 @@
             margin-bottom: 10px;
             text-align: center;
         }
-        
+
         .description {
 			width: 1100px;
 			font-size: 16px;
@@ -52,7 +52,7 @@
             margin: auto;
             text-align: justify;
 		}
-        
+
         .mainrow {
 			width: 1200px;
             height: 800px;
@@ -61,15 +61,16 @@
             justify-content: space-between;
             align-items: flex-start;
 		}
-        
+
         .leftpan {
             width: 400px;
             height: 350px;
             vertical-align: top;
-            margin-top: 20px;
+            margin-top: 5px;
+            margin-top: 5px;
             font-family: "Helvetica", Georgia, Serif;
         }
-        
+
         .centerpan {
             width: 400px;
             height: 350px;
@@ -77,16 +78,17 @@
             margin-top: 20px;
             font-family: "Helvetica", Georgia, Serif;
         }
-        
+
         .rightpan {
             width: 370px;
             height: 350px;
             vertical-align: top;
-            margin-top: 20px;
+            margin-top: 5px;
+            margin-top: 5px;
             font-family: "Helvetica", Georgia, Serif;
             padding-left:30px;
         }
-        
+
         div.bottompan {
             width: 1200px;
             display: flex;
@@ -94,11 +96,12 @@
             justify-content: space-between;
             align-items: flex-start;
         }
-        
+
         .menu {
             margin-bottom: 14px;
+            padding: 5px;
         }
-        
+
         .question {
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
@@ -106,7 +109,7 @@
             margin-bottom: 14px;
             margin-right: 40px;
         }
-        
+
         .answers {
             width: 350px;
             height: 180px;
@@ -115,20 +118,20 @@
             line-height: 16px;
             overflow-y: auto;
         }
-        
+
         .map {
             width: 400px;
             height: 400px;
             vertical-align: top;
         }
-        
+
         .plot {
             width: 400px;
             height: 400px;
             margin-top: 40px;
         }
-        
-        .abox {           
+
+        .abox {
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
             width: 400px;
@@ -137,7 +140,7 @@
             flex-flow: row wrap;
             align-content: flex-start;
         }
-        
+
         div.tooltip {
             font-size: 14px;
             font-family: "Helvetica", Georgia, Serif;
@@ -149,11 +152,11 @@
             opacity: 0.9;
             position: absolute;
         }
-        
+
         .hidden {
             display: none;
         }
-        
+
         .incident {
             width: 200px;
             height: 200px;
@@ -167,35 +170,35 @@
             stroke-width:2px;
             z-index: 10000;
         }
-        
+
         .mapCheckbox{
             vertical-align: center;
             font-size: 16px;
             font-family: "Helvetica", Georgia, Serif;
             cursor: pointer;
         }
-        
+
         .plotlabels{
             font-size: 16px;
             font-family: "Helvetica", Georgia, Serif;
         }
-        
+
         .gridline{
             stroke: black;
             stroke-width:1px;
             stroke-dasharray: 3,3;
         }
-        
+
         .trendline{
             stroke: red;
             stroke-width:2px;
         }
-        
+
         .trendlinehover{
             stroke: red;
             stroke-width:5px;
         }
-        
+
         .credcls {
 			width: 1200px;
             height: 50px;
@@ -206,68 +209,70 @@
             padding: 2px;
             color: white;
 		}
-        
+
 
     </style>
 </head>
 <body>
-    
+
     <script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="https://d3js.org/d3-array.v1.min.js"></script>
 	<script src="https://d3js.org/d3-geo.v1.min.js"></script>
 	<script src="https://d3js.org/d3-queue.v3.min.js"></script>
 	<script src="https://d3js.org/topojson.v1.min.js"></script>
-    
+
     <div class='layout'>
 
         <div class='header'>
             <h1>Coventry Data Explorer</h1>
-            
+
             <div class='navmenu'>
-				<a href="./geographical_distribution.html" style="text-decoration: none; color: LightSteelBlue"> Geographical Distribution</a> | <a href="./differences_wards.html" style="text-decoration: none; color: LightSteelBlue">Differences in Wards</a> | <b>Correlations in Wards</b> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape</a> | <a href="./scenicness.html" style="text-decoration: none; color: LightSteelBlue">Scenicness</a>
+				<a href="./data_exploration.html" style="text-decoration: none; color: LightSteelBlue">Data Exploration</a> | <b> Geographical Correlations</b> | <a href="./time_difference.html" style="text-decoration: none; color: LightSteelBlue">Time Difference</a> | <a href="./visual_landscape.html" style="text-decoration: none; color: LightSteelBlue">Visual Landscape </a> | <a href="./scenicness.html" style="text-decoration: none; color: LightSteelBlue">Scenicness </a>
 			</div>
-            
+
             <div class='description'>
-                <p>This is a tool for exploring the correlation between two different variables selected from 3 different data categories: ONS Census, Households Survey and Cultural Participation. First, select the items in the menu and tick the boxes to create and display the desired variables you want to analyse. Note that you can tick multiple boxes adding the values up. A scatter plot in the center will show a two-dimensional point for each ward and the correlation between the selected variables. A correlation analysis can be performed underneath by pressing run.</p>
+                <p>This is a tool for exploring the geographical correlation between two different variables selected from Households Surveys datasets. First, you can select the items in the menu and tick the boxes to create and display the desired variables you want to analyse. Note that you can tick multiple boxes adding up the percentage values. A scatter plot in the center will show a two-dimensional point for each ward and the correlation between the selected variables. A correlation analysis can be performed underneath by pressing run.</p>
+
+                <p style="font-size: 12px"> <b>Statistics Disclaimer</b>: This tool is for an exploratory analysis. Be careful when drawing conclusions from the plots, further analyses must be run in order to establish a reliable truth.</p>
             </div>
-        
+
         </div>
-        
+
         <div id='row-main' class="mainrow">
-            <div id='leftpanel' class='leftpan'> 
+            <div id='leftpanel' class='leftpan'>
                 <div id='leftmenu' class='menu'>
-                    
-                    <p> Select a database </p>
-                    
+
+                    <p style="margin: 5px"> Select a database: </p>
+
                     <select id="leftdatasetselect" class="select">
                       <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
-                      <option value="Coventry_Census_2011_MSOA.json">ONS Census 2011</option>
-                      <option value="Coventry_Household_Survey_2016_MSOA.json">Household Survey 2016</option>
-                      <option value="Coventry_Household_Survey_2018_MSOA.json">Household Survey 2018</option>
+                      <!-- <option value="Coventry_Census_2011_MSOA.json">ONS Census 2011</option> -->
+                      <option value="Coventry_Household_Survey_2016.json">Household Survey 2016</option>
+                      <option value="Coventry_Household_Survey_2018.json">Household Survey 2018</option>
                     </select>
-                
+
                 </div>
                 <div id='leftquestion' class='question'> </div>
                 <div id='leftanswers' class='answers'> </div>
-                
+
             </div>
             <div id='centerpanel' class='centerpan'>
                 <div id='scatterplot' class='plot'> </div>
             </div>
             <div id='rightpanel' class='rightpan'>
                 <div id='rightmenu' class='menu'>
-                    <p> Select a database </p>
-                    
+                    <p style="margin: 5px"> Select a database: </p>
+
                     <select id="rightdatasetselect" class="select">
                       <option style="background-color: #cccccc;" disabled selected>Select An Option</option>
-                      <option value="Coventry_Census_2011_MSOA.json">ONS Census 2011</option>
-                      <option value="Coventry_Household_Survey_2016_MSOA.json">Household Survey 2016</option>
-                      <option value="Coventry_Household_Survey_2018_MSOA.json">Household Survey 2018</option>
+                      <!-- <option value="Coventry_Census_2011_MSOA.json">ONS Census 2011</option> -->
+                      <option value="Coventry_Household_Survey_2016.json">Household Survey 2016</option>
+                      <option value="Coventry_Household_Survey_2018.json">Household Survey 2018</option>
                     </select>
                 </div>
                 <div id='rightquestion' class='question'> </div>
                 <div id='rightanswers' class='answers'> </div>
-                
+
             </div>
             <div id='bottompanel' class='bottompan'>
                 <div id='leftmap' class='map'> </div>
@@ -277,39 +282,39 @@
                 <div id='rightmap' class='map'> </div>
             </div>
         </div>
-        
+
         <div id='credits' class='credcls'>
-            <p> Visualization by <a href="http://datasciencelab.co.uk/people/mario-gutierrez-roig/" style="text-decoration: none; color: SkyBlue">Mario Guti&#233;rrez-Roig</a> from <a href="http://datasciencelab.co.uk/" style="text-decoration: none; color: SkyBlue">WBS Data Science Lab</a>. Code available on <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer" style="text-decoration: none; color: SkyBlue">github</a> </p>
+            <p> Visualization by <a href="http://datasciencelab.co.uk/people/mario-gutierrez-roig/" style="text-decoration: none; color: SkyBlue">Mario Guti&#233;rrez-Roig</a> and <a href="http://datasciencelab.co.uk/people/federico-botta/" style="text-decoration: none; color: SkyBlue">Federico Botta</a> from <a href="http://datasciencelab.co.uk/" style="text-decoration: none; color: SkyBlue">WBS Data Science Lab</a>. Code available on <a href="https://github.com/mariogutierrezroig/CoventryDataExplorer" style="text-decoration: none; color: SkyBlue">github</a> </p>
         </div>
-    
+
     </div>
-    
+
     <script>
-        
+
         MAP = {}   // General variable for ward objects
         DATA = {}  // General variable for csvtab object
-        
+
         var width = 500,
             height = 500;
-         
+
         var projection = d3.geoAlbers()
             .scale(160000)
             .rotate([0,0])
             .center([-1.49, 52.39])
             .translate([width/2,height/2.3]);
-         
+
         var geoPath = d3.geoPath()
             .projection(projection);
-  
+
         var tooltip = d3.select('#bottompanel')
             .append('div')
             .attr('class', 'hidden tooltip');
-        
+
         var leftselect = d3.select('#leftdatasetselect')
             .on('change', function(d){
                 change_dataset("left");
             });
-        
+
         var rightselect = d3.select('#rightdatasetselect')
             .on('change', function(d){
                 change_dataset("right");
@@ -322,27 +327,32 @@
             d3.select("#" + side + "question_p").remove();
             d3.select("#" + side + "question").selectAll("*").remove();
             d3.select("#" + side + "answers").selectAll("*").remove();
-            
+
+            d3.select("#" + side + "map").selectAll("*").remove();  // Remove previous objects
+            d3.select("#scatterplot").selectAll("*").remove();  // Remove previous objects
+            d3.select("#analysisbox").selectAll("*").remove();  // Remove previous objects
+
             var values = d3.select("#" + side + "datasetselect").property('value');
 
-            datapath = './Data/'.concat(values);
-            
+            datapath = './Data/HouseholdSurveys/'.concat(values);
+
             // Loading data in this way prevents from ploting anything before loading finishes
             d3.queue()
                 .defer(d3.json, './Map/coventry_msoa.geojson')
                 .defer(d3.json, datapath)
                 .await(function(error, map, data){
                     if (error) throw error;
-            
+
                     // Assigning values to general variables, otherwise updating doesn't work
                     MAP = map;
                     DATA[side] = data;
-                                        
+
                     d3.select("#" + side + "menu")
 						.append('p')
                         .attr('id', side + "question_p")
                         .text('Select a question')
-                    
+                        .style("margin", "5px");
+
                     /* Adds Features Menu */
 
 					var options = d3.select("#" + side + "menu")
@@ -356,30 +366,30 @@
 						.append('option')
 						.text(function (d) { return DATA[side][d]["Topic"]; })
                         .attr('value',function (d) { return d; });
-            
+
                 });
         }
-        
+
         function change_question(side) {
-                        
+
             var qvalue = d3.select("#" + side + "questionselect").property('value');
-                                    
+
             // Remove previous question and checkboxes
             d3.select("#" + side + "question").selectAll("*").remove();
             d3.select("#" + side + "answers").selectAll("*").remove();
-                    
+
             /* Appends Questions */
             d3.select("#" + side + "question")
                 .append("div")
                 //.attr("class", "questpan")
                 .text(DATA[side][qvalue]["Question"]);
-            
+
             /* Adds the answers */
 
             var answers = Object.keys(DATA[side][qvalue]["Answers"]); // Get the column names of csv
-            
+
             /* Adds Checkboxes */
-            
+
             answers.forEach(function(d,i) {
                 // Append the checkboxes
                 d3.select("#" + side + "answers")
@@ -390,95 +400,30 @@
                     .attr("type", "checkbox")
                     .attr("class", "mapCheckbox")
                     .attr("value", d)
-                    .on("change", function(d){ 
+                    .on("change", function(d){
                         CheckboxUpdate(side);
                         plotscatterplot();
                     });
-                    
+
                 // Append the text
                 d3.select("#" + side + "answer" + i)
                     .append("text")
-                    .text(d);
+                    .text(DATA[side][qvalue]["Answers"][d]["Text"]);
             });
 
             d3.select("#scatterplot").selectAll("*").remove();  // Remove previous objects
             d3.select("#analysisbox").selectAll("*").remove();  // Remove previous objects
             plotmapnull(MAP, side); // Plots the initial null map in the left
-            
-        };
-
-        function menuchange(side) {
-                        
-            var values = d3.select("#" + side + "select").property('value');
-            csvpath = './Data/Census/Tables/'.concat(values, '.csv');
-            questionpath = './Data/Census/Questions/'.concat(values, '.txt');
-                        
-            // Remove previous question and checkboxes
-            d3.select("#" + side + "question").selectAll("*").remove();
-            d3.select("#" + side + "answers").selectAll("*").remove();
-            
-            // Loading data in this way prevents from ploting anything before loading finishes
-            d3.queue()
-                .defer(d3.json, './Map/coventry_wards.topojson')
-                .defer(d3.csv, csvpath)
-                .defer(d3.text, questionpath)
-                .await(function(error, wards, csvtab, questiontext){
-                    if (error) throw error;
-            
-                    // Assigning values to general variables, otherwise updating doesn't work
-                    WARDS = wards;
-                    CSVTAB[side] = csvtab;
-                    QUESTION[side] = questiontext;
-                    
-                    /* Appends Questions */
-                    d3.select("#" + side + "question")
-                        .append("div")
-                        //.attr("class", "questpan")
-                        .text(QUESTION[side]);
-                    
-                    /* Adds the answers */
-                    var answers = d3.keys(CSVTAB[side][0]); // Get the column names of csv
-                    answers.remove('name', true); // Remove the element "name"
-                    answers.remove('code', true); // Remove the element "code"
-                    
-                    /* Adds Checkboxes */
-                    
-                    answers.forEach(function(d,i) {
-                        // Append the checkboxes
-                        d3.select("#" + side + "answers")
-                            .append("div")
-                            .append("label")
-                            .attr("id", side + "answer" + i)
-                            .append("input")
-                            .attr("type", "checkbox")
-                            .attr("class", "mapCheckbox")
-                            .attr("value", d)
-                            .on("change", function(d){ 
-                                CheckboxUpdate(WARDS, CSVTAB[side], side);
-                                plotscatterplot();
-                            });
-                            
-                        // Append the text
-                        d3.select("#" + side + "answer" + i)
-                            .append("text")
-                            .text(d);
-                    });
-
-                    d3.select("#scatterplot").selectAll("*").remove();  // Remove previous objects
-                    d3.select("#analysisbox").selectAll("*").remove();  // Remove previous objects
-                    plotmapnull(WARDS, side); // Plots the initial null map in the left
-            
-                });
 
         };
-        
+
         // Function that move object to front in order to avoid plotting border issues
         d3.selection.prototype.moveToFront = function() {
           return this.each(function(){
             this.parentNode.appendChild(this);
           });
         };
-        
+
         // Function for removing specific string from array of strings
         Array.prototype.remove= function(){
             var what, a= arguments, L= a.length, ax;
@@ -493,25 +438,25 @@
 
         // Plots the map
         function plotmap(patches, values, legendtext, side) {
-            
+
             d3.select("#" + side + "map").selectAll("*").remove();  // Remove previous objects
-            
+
             var svgelement = d3.select("#" + side + "map")
                 .append('svg')
                 .attr('class', 'map');
-            
+
             /* Domain and Colors */
-            
+
             var arr = Object.keys(values).map(function (key) { return values[key]; });
             var minval = Math.min.apply(null, arr);
             var maxval = Math.max.apply(null, arr);
-            
+
             var xScale = d3.scaleLinear()
                 .domain([minval, maxval])
                 .rangeRound([600, 900]);
-                
+
             var delta = (maxval - minval) / 5.0; // toFixed() for rounding it to int
-            
+
             var domainArray = new Array();
             for (i = minval + delta; i <= maxval; i+=delta){
                 domainArray.push(Number(i.toFixed(1)));
@@ -522,9 +467,9 @@
                 .range(["#ffffcc", "#a1dab4", "#41b6c4", "#2c7fb8", "#253494"]);
                 //.range(["#ffffcc", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#0c2c84"]);
                 //.range(["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#0c2c84"]);
-            
+
             /* Map */
-            
+
 			svgelement.append("g")
                 .selectAll("path")
                 .data(patches.features)
@@ -540,12 +485,12 @@
 				.on('mouseover', function(d){
                     d3.select(this).moveToFront().attr("class","hover");
                     d3.select("#scatterplot").select("#" + d.properties.code).attr("class","hover");
-                    
+
                     var cx = Number(d3.select("#scatterplot").select("#" + d.properties.code).attr("cx"));
                     var cy = Number(d3.select("#scatterplot").select("#" + d.properties.code).attr("cy"));
                     var cr = Number(d3.select("#scatterplot").select("#" + d.properties.code).attr("r"));
-                    var height = d3.select("#plotcanvas").attr("height");                
-                    
+                    var height = d3.select("#plotcanvas").attr("height");
+
                     d3.select("#plotcanvas")
                         .append("line")
                         .attr("class", "gridline")
@@ -553,7 +498,7 @@
                         .attr("y1", cy)
                         .attr("x2", 0)
                         .attr("y2", cy);
-                            
+
                     d3.select("#plotcanvas")
                         .append("line")
                         .attr("class", "gridline")
@@ -561,23 +506,23 @@
                         .attr("y1", cy + cr)
                         .attr("x2", cx)
                         .attr("y2", height);
-                        
+
                 })
                 .on('mousemove', function(d){
                     tooltip.classed('hidden', false)
 						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
-						.html(d.properties.name + ': ' + Number(values[d.properties.code].toFixed(1)));                    
+						.html(d.properties.name + ': ' + Number(values[d.properties.code].toFixed(1)));
                 })
                 .on('mouseout', function(d){
                     tooltip.classed('hidden', true);
                     d3.select(this).attr("class","incident");
                     d3.select("#scatterplot").select("#" + d.properties.code).attr("class","incident");
-                    
+
                     d3.select("#plotcanvas").selectAll(".gridline").remove();
                 });
-                
+
                 /* Legend */
-                
+
                 svgelement.append("g")
                     .attr("class", "key")
                     .attr("transform", "translate(-550,310)")
@@ -594,7 +539,7 @@
                     .attr("width", function(d) { return xScale(d[1]) - xScale(d[0]); })
                     .attr("fill", function(d) { return color(d[0]); })
                     .attr("opacity", "0.7");
-                    
+
                 svgelement.append("g")
                     .attr("class", "key")
                     .attr("transform", "translate(-550,310)")
@@ -618,18 +563,18 @@
                     .select(".domain")
                     .remove();
         }
-        
+
         // Plots the map if there is no choice selected
         function plotmapnull(patches, side) {
-            
+
             d3.select("#" + side + "map").selectAll("*").remove();  // Remove previous objects
-            
+
             var svgelement = d3.select("#" + side + "map")
                 .append('svg')
                 .attr('class', 'map');
-            
+
             /* Map */
-            
+
 			svgelement.append("g")
                 .selectAll("path")
                 .data(patches.features)
@@ -646,13 +591,13 @@
                 .on('mousemove', function(d){
                     tooltip.classed('hidden', false)
 						.attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 50) + 'px')
-						.html(d.properties.name);                    
+						.html(d.properties.name);
                 })
                 .on('mouseout', function(d){
                     d3.select(this)
                         .attr("class","incident")
                         .style("fill", "#e5e5e5");
-                    
+
                     tooltip.classed('hidden', true);
                 });
         }
@@ -662,24 +607,24 @@
 
             var paneltoplot = "#" + side + "map";
             var valuestoplot = computevalues(side);
-            
+
             if (Object.keys(valuestoplot).length == 0)
             {
                 plotmapnull(MAP,side); // Plots the map again
             }
             else
-            {                
+            {
                 plotmap(MAP, valuestoplot, "Percentage",side); // Plots the map again
             }
         }
-        
+
         // Looks which checkboxes are selected and returns the corresponding data
         function computevalues(side){
-            
+
             var paneltolook = "#" + side + "panel";
-            
+
             var choices = [];
-            
+
             d3.select(paneltolook)
                 .selectAll(".mapCheckbox")
                 .each(function(d){
@@ -688,37 +633,37 @@
                         choices.push(cb.property("value"));
                 }
             });
-            
+
             var qvalue = d3.select("#" + side + "questionselect").property('value');
-            
+
             var valuestoplot = {};
 
             choices.forEach(function(c) {
-                var keys = Object.keys(DATA[side][qvalue]["Answers"][c]);
+                var keys = Object.keys(DATA[side][qvalue]["Answers"][c]["MSOA"]);
                 keys.forEach(function(k) {
                     if (k in valuestoplot) {
-                        valuestoplot[k] += Number(DATA[side][qvalue]["Answers"][c][k]);
+                        valuestoplot[k] += Number(DATA[side][qvalue]["Answers"][c]["MSOA"][k]);
                     } else {
-                        valuestoplot[k] = Number(DATA[side][qvalue]["Answers"][c][k]);
+                        valuestoplot[k] = Number(DATA[side][qvalue]["Answers"][c]["MSOA"][k]);
                     }
                 });
             });
-            
+
             return(valuestoplot);
         }
-        
+
         // Plots the scatter plot
         function plotscatterplot(){
-                        
+
             d3.select("#scatterplot").selectAll("*").remove();  // Remove previous objects
             d3.select("#analysisbox").selectAll("*").remove();
-            
+
             if(Object.keys(DATA).length == 2)
-            {                
+            {
                 var margin = {top: 20, right: 20, bottom: 50, left: 60},
                     width = 400 - margin.left - margin.right,
                     height = 300 - margin.top - margin.bottom;
-                
+
                 var svg = d3.select("#scatterplot")
                     .append("svg")
                     .attr("width", width + margin.left + margin.right)
@@ -731,26 +676,26 @@
 
                 var leftvalues = computevalues("left");
                 var rightvalues = computevalues("right");
-                            
+
                 if(Object.keys(leftvalues).length > 0 && Object.keys(rightvalues).length > 0){
-                
+
                     var x=[],
                         y=[];
-                    
+
                     var names = {}
-                    
+
                     MAP["features"].forEach(function(d){ names[d["properties"]["code"]] = d["properties"]["name"] });
-                                        
+
                     var keys = Object.keys(leftvalues);
                     keys.forEach(function(key){
                         x.push(leftvalues[key])
                         y.push(rightvalues[key])
                     });
-                    
+
                     // set the ranges
                     var xscale = d3.scaleLinear().range([0, width]);
                     var yscale = d3.scaleLinear().range([height, 0]);
-                    
+
                     // Scale the range of the data
                     xscale.domain(d3.extent(x, function(d) { return d; })).nice();
                     yscale.domain(d3.extent(y, function(d) { return d; })).nice();
@@ -772,11 +717,11 @@
                                 .html(names[d[0]]);
                             d3.select(this).attr("class","hover");
                             d3.selectAll("#" + d[0]).moveToFront().attr("class","hover");
-                            
+
                             var cx = Number(d3.select(this).attr("cx"));
                             var cy = Number(d3.select(this).attr("cy"));
                             var cr = Number(d3.select(this).attr("r"));
-                            
+
                             // Add x gridline
                             svg.append("line")
                                 .attr("class", "gridline")
@@ -784,7 +729,7 @@
                                 .attr("y1", cy)
                                 .attr("x2", 0)
                                 .attr("y2", cy);
-                            
+
                             // Add y gridline
                             svg.append("line")
                                 .attr("class", "gridline")
@@ -797,7 +742,7 @@
                             tooltip.classed('hidden', true);
                             d3.select(this).attr("class","incident");
                             d3.selectAll("#" + d[0]).moveToFront().attr("class","incident");
-                            
+
                             svg.selectAll(".gridline").remove();
                         });
 
@@ -805,19 +750,19 @@
                     svg.append("g")
                         .attr("transform", "translate(0," + height + ")")
                         .call(d3.axisBottom(xscale));
-                    
+
                     // text label for the x axis
                     svg.append("text")
-                        .attr("class", "plotlabels")            
-                        .attr("transform", "translate(" + (width/2) + " ," + 
+                        .attr("class", "plotlabels")
+                        .attr("transform", "translate(" + (width/2) + " ," +
                                            (height + margin.top + 20) + ")")
                         .style("text-anchor", "middle")
-                        .text("Variable X (Left Map)");
+                        .text("Variable X (Left Panel)");
 
                     // Add the Y Axis
                     svg.append("g")
                         .call(d3.axisLeft(yscale));
-                    
+
                     // text label for the y axis
                     svg.append("text")
                         .attr("class", "plotlabels")
@@ -826,12 +771,12 @@
                         .attr("x",0 - (height / 2))
                         .attr("dy", "1em")
                         .style("text-anchor", "middle")
-                        .text("Variable Y (Right Map)");
+                        .text("Variable Y (Right Panel)");
 
                     generate_analysisbox(xscale, yscale, leftvalues, rightvalues);
-                    
+
                     /* Interactive Icon */
-            
+
                     svg.append("image")
                         .attr("width", "24px")
                         .attr("height", "36px")
@@ -843,7 +788,7 @@
                             tooltip.classed('hidden', false)
                                 .attr('style', 'left:' + (d3.event.pageX + 5) +  'px; top:' + (d3.event.pageY - 0) + 'px')
                                 .style("width", "220")
-                                .html("This is an interactive plot. Hover on the points to display the corresponding ward.");                    
+                                .html("This is an interactive plot. Hover on the points to display the corresponding ward.");
                         })
                         .on('mouseout', function(d){
                             tooltip.classed('hidden', true);
@@ -851,16 +796,16 @@
                 }
             }
         }
-        
+
         // Generates the content for the analysis box
         function generate_analysisbox(xscale, yscale, leftvalues, rightvalues) {
-            
+
             // Add text
             var abtext = d3.select("#analysisbox")
                 .append("div")
                 .style("width", "400px")
                 .text("Click the button to perform a linear regression test:");
-            
+
             // Add button to perform linear regression
             var lrButton = d3.select("#analysisbox")
                 .append("button")
@@ -871,7 +816,7 @@
                 .style("margin-top", "15px")
                 .on('click', function(){
                     plotTrendLine(xscale, yscale, leftvalues, rightvalues);
-                    
+
                     d3.select(this).attr('disabled','disabled');
                 });
 
@@ -879,24 +824,24 @@
             var abparams = d3.select("#analysisbox")
                 .append("div")
                 .attr("id", "abparams");
-                
+
             // Add results
             var abres = d3.select("#analysisbox")
                 .append("div")
                 .attr("id", "abres")
                 .style("width", "400px");
         }
-        
+
         //Plot the trendline
         function plotTrendLine(xscale, yscale, leftvalues, rightvalues){
-            
+
             x_vals = [];
             y_vals = [];
-            
+
             Object.keys(leftvalues).forEach(function(d){ x_vals.push(leftvalues[d]); y_vals.push(rightvalues[d]) });
-            
+
             var ls = leastSquares(x_vals, y_vals);
-                                
+
             var vmax = d3.max(x_vals);
             var vmin = d3.min(x_vals);
 
@@ -914,7 +859,7 @@
                 //  tooltip.classed('hidden', false)
 				//      .attr('style', 'left:' + (d3.event.pageX + 10) +  'px; top:' + (d3.event.pageY - 0) + 'px')
 				//      .html('Slope: ' + ls.slope.toFixed(4) + '<br/>' + 'Intercept: ' + ls.intercept.toFixed(4) + '<br/>' + 'R^2: ' + ls.r2.toFixed(4));
-                //        
+                //
                 //})
                 .on('mouseout', function(d){
                     tooltip.classed('hidden', true);
@@ -924,11 +869,11 @@
                 .duration(1500)
                 .attr("x2", xscale(vmax))
                 .attr("y2", yscale( (vmax * ls.slope) + ls.intercept ));
-                
+
             d3.select("#abparams")
                 .append("html")
                 .html('Slope: ' + ls.slope.toFixed(4) + '<img src="./Images/help-browser-20px.png"> <br/>' + 'Intercept: ' + ls.intercept.toFixed(4) + '<img src="./Images/help-browser-20px.png"> <br/>' + 'R^2: ' + ls.r2.toFixed(4) + '<img src="./Images/help-browser-20px.png">');
-                
+
             d3.select("#abres")
                 .append("html")
                 .style("font-size", "24px")
@@ -950,12 +895,12 @@
                         return 'There is no correlation';
                     }
                 });
-        }        
-        
+        }
+
         // returns slope, intercept and r-square of the line
         //Pulled from http://bl.ocks.org/benvandyke/8459843
         function leastSquares(xSeries, ySeries) {
-                        
+
             var reduceSumFunc = function(prev, cur) { return prev + cur; };
 
             var xBar = xSeries.reduce(reduceSumFunc) * 1.0 / xSeries.length;
@@ -969,7 +914,7 @@
 
             var ssXY = xSeries.map(function(d, i) { return (d - xBar) * (ySeries[i] - yBar); })
                 .reduce(reduceSumFunc);
-            
+
             var res = {};
             res['slope'] = ssXY / ssXX;
             res['intercept'] = yBar - (xBar * res.slope);
